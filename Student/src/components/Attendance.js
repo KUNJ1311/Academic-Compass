@@ -2,7 +2,7 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 const Attendance = () => {
 	return (
-		<div className="container-fluid">
+		<div className="container-fluid  height-max">
 			<Table striped bordered hover>
 				<thead>
 					<tr>

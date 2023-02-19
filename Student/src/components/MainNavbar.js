@@ -3,7 +3,12 @@ import errorimg from "./img/error-photo.png";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "./img/IuLogo.png";
 import Button from "react-bootstrap/Button";
+
 function MainNavbar() {
+	function handleLogout() {
+		window.localStorage.clear();
+		window.location.href = "./login";
+	}
 	return (
 		<>
 			<div className="nav-color sticky-top">
@@ -15,7 +20,9 @@ function MainNavbar() {
 					<Navbar.Collapse className="justify-content-end mx-4">
 						<Navbar.Text className="hidden-300 font-size mx-3">User:123456789</Navbar.Text>
 						<Navbar.Text>
-							<Button variant="outline-warning mx-2">Logout</Button>
+							<Button onClick={handleLogout} variant="outline-warning mx-2">
+								Logout
+							</Button>
 						</Navbar.Text>
 					</Navbar.Collapse>
 				</Navbar>

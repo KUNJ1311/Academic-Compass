@@ -1,11 +1,19 @@
-import MainNavbar from "./components/MainNavbar";
-import SubNavbar from "./components/SubNavbar";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import "./components/login.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
+	const isLoggedIn = window.localStorage.getItem("loggedIn");
 	return (
 		<>
-			<MainNavbar />
-			<SubNavbar />
+			<Router>
+				<Routes>
+					<Route exact path="/" element={isLoggedIn === "true" ? <Home /> : <Login />} />
+					<Route path="/home" element={<Home />} />
+					<Route path="/login" element={<Login />} />
+				</Routes>
+			</Router>
 		</>
 	);
 }

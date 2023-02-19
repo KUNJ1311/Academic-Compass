@@ -2,7 +2,7 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 const TestSecond = () => {
 	return (
-		<div className="container">
+		<div className="container-fluid height-max">
 			<Table striped bordered hover>
 				<thead>
 					<tr>
