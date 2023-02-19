@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap");
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+* {
+	font-family: "Roboto Slab", serif;
+}
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.th-small {
+	column-width: 30px;
+}
+.nav-color {
+	box-shadow: 0 9px 8px -6px #04215378;
+	background-color: #042153;
+	width: 100%;
+}
+.font-size {
+	font-size: 20px;
+}
+.subnav-sticky {
+	position: relative;
+	overflow: hidden;
+	display: block;
+	width: 100%;
+	background-color: #ffffff;
+}
+
+.bg-subnav {
+	background-color: aliceblue;
+}
+.border-round {
+	border-radius: 1px;
+	width: 120px;
+	height: 40px;
+}
+.sidebar {
+	z-index: 0;
+	padding: 0;
+	width: 285px;
+	border-right: 1px solid rgb(173, 173, 173);
+	background-color: aliceblue;
+	position: fixed;
+	height: 100vh;
+	overflow: auto;
+}
+.sidebar li {
+	display: flex;
+	color: rgb(0, 0, 0);
+	padding: 16px;
+	text-decoration: none;
+}
+.content {
+	position: relative;
+	margin-left: 285px;
+	margin-top: -16px;
+}
+.stuphoto {
+	border: 2px solid black;
+	width: 250px;
+	height: 250px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+@media screen and (max-width: 700px) {
+	.content {
+		top: 258px;
+		position: fixed;
+		margin-top: 0;
+	}
+
+	.subnav-sticky {
+		width: 100vw;
+	}
+	.sidebar {
+		border-bottom: 1px solid rgb(173, 173, 173);
+		width: 100%;
+		height: 180px;
+		position: fixed;
+		overflow: auto;
+	}
+	.sidebar li {
+		float: left;
+	}
+	div.content {
+		margin-left: 0;
+	}
+	.stuphoto {
+		width: 150px;
+		height: 150px;
+	}
+}
+
+/* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 500px) {
+	.sidebar li {
+		text-align: center;
+		float: left;
+	}
+	.subnav-sticky {
+		width: 130vw;
+	}
+	.nav-color {
+		width: 133vw;
+	}
+}
+@media screen and (max-width: 400px) {
+	.nav-color {
+		width: 143vw;
+	}
+	.stuphoto {
+		width: 140px;
+		height: 140px;
+	}
+	.subnav-sticky {
+		width: 143vw;
+	}
+	.hidden-300 {
+		font-size: 10px;
+	}
+}
+
+.nav-tabs {
+	padding-top: 2px;
+	padding-left: 2px;
+}
+.nav-tabs .nav-link.active {
+	border: 2px solid rgb(123, 123, 123);
+	border-bottom: 0px;
+}
+.nav-tabs .nav-link {
+	border: 0;
+}
