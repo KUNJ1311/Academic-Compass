@@ -1,4 +1,3 @@
-import "./App.css";
 import MainNavbar from "./components/MainNavbar";
 import SubNavbar from "./components/SubNavbar";
 
@@ -10,5 +9,4 @@ function App() {
 		</>
 	);
 }
-
 export default App;
