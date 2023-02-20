@@ -8,10 +8,8 @@
 	width: 100%;
 	height: 100%;
 	background-repeat: no-repeat;
-	opacity: 0.7;
 }
 .login-page {
-	background-color: #dfe9f5;
 	margin-top: 20vh;
 }
 .icon {
@@ -25,11 +23,11 @@
 	left: 58px;
 }
 .icon-pass {
-	top: 314px;
+	top: 313px;
 	left: 58px;
 }
 .wrapper {
-	opacity: 0.85;
+	opacity: 0.8;
 	position: relative;
 	width: 430px;
 	padding: 2rem 1rem;
@@ -44,6 +42,9 @@
 	opacity: 1;
 	transform: scale(1.2);
 }
+.iu-back .wrapper:hover {
+	opacity: 0.4;
+}
 .h1-login {
 	font-size: 2rem;
 	color: darkblue;
@@ -53,16 +54,16 @@
 .input-login {
 	width: 85%;
 	outline: none;
-	border: 1px solid white;
+	border: 1px solid rgb(0, 0, 0);
 	padding: 13px 50px;
 	margin-bottom: 10px;
 	border-radius: 20px;
-	background: #dddddd;
+	background: #cbe7ff;
 }
 
 .login-button {
 	font-size: 1rem;
-	margin-top: 0.8rem;
+	margin-top: 0.7rem;
 	padding: 10px 0;
 	border-radius: 20px;
 	outline: none;
@@ -70,13 +71,9 @@
 	width: 85%;
 	color: white;
 	cursor: pointer;
-	background: rgb(8, 81, 109);
-}
-
-.login-button:hover {
 	background: rgb(14, 92, 148);
 }
 
-.input-login:focus {
-	border: 1px solid rgb(192, 192, 192);
+.login-button:hover {
+	background: rgb(8, 81, 109);
 }

@@ -3,9 +3,14 @@ import MainNavbar from "./MainNavbar";
 import SubNavbar from "./SubNavbar";
 
 const Home = () => {
+	function handleLogout(e) {
+		e.preventDefault();
+		window.localStorage.clear();
+		window.location.href = "./login";
+	}
 	return (
 		<div>
-			<MainNavbar />
+			<MainNavbar handleLogout={handleLogout} />
 			<SubNavbar />
 		</div>
 	);

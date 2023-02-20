@@ -11,7 +11,7 @@ const Login = () => {
 	};
 	return (
 		<>
-			<img className="iu-back" alt="" src={logo2} />
+			<img className="iu-back " alt="" src={logo2} />
 			<div className="login-page">
 				<div className="wrapper">
 					<img alt="" src={logo} width="350" height="180" className="d-inline-block hidden-300 align-top logo-2" />
