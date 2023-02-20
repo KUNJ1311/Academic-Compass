@@ -10,7 +10,7 @@ function App() {
 			<Router>
 				<Routes>
 					<Route exact path="/" element={isLoggedIn === "true" ? <Home /> : <Login />} />
-					<Route path="/home" element={<Home />} />
+					<Route path="/home" element={isLoggedIn === "true" ? <Home /> : <Login />} />
 					<Route path="/login" element={<Login />} />
 				</Routes>
 			</Router>

@@ -1,17 +1,18 @@
 import React from "react";
 import logo from "./img/iuLogo2.jpeg";
 import logo2 from "./img/iuback.jpg";
-
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+	let navigate = useNavigate();
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		window.localStorage.setItem("token", "testing-token");
 		window.localStorage.setItem("loggedIn", true);
-		window.location.href = "/home";
+		navigate("/home");
 	};
 	return (
 		<>
-			<img className="iu-back" alt="" src={logo2} />
+			<img className="iu-back " alt="" src={logo2} />
 			<div className="login-page">
 				<div className="wrapper">
 					<img alt="" src={logo} width="350" height="180" className="d-inline-block hidden-300 align-top logo-2" />
