@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
 	let navigate = useNavigate();
 	const handleSubmit = (e) => {
-		// e.preventDefault();
-		localStorage.setItem("token", "testing-token");
-		localStorage.setItem("loggedIn", true);
+		e.preventDefault();
+		window.localStorage.setItem("token", "testing-token");
+		window.localStorage.setItem("loggedIn", true);
 		navigate("/home");
 	};
 	return (

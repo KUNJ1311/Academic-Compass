@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
 	let navigate = useNavigate();
 	function handleLogout(e) {
-		// e.preventDefault();
-		localStorage.clear();
+		e.preventDefault();
+		window.localStorage.clear();
 		navigate("/login");
 	}
 	return (
