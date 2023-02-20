@@ -1,13 +1,14 @@
 import React from "react";
 import logo from "./img/iuLogo2.jpeg";
 import logo2 from "./img/iuback.jpg";
-
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+	let navigate = useNavigate();
 	const handleSubmit = (e) => {
-		e.preventDefault();
-		window.localStorage.setItem("token", "testing-token");
-		window.localStorage.setItem("loggedIn", true);
-		window.location.href = "/home";
+		// e.preventDefault();
+		localStorage.setItem("token", "testing-token");
+		localStorage.setItem("loggedIn", true);
+		navigate("/home");
 	};
 	return (
 		<>

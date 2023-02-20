@@ -1,12 +1,14 @@
 import React from "react";
 import MainNavbar from "./MainNavbar";
 import SubNavbar from "./SubNavbar";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+	let navigate = useNavigate();
 	function handleLogout(e) {
-		e.preventDefault();
+		// e.preventDefault();
 		window.localStorage.clear();
-		window.location.href = "./login";
+		navigate("/login");
 	}
 	return (
 		<div>
