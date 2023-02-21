@@ -16,7 +16,7 @@ function MainNavbar(props) {
 					<Navbar.Collapse className="justify-content-end mx-4">
 						<Navbar.Text className="hidden-300 font-size mx-3">User:123456789</Navbar.Text>
 						<Navbar.Text>
-							<Button onClick={props.handleLogout} variant="outline-warning mx-2">
+							<Button onClick={props.handleLogout} variant="danger mx-2">
 								Logout
 							</Button>
 						</Navbar.Text>
