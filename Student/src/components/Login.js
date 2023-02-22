@@ -17,9 +17,9 @@ const Login = (props) => {
 			body: JSON.stringify({ enrolment: credentials.enrolment, dob: credentials.dob }),
 		});
 		const json = await response.json();
-		localStorage.setItem("key", json.data._id);
 		if (json.success) {
 			//Save the auth token and redirect
+			localStorage.setItem("key", json.data._id);
 			// props.showAlert("Logged in Successfully", "success");
 			navigate("/home");
 		} else {

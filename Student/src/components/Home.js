@@ -8,7 +8,7 @@ const Home = () => {
 	function handleLogout(e) {
 		e.preventDefault();
 		window.localStorage.clear();
-		navigate("/login");
+		navigate("/");
 	}
 	return (
 		<div>

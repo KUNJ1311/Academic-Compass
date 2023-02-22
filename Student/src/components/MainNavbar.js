@@ -11,7 +11,7 @@ function MainNavbar(props) {
 		if (localStorage.getItem("key")) {
 			getStudents();
 		} else {
-			navigate("/login");
+			navigate("/");
 		}
 		//eslint-disable-next-line
 	}, []);
