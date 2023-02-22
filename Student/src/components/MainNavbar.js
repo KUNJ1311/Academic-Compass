@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import errorimg from "./img/error-photo.png";
 
 function MainNavbar(props) {
 	useEffect(() => {
@@ -20,7 +19,7 @@ function MainNavbar(props) {
 	let navigate = useNavigate();
 	const host = "http://localhost:5000";
 	//Get Students
-	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "" });
+	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "", img: { data: { data: "" } } });
 	const getStudents = async () => {
 		//API Call
 		try {
@@ -31,7 +30,6 @@ function MainNavbar(props) {
 			});
 			const json = await response.json();
 			setStudentsdata(json);
-			// navigate("/home");
 		} catch (error) {
 			console.error(error.message);
 			setStudentsdata([]);
@@ -47,7 +45,6 @@ function MainNavbar(props) {
 					</Navbar.Brand>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end mx-4">
-						<Navbar.Text className="hidden-300 font-size mx-3">User:{studentsdata.enrolment}</Navbar.Text>
 						<Navbar.Text>
 							<Button onClick={props.handleLogout} variant="danger mx-2">
 								Logout
@@ -59,12 +56,20 @@ function MainNavbar(props) {
 			<ul id="sidebar" className="d-lg-block list-group mb-3 list-unstyled">
 				<div className="sidebar">
 					<li>
-						<img className="stuphoto" src={errorimg} alt="no" />
+						<img className="stuphoto" src={`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(studentsdata.img.data.data)))}`} alt="Not Found" />
 					</li>
-					<li>Name:{studentsdata.name}</li>
-					<li>Enrolment No:{studentsdata.enrolment}</li>
-					<li>Branch:{studentsdata.branch}</li>
-					<li>Course:{studentsdata.course}</li>
+					<li className="fw-bold px-3 py-3">
+						Name :&nbsp;<p className="fw-normal my-0 mx-1">{studentsdata.name}</p>
+					</li>
+					<li className="fw-bold px-3 py-3">
+						Enrolment No :&nbsp;<p className="fw-normal my-0 mx-1">{studentsdata.enrolment}</p>
+					</li>
+					<li className="fw-bold px-3 py-3">
+						Branch :&nbsp;<p className="fw-normal my-0 mx-1">{studentsdata.branch}</p>
+					</li>
+					<li className="fw-bold px-3 py-3">
+						Course :&nbsp;<p className="fw-normal my-0 mx-1">{studentsdata.course}</p>
+					</li>
 				</div>
 			</ul>
 		</>

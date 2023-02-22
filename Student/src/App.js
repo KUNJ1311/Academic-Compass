@@ -9,8 +9,8 @@ function App() {
 		<>
 			<Router>
 				<Routes>
-					<Route exact path="/" element={isLoggedIn === "63f5ab8eb2639f74e48411f9" ? <Home /> : <Login />} />
-					<Route path="/home" element={isLoggedIn === "63f5ab8eb2639f74e48411f9" ? <Home /> : <Login />} />
+					<Route exact path="/" element={isLoggedIn === "63f615906910076fdca5f9f4" ? <Home /> : <Login />} />
+					<Route path="/home" element={isLoggedIn === "63f615906910076fdca5f9f4" ? <Home /> : <Login />} />
 					<Route path="/login" element={<Login />} />
 				</Routes>
 			</Router>
