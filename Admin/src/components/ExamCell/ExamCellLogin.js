@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "./img/iuLogo2.jpeg";
-import logo2 from "./img/iuback.jpg";
+import logo from "../img/iuLogo2.jpeg";
+import logo2 from "../img/iuback.jpg";
 import { Link, useNavigate } from "react-router-dom";
 const ExamCellLogin = () => {
 	let navigate = useNavigate();

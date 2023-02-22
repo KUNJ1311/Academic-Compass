@@ -1,10 +1,43 @@
 import React from "react";
-import errorimg from "./img/error-photo.png";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "./img/IuLogo.png";
 import Button from "react-bootstrap/Button";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import errorimg from "./img/error-photo.png";
 
 function MainNavbar(props) {
+	useEffect(() => {
+		if (localStorage.getItem("key")) {
+			getStudents();
+		} else {
+			navigate("/login");
+		}
+		//eslint-disable-next-line
+	}, []);
+
+	let navigate = useNavigate();
+	const host = "http://localhost:5000";
+	//Get Students
+	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "" });
+	const getStudents = async () => {
+		//API Call
+		try {
+			const id = localStorage.getItem("key");
+			// API Call
+			const response = await fetch(`${host}/api/getstudentdata/${id}`, {
+				method: "GET",
+			});
+			const json = await response.json();
+			setStudentsdata(json);
+			// navigate("/home");
+		} catch (error) {
+			console.error(error.message);
+			setStudentsdata([]);
+		}
+	};
+
 	return (
 		<>
 			<div className="nav-color sticky-top">
@@ -14,7 +47,7 @@ function MainNavbar(props) {
 					</Navbar.Brand>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end mx-4">
-						<Navbar.Text className="hidden-300 font-size mx-3">User:123456789</Navbar.Text>
+						<Navbar.Text className="hidden-300 font-size mx-3">User:{studentsdata.enrolment}</Navbar.Text>
 						<Navbar.Text>
 							<Button onClick={props.handleLogout} variant="danger mx-2">
 								Logout
@@ -28,10 +61,10 @@ function MainNavbar(props) {
 					<li>
 						<img className="stuphoto" src={errorimg} alt="no" />
 					</li>
-					<li>Name:Kunj Faladu Sureshbhai</li>
-					<li>EnRoll No:210110101016</li>
-					<li>Branch:B.Tech-CSE</li>
-					<li>Phone:8141583011</li>
+					<li>Name:{studentsdata.name}</li>
+					<li>Enrolment No:{studentsdata.enrolment}</li>
+					<li>Branch:{studentsdata.branch}</li>
+					<li>Course:{studentsdata.course}</li>
 				</div>
 			</ul>
 		</>

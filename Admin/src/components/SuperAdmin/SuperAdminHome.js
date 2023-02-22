@@ -1,14 +1,14 @@
 import React from "react";
-import MainNavbar from "./MainNavbar";
-import SubNavbar from "./SubNavbar";
+import MainNavbar from "../MainNavbar";
+import SubNavbar from "../SubNavbar";
 import { useNavigate } from "react-router-dom";
 
-const ExamCellHome = () => {
+const SuperAdminHome = () => {
 	let navigate = useNavigate();
 	function handleLogout(e) {
 		e.preventDefault();
 		window.localStorage.clear();
-		navigate("/exam-cell-login");
+		navigate("/super-admin-login");
 	}
 	return (
 		<div>
@@ -18,4 +18,4 @@ const ExamCellHome = () => {
 	);
 };
 
-export default ExamCellHome;
+export default SuperAdminHome;

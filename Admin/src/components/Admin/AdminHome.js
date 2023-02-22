@@ -1,6 +1,6 @@
 import React from "react";
-import MainNavbar from "./MainNavbar";
-import SubNavbar from "./SubNavbar";
+import MainNavbar from "../MainNavbar";
+import SubNavbar from "../SubNavbar";
 import { useNavigate } from "react-router-dom";
 
 const AdminHome = () => {
