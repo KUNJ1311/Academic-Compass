@@ -2,7 +2,8 @@ const express = require("express");
 const Studentdata = require("../models/Studentdata");
 const router = express.Router();
 const multer = require("multer");
-const fs = require("fs");
+// const fs = require("fs");
+
 const { body, validationResult } = require("express-validator");
 //Add data
 const storage = multer.diskStorage({
@@ -11,7 +12,7 @@ const storage = multer.diskStorage({
 	},
 	filename: (req, file, cb) => {
 		const uniqueSuffix = req.body.enrolment;
-		cb(null, uniqueSuffix + "_" + file.fieldname);
+		cb(null, uniqueSuffix + "_" + Date.now() + ".png");
 	},
 });
 const upload = multer({ storage: storage });
@@ -22,10 +23,11 @@ router.post("/addstudentdata", upload.single("IU"), (req, res) => {
 		name: req.body.name,
 		branch: req.body.branch,
 		course: req.body.course,
-		img: {
-			data: fs.readFileSync("uploads/" + req.file.filename),
-			contentType: "image/png",
-		},
+		// img: {
+		// 	data: fs.readFileSync("uploads/" + req.file.filename),
+		// 	contentType: "image/png",
+		// },
+		path: req.file.filename,
 	});
 	saveData
 		.save()
@@ -35,7 +37,7 @@ router.post("/addstudentdata", upload.single("IU"), (req, res) => {
 		.catch((err) => {
 			console.log(err, "error!!!");
 		});
-	res.send("data saved");
+	res.send();
 });
 
 //Get All data

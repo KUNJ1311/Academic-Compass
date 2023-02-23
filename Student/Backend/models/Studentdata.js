@@ -23,9 +23,12 @@ const StudentdataSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	img: {
-		data: Buffer,
-		contentType: String,
+	// img: {
+	// 	data: Buffer,
+	// 	contentType: String,
+	// },
+	path: {
+		type: String,
 	},
 });
 

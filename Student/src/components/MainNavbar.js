@@ -19,7 +19,7 @@ function MainNavbar(props) {
 	let navigate = useNavigate();
 	const host = "http://localhost:5000";
 	//Get Students
-	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "", img: { data: { data: "" } } });
+	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "", path: "" });
 	const getStudents = async () => {
 		//API Call
 		try {
@@ -56,7 +56,7 @@ function MainNavbar(props) {
 			<ul id="sidebar" className="d-lg-block list-group mb-3 list-unstyled">
 				<div className="sidebar">
 					<li>
-						<img className="stuphoto" src={`data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(studentsdata.img.data.data)))}`} alt="Not Found" />
+						<img className="stuphoto" src={`${host}/api/${studentsdata.path}`} alt="Not Found" />
 					</li>
 					<li className="fw-bold px-3 py-3">
 						Name :&nbsp;<p className="fw-normal my-0 mx-1">{studentsdata.name}</p>

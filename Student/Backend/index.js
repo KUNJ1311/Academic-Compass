@@ -10,8 +10,7 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-app.use("/api", require("./routes/student"));
+app.use("/api", require("./routes/student"), express.static("uploads"));
 
 app.get("/", (req, res) => {
 	res.send("Hello Kunj!");
