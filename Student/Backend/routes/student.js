@@ -86,7 +86,6 @@ router.post("/loginstudent", [body("enrolment", "Enter valid Enrolment No").exis
 		let success = false;
 		return res.status(400).json({ success, errors: "Please try to login with correct credentials" });
 	}
-
 	const { enrolment, dob } = req.body;
 	try {
 		let user = await Studentdata.findOne({ enrolment, dob });
