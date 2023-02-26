@@ -14,12 +14,7 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-.sticky-onnav {
-	overflow: hidden;
-	position: absolute;
-	z-index: 1000;
-	width: 100%;
-}
+
 .table-row-hover:hover {
 	background-color: aliceblue;
 }
