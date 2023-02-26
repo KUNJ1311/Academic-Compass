@@ -1,6 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-const Attendance = () => {
+const Attendance = (props) => {
+	const { attendance } = props;
 	return (
 		<div className="container-fluid height-max">
 			<Table bordered hover>
@@ -12,21 +13,13 @@ const Attendance = () => {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark</td>
-						<td>12</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>15</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Larry the Bird</td>
-						<td>20</td>
-					</tr>
+					{attendance.map((item) => (
+						<tr key={item.course_code} className="table-row-hover">
+							<td>{item.course_code}</td>
+							<td>{item.subject}</td>
+							<td>{item.attendance}</td>
+						</tr>
+					))}
 				</tbody>
 			</Table>
 		</div>

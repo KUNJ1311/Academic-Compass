@@ -24,7 +24,12 @@ const storage = multer.diskStorage({
 	},
 });
 const upload = multer({ storage: storage });
-router.post("/addstudentdata", upload.single("IU"), (req, res) => {
+router.post("/addstudentdata", upload.single("IU"), async (req, res) => {
+	let user = await Studentdata.findOne({ enrolment: req.body.enrolment });
+	if (user) {
+		let success = false;
+		return res.status(400).json({ success, error: "Sorry a user with this id is already exists" });
+	}
 	const saveData = new Studentdata({
 		enrolment: req.body.enrolment,
 		dob: req.body.dob,
@@ -37,6 +42,7 @@ router.post("/addstudentdata", upload.single("IU"), (req, res) => {
 		// },
 		path: req.file.filename,
 	});
+
 	saveData
 		.save()
 		.then((res) => {
@@ -45,7 +51,8 @@ router.post("/addstudentdata", upload.single("IU"), (req, res) => {
 		.catch((err) => {
 			console.log(err, "error!!!");
 		});
-	res.json();
+	let success = true;
+	res.json({ success });
 });
 
 //Get All data
@@ -77,7 +84,7 @@ router.post("/loginstudent", [body("enrolment", "Enter valid Enrolment No").exis
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		let success = false;
-		return res.status(400).json({ success, errors: errors.array() });
+		return res.status(400).json({ success, errors: "Please try to login with correct credentials" });
 	}
 
 	const { enrolment, dob } = req.body;

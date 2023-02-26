@@ -3,17 +3,11 @@ import Navbar from "react-bootstrap/Navbar";
 import logo from "./img/IuLogo.png";
 import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function MainNavbar(props) {
-	let navigate = useNavigate();
 	useEffect(() => {
-		if (localStorage.getItem("key")) {
-			getStudents();
-		} else {
-			navigate("/");
-		}
+		getStudents();
 		//eslint-disable-next-line
 	}, []);
 

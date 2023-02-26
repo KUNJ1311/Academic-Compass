@@ -13,13 +13,13 @@ const TestFinal = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{/* {testfinal.map((item) => (
+					{testfinal.map((item) => (
 						<tr key={item.course_code} className="table-row-hover">
 							<td>{item.course_code}</td>
 							<td>{item.subject}</td>
 							<td>{item.marks}</td>
 						</tr>
-					))} */}
+					))}
 				</tbody>
 			</Table>
 		</div>

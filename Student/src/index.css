@@ -14,12 +14,18 @@ body {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+.sticky-onnav {
+	overflow: hidden;
+	position: absolute;
+	z-index: 1000;
+	width: 100%;
+}
 .table-row-hover:hover {
 	background-color: aliceblue;
 }
 .drop-down {
 	background-color: aliceblue;
-	padding-top: 4px;
+	padding-top: 3px;
 	position: absolute;
 	left: 468px;
 	top: 0;

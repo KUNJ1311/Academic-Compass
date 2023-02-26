@@ -3,6 +3,7 @@ import logo from "./img/iuLogo2.jpeg";
 import logo2 from "./img/iuback.jpg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const Login = (props) => {
 	const [credentials, setCredentials] = useState({ enrolment: "", dob: "" });
@@ -20,15 +21,23 @@ const Login = (props) => {
 		if (json.success) {
 			//Save the auth token and redirect
 			localStorage.setItem("key", json.data._id);
-			// props.showAlert("Logged in Successfully", "success");
+			props.showAlert("Logged in Successfully", "success");
 			navigate("/home");
 		} else {
-			// props.showAlert("Invalid Details", "danger");
+			props.showAlert("Invalid Details", "danger");
 		}
 	};
+	useEffect(() => {
+		if (localStorage.getItem("key")) {
+			navigate("/home");
+		}
+		//eslint-disable-next-line
+	}, []);
+
 	const onChange = (e) => {
 		setCredentials({ ...credentials, [e.target.name]: e.target.value });
 	};
+
 	return (
 		<>
 			<img className="iu-back " alt="" src={logo2} />
