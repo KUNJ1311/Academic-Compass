@@ -1,32 +1,26 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-const TestFirst = () => {
+
+const TestFirst = (props) => {
+	const { testfirst } = props;
 	return (
 		<div className="container-fluid height-max">
-			<Table striped bordered hover>
+			<Table bordered hover>
 				<thead>
 					<tr>
-						<th width="150px">Course Code</th>
-						<th>Subject</th>
-						<th>Marks</th>
+						<th width="20%">Course Code</th>
+						<th width="60%">Subject</th>
+						<th width="20%">Marks</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark</td>
-						<td>Otto</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>Thornton</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
+					{testfirst.map((item) => (
+						<tr key={item.course_code} className="table-row-hover">
+							<td>{item.course_code}</td>
+							<td>{item.subject}</td>
+							<td>{item.marks}</td>
+						</tr>
+					))}
 				</tbody>
 			</Table>
 		</div>

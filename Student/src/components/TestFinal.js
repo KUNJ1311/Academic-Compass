@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
-const TestSecond = (props) => {
-	const { testsecond } = props;
+const TestFinal = (props) => {
+	const { testfinal } = props;
 	return (
 		<div className="container-fluid height-max">
 			<Table bordered hover>
@@ -13,17 +13,17 @@ const TestSecond = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{testsecond.map((item) => (
+					{/* {testfinal.map((item) => (
 						<tr key={item.course_code} className="table-row-hover">
 							<td>{item.course_code}</td>
 							<td>{item.subject}</td>
 							<td>{item.marks}</td>
 						</tr>
-					))}
+					))} */}
 				</tbody>
 			</Table>
 		</div>
 	);
 };
 
-export default TestSecond;
+export default TestFinal;

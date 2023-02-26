@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function MainNavbar(props) {
+	let navigate = useNavigate();
 	useEffect(() => {
 		if (localStorage.getItem("key")) {
 			getStudents();
@@ -16,7 +17,6 @@ function MainNavbar(props) {
 		//eslint-disable-next-line
 	}, []);
 
-	let navigate = useNavigate();
 	const host = "http://localhost:5000";
 	//Get Students
 	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "", path: "" });
