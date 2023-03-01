@@ -1,9 +1,9 @@
 import React from "react";
-import MainNavbar from "../MainNavbar";
-import SubNavbar from "../SubNavbar";
+import ExamCellSideBar from "./ExamCellSideBar";
+import MainNavbarExam from "./MainNavbarExam";
 import { useNavigate } from "react-router-dom";
 
-const ExamCellHome = () => {
+const ManageMarks = () => {
 	let navigate = useNavigate();
 	function handleLogout(e) {
 		e.preventDefault();
@@ -11,11 +11,11 @@ const ExamCellHome = () => {
 		navigate("/exam-cell-login");
 	}
 	return (
-		<div>
-			<MainNavbar handleLogout={handleLogout} />
-			<SubNavbar />
-		</div>
+		<>
+			<MainNavbarExam handleLogout={handleLogout} />
+			<ExamCellSideBar />
+		</>
 	);
 };
 
-export default ExamCellHome;
+export default ManageMarks;

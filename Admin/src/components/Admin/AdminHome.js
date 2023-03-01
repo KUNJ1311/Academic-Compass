@@ -1,7 +1,6 @@
 import React from "react";
-import MainNavbar from "../MainNavbar";
-import SubNavbar from "../SubNavbar";
 import { useNavigate } from "react-router-dom";
+import MainNavbarAdmin from "./MainNavbarAdmin";
 
 const AdminHome = () => {
 	let navigate = useNavigate();
@@ -12,8 +11,7 @@ const AdminHome = () => {
 	}
 	return (
 		<div>
-			<MainNavbar handleLogout={handleLogout} />
-			<SubNavbar />
+			<MainNavbarAdmin handleLogout={handleLogout} />
 		</div>
 	);
 };

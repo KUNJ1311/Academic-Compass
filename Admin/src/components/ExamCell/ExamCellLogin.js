@@ -7,7 +7,7 @@ const ExamCellLogin = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		window.localStorage.setItem("token", "true");
-		navigate("/exam-cell-home");
+		navigate("/managestudent");
 	};
 	return (
 		<>
