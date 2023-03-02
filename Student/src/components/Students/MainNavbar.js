@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import logo from "./img/IuLogo.png";
+import logo from "../img/IuLogo.png";
 import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
 import { useState } from "react";

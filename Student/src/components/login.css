@@ -87,3 +87,6 @@
 .login-button:hover {
 	background: rgb(8, 81, 109);
 }
+.link {
+	text-decoration: none;
+}
