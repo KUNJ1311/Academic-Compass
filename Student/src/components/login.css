@@ -40,7 +40,7 @@
 }
 .wrapper:hover {
 	opacity: 1;
-	transform: scale(1.2);
+	transform: scale(1.1);
 }
 @media screen and (max-width: 700px) {
 	.wrapper {

@@ -8,9 +8,14 @@ body {
 	overflow: hidden;
 }
 * {
+	margin: 0;
+	padding: 0;
 	font-family: "Roboto Slab", serif;
 }
-
+body {
+	height: 100%;
+	width: 100%;
+}
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -176,8 +181,8 @@ code {
 	width: 270px;
 	flex-shrink: 0;
 	font-size: 15px;
-	position: sticky;
 	overflow: auto;
+	left: 0;
 }
 .examcell-nav {
 	flex-direction: column;
@@ -210,4 +215,9 @@ code {
 }
 .link {
 	text-decoration: none;
+}
+.main-screen {
+	height: 100vh;
+	flex-grow: 1;
+	background-color: rgb(255, 255, 255);
 }

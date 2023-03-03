@@ -27,7 +27,7 @@ const AdminLogin = () => {
 
 						<input className="input-login" type="password" placeholder="DDMMYYYY" />
 						<button onClick={handleSubmit} className="login-button mb-3">
-							Student Login
+							Login
 						</button>
 					</form>
 					<Link className="mx-1 link" to="/">
