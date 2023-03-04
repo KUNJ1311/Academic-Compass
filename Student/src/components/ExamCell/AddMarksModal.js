@@ -1,12 +1,16 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
+import marks from "./svg/marks.svg";
 
 function AddMarksModal(props) {
 	return (
-		<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+		<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" backdrop="static" keyboard={false} centered>
 			<Modal.Header style={{ backgroundColor: "#33336b", color: "white" }}>
-				<Modal.Title id="contained-modal-title-vcenter">Add Marks</Modal.Title>
+				<Modal.Title id="contained-modal-title-vcenter">
+					<img src={marks} alt="" width="40px" />
+					<span style={{ position: "relative", top: "3px", left: "5px" }}>&nbsp;Add Marks</span>
+				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				<Row>
@@ -86,7 +90,7 @@ function AddMarksModal(props) {
 					</Col>
 					<Row>
 						<Col>
-							<Form.Group as={Row} className="mb-3" controlId="course">
+							<Form.Group as={Row} controlId="course">
 								<Form.Label column>Course Code:</Form.Label>
 								<Col>
 									<Form.Control plaintext readOnly defaultValue="Data Not Found!" className="mx-2" />
@@ -94,7 +98,7 @@ function AddMarksModal(props) {
 							</Form.Group>
 						</Col>
 						<Col>
-							<Form.Group as={Row} className="mb-3 " controlId="mark">
+							<Form.Group as={Row} controlId="mark">
 								<Form.Label column sm="3" className="mx-3">
 									Marks:
 								</Form.Label>

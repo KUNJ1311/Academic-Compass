@@ -11,16 +11,147 @@ import add from "./svg/adds.svg";
 import excel from "./svg/excel.svg";
 import AddExcelModel from "./AddExcelModel";
 import setting from "./svg/settings.svg";
+import UpdateMarksModel from "./UpdateMarksModel";
 
 const ManageMarks = () => {
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
+	const [selectedStudent, setSelectedStudent] = useState(null);
+	const [showUpdateModal, setShowUpdateModal] = useState(false);
+	const [selectedSemester, setSelectedSemester] = useState("");
+	const [selectedSubject, setSelectedSubject] = useState("");
+	const [selectedTest, setSelectedTest] = useState("");
+	const stu = [
+		{
+			"Enrolment No.": "210110101016",
+			Name: "Kunj Faladu Sureshbhai",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "22",
+		},
+		{
+			"Enrolment No.": "210110101019",
+			Name: "Rishi",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "20",
+		},
+		{
+			"Enrolment No.": "2101101010161",
+			Name: "Kunj Faladu Sureshbhai",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "22",
+		},
+		{
+			"Enrolment No.": "2101101010191",
+			Name: "Rishi",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "20",
+		},
+		{
+			"Enrolment No.": "2101101010162",
+			Name: "Kunj Faladu Sureshbhai",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "22",
+		},
+		{
+			"Enrolment No.": "210110101019",
+			Name: "Rishi",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "20",
+		},
+		{
+			"Enrolment No.": "2101101010161",
+			Name: "Kunj Faladu Sureshbhai",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "22",
+		},
+		{
+			"Enrolment No.": "2101101010191",
+			Name: "Rishi",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "20",
+		},
+		{
+			"Enrolment No.": "2101101010162",
+			Name: "Kunj Faladu Sureshbhai",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "22",
+		},
+		{
+			"Enrolment No.": "210110101019",
+			Name: "Rishi",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "20",
+		},
+		{
+			"Enrolment No.": "2101101010161",
+			Name: "Kunj Faladu Sureshbhai",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "22",
+		},
+		{
+			"Enrolment No.": "2101101010191",
+			Name: "Rishi",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "20",
+		},
+		{
+			"Enrolment No.": "2101101010162",
+			Name: "Kunj Faladu Sureshbhai",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "22",
+		},
+		{
+			"Enrolment No.": "210110101019",
+			Name: "Rishi",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "20",
+		},
+		{
+			"Enrolment No.": "2101101010161",
+			Name: "Kunj Faladu Sureshbhai",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "22",
+		},
+		{
+			"Enrolment No.": "2101101010191",
+			Name: "Rishi",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "20",
+		},
+		{
+			"Enrolment No.": "2101101010162",
+			Name: "Kunj Faladu Sureshbhaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
+			Marks: "22",
+		},
+	];
 	let navigate = useNavigate();
 	function handleLogout(e) {
 		e.preventDefault();
 		window.localStorage.clear();
 		navigate("/exam-cell-login");
 	}
+	const handleRowClick = (data) => {
+		setSelectedStudent(data);
+		setShowUpdateModal(true);
+	};
 
 	return (
 		<>
@@ -28,10 +159,10 @@ const ManageMarks = () => {
 			<div className="d-flex">
 				<ExamCellSideBar />
 				<div className="main-content px-2 mt-3">
-					<div className="mb-2 d-flex justify-content-center align-items-center">
+					<div className="d-flex justify-content-center align-items-center">
 						<div className="mr-auto">
 							<img className="mx-2" src={add} alt="" />
-							<Button variant="primary" onClick={() => setModalShow(true)}>
+							<Button className="btn-my" onClick={() => setModalShow(true)}>
 								Add Marks
 							</Button>
 							<AddMarksModal show={modalShow} onHide={() => setModalShow(false)} />
@@ -44,44 +175,45 @@ const ManageMarks = () => {
 						</span>
 						<div className="ml-auto">
 							<img className="mx-2" src={excel} alt="" />
-							<Button variant="success" onClick={() => setModalShow2(true)}>
+							<Button className="btn-my" onClick={() => setModalShow2(true)}>
 								Add Excel File
 							</Button>
 							<AddExcelModel show={modalShow2} onHide={() => setModalShow2(false)} />
 						</div>
 					</div>
+					<hr className="my-2" style={{ border: "1px solid black" }} />
 					<div style={{ backgroundColor: "white", position: "sticky", top: "0", zIndex: "999" }}>
-						<Row className="d-flex">
+						<Row className="d-flex mb-3">
 							<Col sm={2}>
-								<Form.Group className="mb-3">
+								<Form.Group>
 									<Form.Label>&nbsp;Select Test</Form.Label>
-									<Form.Select defaultValue="">
+									<Form.Select value={selectedTest} onChange={(e) => setSelectedTest(e.target.value)}>
 										<option disabled value="">
 											Select Test
 										</option>
-										<option value="maths">First Test</option>
-										<option value="physics">Second Test</option>
-										<option value="chemistry">Final Test</option>
+										<option value="1">First Test</option>
+										<option value="2">Second Test</option>
+										<option value="3">Final Test</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
 							<Col>
-								<Form.Group className="mb-3">
+								<Form.Group>
 									<Form.Label>&nbsp;Select Branch</Form.Label>
 									<Form.Select defaultValue="">
 										<option disabled value="">
 											Select Branch
 										</option>
-										<option value="CSE">Computer Science & Engineering</option>
-										<option value="ECE">Electronics & Communication Engineering</option>
-										<option value="ME">Mechanical Engineering</option>
+										<option value="1">Computer Science & Engineering</option>
+										<option value="2">Electronics & Communication Engineering</option>
+										<option value="3">Mechanical Engineering</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
 							<Col sm={2}>
-								<Form.Group className="mb-3">
+								<Form.Group>
 									<Form.Label>&nbsp;Select Semester</Form.Label>
-									<Form.Select defaultValue="">
+									<Form.Select value={selectedSemester} onChange={(e) => setSelectedSemester(e.target.value)}>
 										<option disabled value="">
 											Select Semester
 										</option>
@@ -97,78 +229,44 @@ const ManageMarks = () => {
 								</Form.Group>
 							</Col>
 							<Col>
-								<Form.Group className="mb-3">
+								<Form.Group>
 									<Form.Label>&nbsp;Select Subject</Form.Label>
-									<Form.Select defaultValue="">
+									<Form.Select value={selectedSubject} onChange={(e) => setSelectedSubject(e.target.value)}>
 										<option disabled value="">
 											Select Subject
 										</option>
-										<option value="maths">Mathematics</option>
-										<option value="physics">Physics</option>
-										<option value="chemistry">Chemistry</option>
+										<option value="1">Mathematics</option>
+										<option value="2">Physics</option>
+										<option value="3">Chemistry</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
 						</Row>
 					</div>
-					<div>
-						<div className="main-content-table scroller">
-							<Table bordered hover className="table-my ">
-								<thead className="col-sticky" style={{ backgroundColor: "white" }}>
-									<tr className="col-sticky">
-										<th className="col-sticky">Enrolment No.</th>
-										<th className="col-sticky">Name</th>
-										<th className="col-sticky">Course Code</th>
-										<th className="col-sticky">Subject</th>
-										<th className="col-sticky">Marks</th>
+					<div className="main-content-table scroller">
+						<Table bordered hover className="table-my">
+							<thead className="col-sticky" style={{ backgroundColor: "white" }}>
+								<tr className="col-sticky">
+									<th className="col-sticky">Enrolment No.</th>
+									<th className="col-sticky">Name</th>
+									<th className="col-sticky">Course Code</th>
+									<th className="col-sticky">Subject</th>
+									<th className="col-sticky">Marks</th>
+								</tr>
+							</thead>
+							<tbody>
+								{stu.map((data) => (
+									<tr key={data["Enrolment No."]} className="table-row-hover" onClick={() => handleRowClick(data)}>
+										<td>{data["Enrolment No."]}</td>
+										<td>{data.Name}</td>
+										<td>{data["Course Code"]}</td>
+										<td>{data.Subject}</td>
+										<td>{data.Marks}</td>
 									</tr>
-								</thead>
-								<tbody>
-									<tr className="table-row-hover">
-										<td>210110101016</td>
-										<td>Kunj Faladu Sureshbhai</td>
-										<td>CSE101</td>
-										<td>Computer Network</td>
-										<td>20</td>
-									</tr>
-									<tr className="table-row-hover">
-										<td>210110101016</td>
-										<td>Kunj Faladu Sureshbhai</td>
-										<td>CSE101</td>
-										<td>Computer Network</td>
-										<td>20</td>
-									</tr>
-									<tr className="table-row-hover">
-										<td>210110101016</td>
-										<td>Kunj Faladu Sureshbhai</td>
-										<td>CSE101</td>
-										<td>Computer Network</td>
-										<td>20</td>
-									</tr>
-									<tr className="table-row-hover">
-										<td>210110101016</td>
-										<td>Kunj Faladu Sureshbhai</td>
-										<td>CSE101</td>
-										<td>Computer Network</td>
-										<td>20</td>
-									</tr>
-									<tr className="table-row-hover">
-										<td>210110101016</td>
-										<td>Kunj Faladu Sureshbhai</td>
-										<td>CSE101</td>
-										<td>Computer Network</td>
-										<td>20</td>
-									</tr>
-									<tr className="table-row-hover">
-										<td>210110101016</td>
-										<td>Kunj Faladu Sureshbhai</td>
-										<td>CSE101</td>
-										<td>Computer Network</td>
-										<td>20</td>
-									</tr>
-								</tbody>
-							</Table>
-						</div>
+								))}
+							</tbody>
+						</Table>
+						{selectedStudent && <UpdateMarksModel show={showUpdateModal} onHide={() => setShowUpdateModal(false)} student={selectedStudent} semester={selectedSemester} subject={selectedSubject} test={selectedTest} />}
 					</div>
 				</div>
 			</div>

@@ -1,17 +1,22 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
+import marks from "./svg/marks.svg";
+
 const AddExcelModel = (props) => {
 	return (
 		<div>
-			<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+			<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" backdrop="static" keyboard={false} centered>
 				<Modal.Header style={{ backgroundColor: "#33336b", color: "white" }}>
-					<Modal.Title id="contained-modal-title-vcenter">Add Marks</Modal.Title>
+					<Modal.Title id="contained-modal-title-vcenter">
+						<img src={marks} alt="" width="40px" />
+						<span style={{ position: "relative", top: "3px", left: "5px" }}>&nbsp;Add Marks</span>
+					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<Row className="d-flex">
 						<Col sm={3}>
-							<Form.Group className="mb-3">
+							<Form.Group>
 								<Form.Label>&nbsp;Select Semester</Form.Label>
 								<Form.Select defaultValue="">
 									<option disabled value="">
@@ -29,7 +34,7 @@ const AddExcelModel = (props) => {
 							</Form.Group>
 						</Col>
 						<Col sm={3}>
-							<Form.Group className="mb-3">
+							<Form.Group>
 								<Form.Label>&nbsp;Select Test</Form.Label>
 								<Form.Select defaultValue="">
 									<option disabled value="">
@@ -42,7 +47,7 @@ const AddExcelModel = (props) => {
 							</Form.Group>
 						</Col>
 						<Col>
-							<Form.Group controlId="formFile" className="mb-3">
+							<Form.Group controlId="formFile">
 								<Form.Label>Add Excel File</Form.Label>
 								<Form.Control type="file" />
 							</Form.Group>

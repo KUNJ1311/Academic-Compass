@@ -4,6 +4,7 @@ import student from "./svg/student.svg";
 import marks from "./svg/marks.svg";
 import attendance from "./svg/attendance.svg";
 import { useLocation } from "react-router-dom";
+
 const ExamCellSideBar = () => {
 	const location = useLocation();
 	const queryParams = new URLSearchParams(location.search);

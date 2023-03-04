@@ -225,16 +225,15 @@ code {
 }
 .main-content-table {
 	box-sizing: border-box;
-	height: calc(100vh - 180px - 55px);
+	height: calc(100vh - 180px - 67px);
 	width: calc(100vw - 279px);
 	overflow: auto;
 	padding-right: 8px;
 	white-space: nowrap;
-	margin-top: -1px;
 }
 .col-sticky {
 	position: sticky;
-	top: 0px;
+	top: -1px;
 }
 .table-my {
 	border-collapse: collapse;
@@ -250,7 +249,14 @@ code {
 .table-my td {
 	cursor: pointer;
 }
-
+.btn-my {
+	background-color: #4343c4;
+	border: #4343c4;
+}
+.btn-my:hover {
+	background-color: #33336b;
+	border: #33336b;
+}
 /* -------------------------------
 						scroll bar
 ------------------------------- */
