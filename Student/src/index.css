@@ -6,16 +6,15 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	overflow: hidden;
+	height: 100%;
+	width: 100%;
 }
 * {
 	margin: 0;
 	padding: 0;
 	font-family: "Roboto Slab", serif;
 }
-body {
-	height: 100%;
-	width: 100%;
-}
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -216,8 +215,80 @@ code {
 .link {
 	text-decoration: none;
 }
-.main-screen {
-	height: 100vh;
-	flex-grow: 1;
-	background-color: rgb(255, 255, 255);
+/* -------------------------------
+						Exam cell content
+------------------------------- */
+.main-content {
+	box-sizing: border-box;
+	height: calc(100vh - 95px);
+	width: calc(100vw - 270px);
+}
+.main-content-table {
+	box-sizing: border-box;
+	height: calc(100vh - 180px - 49px);
+	width: calc(100vw - 279px);
+	overflow: auto;
+	padding-right: 8px;
+	white-space: nowrap;
+}
+.col-sticky {
+	position: sticky;
+	top: -1px;
+}
+.table-my {
+	border-collapse: collapse;
+}
+
+.table-my thead th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	box-shadow: inset -1px 0px 1px rgb(121, 121, 121), inset 0px -1px 1px rgb(121, 121, 121), inset 1px 0 1px rgb(121, 121, 121), inset 0px 1px 1px rgb(121, 121, 121);
+}
+.table-my td {
+	cursor: pointer;
+}
+/* -------------------------------
+						scroll bar
+------------------------------- */
+.scroller::-webkit-scrollbar {
+	height: 12px;
+	background-color: #f5f5f5;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+	background-color: #aaa;
+	border-radius: 10px;
+	border: 2px solid #f5f5f5;
+}
+
+.scroller::-webkit-scrollbar-thumb:hover {
+	background-color: #999;
+}
+
+.scroller::-webkit-scrollbar-thumb:active {
+	background-color: #666;
+}
+.scroller {
+	overflow: auto;
+}
+
+.scroller::-webkit-scrollbar {
+	width: 12px;
+	background-color: #f5f5f5;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+	background-color: #aaa;
+	border-radius: 10px;
+	border: 2px solid #f5f5f5;
+}
+
+.scroller::-webkit-scrollbar-thumb:hover {
+	background-color: #999;
+}
+
+.scroller::-webkit-scrollbar-thumb:active {
+	background-color: #666;
 }

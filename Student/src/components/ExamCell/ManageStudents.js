@@ -34,7 +34,7 @@ const ManageStudents = () => {
 			<MainNavbarExam handleLogout={handleLogout} />
 			<div className="d-flex">
 				<ExamCellSideBar />
-				<div className="main-screen mx-3 my-3">
+				<div className="main-content mx-3 my-3">
 					<Row className="d-flex">
 						<Col sm={4}>
 							<Form.Group className="mb-3">

@@ -32,22 +32,22 @@ const AdminLogin = () => {
 					</form>
 					<Link className="mx-1 link" to="/">
 						<svg width="30px" height="30px" viewBox="0 1 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M16 12L8 12" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-							<path d="M13 15L15.913 12.087V12.087C15.961 12.039 15.961 11.961 15.913 11.913V11.913L13 9" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M16 12L8 12" stroke="#323232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+							<path d="M13 15L15.913 12.087V12.087C15.961 12.039 15.961 11.961 15.913 11.913V11.913L13 9" stroke="#323232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 						Student
 					</Link>
 					<Link className="mx-1 link" to="/exam-cell-login">
 						<svg width="30px" height="30px" viewBox="0 1 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M16 12L8 12" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-							<path d="M13 15L15.913 12.087V12.087C15.961 12.039 15.961 11.961 15.913 11.913V11.913L13 9" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M16 12L8 12" stroke="#323232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+							<path d="M13 15L15.913 12.087V12.087C15.961 12.039 15.961 11.961 15.913 11.913V11.913L13 9" stroke="#323232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 						Exam Cell
 					</Link>
 					<Link className="mx-1 link" to="/super-admin-login">
 						<svg width="30px" height="30px" viewBox="0 1 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M16 12L8 12" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-							<path d="M13 15L15.913 12.087V12.087C15.961 12.039 15.961 11.961 15.913 11.913V11.913L13 9" stroke="#323232" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M16 12L8 12" stroke="#323232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+							<path d="M13 15L15.913 12.087V12.087C15.961 12.039 15.961 11.961 15.913 11.913V11.913L13 9" stroke="#323232" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 						Super Admin
 					</Link>
