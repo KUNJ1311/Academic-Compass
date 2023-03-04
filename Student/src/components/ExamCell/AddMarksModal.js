@@ -5,7 +5,7 @@ import { Modal, Row, Col, Form } from "react-bootstrap";
 function AddMarksModal(props) {
 	return (
 		<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
-			<Modal.Header closeButton>
+			<Modal.Header style={{ backgroundColor: "#33336b", color: "white" }}>
 				<Modal.Title id="contained-modal-title-vcenter">Add Marks</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
@@ -43,8 +43,8 @@ function AddMarksModal(props) {
 					<Col sm={3}>
 						<Form.Group className="mb-3">
 							<Form.Label>Select Semester</Form.Label>
-							<Form.Select>
-								<option selected disabled value="">
+							<Form.Select defaultValue="">
+								<option disabled value="">
 									Select Semester
 								</option>
 								<option value="1">1st Semester</option>
@@ -61,8 +61,8 @@ function AddMarksModal(props) {
 					<Col sm={3}>
 						<Form.Group className="mb-3">
 							<Form.Label>Select Test</Form.Label>
-							<Form.Select>
-								<option selected disabled value="">
+							<Form.Select defaultValue="">
+								<option disabled value="">
 									Select Test
 								</option>
 								<option value="maths">First Test</option>
@@ -74,8 +74,8 @@ function AddMarksModal(props) {
 					<Col>
 						<Form.Group className="mb-3">
 							<Form.Label>Select Subject</Form.Label>
-							<Form.Select>
-								<option selected disabled value="">
+							<Form.Select defaultValue="">
+								<option disabled value="">
 									Select Subject
 								</option>
 								<option value="maths">Mathematics</option>

@@ -19,7 +19,7 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 /* -------------------------------
-						Students
+						Students+navbar
 ------------------------------- */
 .table-row-hover:hover {
 	background-color: aliceblue;
@@ -216,7 +216,7 @@ code {
 	text-decoration: none;
 }
 /* -------------------------------
-						Exam cell content
+				Exam cell content
 ------------------------------- */
 .main-content {
 	box-sizing: border-box;
@@ -225,15 +225,16 @@ code {
 }
 .main-content-table {
 	box-sizing: border-box;
-	height: calc(100vh - 180px - 49px);
+	height: calc(100vh - 180px - 55px);
 	width: calc(100vw - 279px);
 	overflow: auto;
 	padding-right: 8px;
 	white-space: nowrap;
+	margin-top: -1px;
 }
 .col-sticky {
 	position: sticky;
-	top: -1px;
+	top: 0px;
 }
 .table-my {
 	border-collapse: collapse;
@@ -249,6 +250,7 @@ code {
 .table-my td {
 	cursor: pointer;
 }
+
 /* -------------------------------
 						scroll bar
 ------------------------------- */

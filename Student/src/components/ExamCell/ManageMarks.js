@@ -7,9 +7,10 @@ import Form from "react-bootstrap/Form";
 import { Row, Col } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import AddMarksModal from "./AddMarksModal";
-import add from "./svg/add.svg";
+import add from "./svg/adds.svg";
 import excel from "./svg/excel.svg";
 import AddExcelModel from "./AddExcelModel";
+import setting from "./svg/settings.svg";
 
 const ManageMarks = () => {
 	const [modalShow, setModalShow] = useState(false);
@@ -26,7 +27,7 @@ const ManageMarks = () => {
 			<MainNavbarExam handleLogout={handleLogout} />
 			<div className="d-flex">
 				<ExamCellSideBar />
-				<div className="main-content px-2 my-3">
+				<div className="main-content px-2 mt-3">
 					<div className="mb-2 d-flex justify-content-center align-items-center">
 						<div className="mr-auto">
 							<img className="mx-2" src={add} alt="" />
@@ -37,7 +38,8 @@ const ManageMarks = () => {
 						</div>
 						<span className="mx-auto">
 							<h3>
-								<strong>Manage Marks</strong>
+								<img className="mx-1" src={setting} alt="" />
+								<strong className="mx-1">Manage Marks</strong>
 							</h3>
 						</span>
 						<div className="ml-auto">
@@ -53,8 +55,8 @@ const ManageMarks = () => {
 							<Col sm={2}>
 								<Form.Group className="mb-3">
 									<Form.Label>&nbsp;Select Test</Form.Label>
-									<Form.Select>
-										<option selected disabled value="">
+									<Form.Select defaultValue="">
+										<option disabled value="">
 											Select Test
 										</option>
 										<option value="maths">First Test</option>
@@ -66,8 +68,8 @@ const ManageMarks = () => {
 							<Col>
 								<Form.Group className="mb-3">
 									<Form.Label>&nbsp;Select Branch</Form.Label>
-									<Form.Select>
-										<option selected disabled value="">
+									<Form.Select defaultValue="">
+										<option disabled value="">
 											Select Branch
 										</option>
 										<option value="CSE">Computer Science & Engineering</option>
@@ -79,8 +81,8 @@ const ManageMarks = () => {
 							<Col sm={2}>
 								<Form.Group className="mb-3">
 									<Form.Label>&nbsp;Select Semester</Form.Label>
-									<Form.Select>
-										<option selected disabled value="">
+									<Form.Select defaultValue="">
+										<option disabled value="">
 											Select Semester
 										</option>
 										<option value="1">1st Semester</option>
@@ -97,8 +99,8 @@ const ManageMarks = () => {
 							<Col>
 								<Form.Group className="mb-3">
 									<Form.Label>&nbsp;Select Subject</Form.Label>
-									<Form.Select>
-										<option selected disabled value="">
+									<Form.Select defaultValue="">
+										<option disabled value="">
 											Select Subject
 										</option>
 										<option value="maths">Mathematics</option>
@@ -109,7 +111,7 @@ const ManageMarks = () => {
 							</Col>
 						</Row>
 					</div>
-					<div className="">
+					<div>
 						<div className="main-content-table scroller">
 							<Table bordered hover className="table-my ">
 								<thead className="col-sticky" style={{ backgroundColor: "white" }}>
@@ -122,6 +124,20 @@ const ManageMarks = () => {
 									</tr>
 								</thead>
 								<tbody>
+									<tr className="table-row-hover">
+										<td>210110101016</td>
+										<td>Kunj Faladu Sureshbhai</td>
+										<td>CSE101</td>
+										<td>Computer Network</td>
+										<td>20</td>
+									</tr>
+									<tr className="table-row-hover">
+										<td>210110101016</td>
+										<td>Kunj Faladu Sureshbhai</td>
+										<td>CSE101</td>
+										<td>Computer Network</td>
+										<td>20</td>
+									</tr>
 									<tr className="table-row-hover">
 										<td>210110101016</td>
 										<td>Kunj Faladu Sureshbhai</td>

@@ -1,12 +1,11 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
-
 const AddExcelModel = (props) => {
 	return (
 		<div>
 			<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
-				<Modal.Header closeButton>
+				<Modal.Header style={{ backgroundColor: "#33336b", color: "white" }}>
 					<Modal.Title id="contained-modal-title-vcenter">Add Marks</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
@@ -14,8 +13,8 @@ const AddExcelModel = (props) => {
 						<Col sm={3}>
 							<Form.Group className="mb-3">
 								<Form.Label>&nbsp;Select Semester</Form.Label>
-								<Form.Select>
-									<option selected disabled value="">
+								<Form.Select defaultValue="">
+									<option disabled value="">
 										Select Semester
 									</option>
 									<option value="1">1st Semester</option>
@@ -32,8 +31,8 @@ const AddExcelModel = (props) => {
 						<Col sm={3}>
 							<Form.Group className="mb-3">
 								<Form.Label>&nbsp;Select Test</Form.Label>
-								<Form.Select>
-									<option selected disabled value="">
+								<Form.Select defaultValue="">
+									<option disabled value="">
 										Select Test
 									</option>
 									<option value="maths">First Test</option>
