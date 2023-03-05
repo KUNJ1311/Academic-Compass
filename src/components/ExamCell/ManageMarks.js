@@ -50,97 +50,6 @@ const ManageMarks = () => {
 			Subject: "Computer Network",
 			Marks: "20",
 		},
-		{
-			"Enrolment No.": "2101101010162",
-			Name: "Kunj Faladu Sureshbhai",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "22",
-		},
-		{
-			"Enrolment No.": "210110101019",
-			Name: "Rishi",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "20",
-		},
-		{
-			"Enrolment No.": "2101101010161",
-			Name: "Kunj Faladu Sureshbhai",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "22",
-		},
-		{
-			"Enrolment No.": "2101101010191",
-			Name: "Rishi",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "20",
-		},
-		{
-			"Enrolment No.": "2101101010162",
-			Name: "Kunj Faladu Sureshbhai",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "22",
-		},
-		{
-			"Enrolment No.": "210110101019",
-			Name: "Rishi",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "20",
-		},
-		{
-			"Enrolment No.": "2101101010161",
-			Name: "Kunj Faladu Sureshbhai",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "22",
-		},
-		{
-			"Enrolment No.": "2101101010191",
-			Name: "Rishi",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "20",
-		},
-		{
-			"Enrolment No.": "2101101010162",
-			Name: "Kunj Faladu Sureshbhai",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "22",
-		},
-		{
-			"Enrolment No.": "210110101019",
-			Name: "Rishi",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "20",
-		},
-		{
-			"Enrolment No.": "2101101010161",
-			Name: "Kunj Faladu Sureshbhai",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "22",
-		},
-		{
-			"Enrolment No.": "2101101010191",
-			Name: "Rishi",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "20",
-		},
-		{
-			"Enrolment No.": "2101101010162",
-			Name: "Kunj Faladu Sureshbhaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "22",
-		},
 	];
 	let navigate = useNavigate();
 	function handleLogout(e) {
@@ -168,14 +77,16 @@ const ManageMarks = () => {
 							<AddMarksModal show={modalShow} onHide={() => setModalShow(false)} />
 						</div>
 						<span className="mx-auto">
-							<h3>
+							<h3 className="mb-0">
 								<img className="mx-1" src={setting} alt="" />
-								<strong className="mx-1">Manage Marks</strong>
+								<strong className="mx-1" style={{ position: "relative", top: "2px" }}>
+									Manage Marks
+								</strong>
 							</h3>
 						</span>
 						<div className="ml-auto">
 							<img className="mx-2" src={excel} alt="" />
-							<Button className="btn-my" onClick={() => setModalShow2(true)}>
+							<Button className="btn-my" style={{ marginRight: "8px" }} onClick={() => setModalShow2(true)}>
 								Add Excel File
 							</Button>
 							<AddExcelModel show={modalShow2} onHide={() => setModalShow2(false)} />
@@ -244,14 +155,24 @@ const ManageMarks = () => {
 						</Row>
 					</div>
 					<div className="main-content-table scroller">
-						<Table bordered hover className="table-my">
+						<Table bordered hover className="table-my mb-2">
 							<thead className="col-sticky" style={{ backgroundColor: "white" }}>
-								<tr className="col-sticky">
-									<th className="col-sticky">Enrolment No.</th>
-									<th className="col-sticky">Name</th>
-									<th className="col-sticky">Course Code</th>
-									<th className="col-sticky">Subject</th>
-									<th className="col-sticky">Marks</th>
+								<tr className="col-sticky" style={{ backgroundColor: "white" }}>
+									<th className="col-sticky" style={{ backgroundColor: "white" }}>
+										Enrolment No.
+									</th>
+									<th className="col-sticky" style={{ backgroundColor: "white" }}>
+										Name
+									</th>
+									<th className="col-sticky" style={{ backgroundColor: "white" }}>
+										Course Code
+									</th>
+									<th className="col-sticky" style={{ backgroundColor: "white" }}>
+										Subject
+									</th>
+									<th className="col-sticky" style={{ backgroundColor: "white" }}>
+										Marks
+									</th>
 								</tr>
 							</thead>
 							<tbody>

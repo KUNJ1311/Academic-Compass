@@ -225,7 +225,7 @@ code {
 }
 .main-content-table {
 	box-sizing: border-box;
-	height: calc(100vh - 180px - 67px);
+	height: calc(100vh - 180px - 59px);
 	width: calc(100vw - 279px);
 	overflow: auto;
 	padding-right: 8px;
@@ -242,9 +242,10 @@ code {
 .table-my thead th {
 	position: -webkit-sticky;
 	position: sticky;
-	top: 0;
+	top: 1px;
 	z-index: 2;
 	box-shadow: inset -1px 0px 1px rgb(121, 121, 121), inset 0px -1px 1px rgb(121, 121, 121), inset 1px 0 1px rgb(121, 121, 121), inset 0px 1px 1px rgb(121, 121, 121);
+	border-top: 1px solid transparent;
 }
 .table-my td {
 	cursor: pointer;
