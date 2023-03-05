@@ -85,10 +85,10 @@ const ManageMarks = () => {
 							</h3>
 						</span>
 						<div className="ml-auto">
-							<img className="mx-2" src={excel} alt="" />
-							<Button className="btn-my" style={{ marginRight: "8px" }} onClick={() => setModalShow2(true)}>
+							<Button className="btn-my" onClick={() => setModalShow2(true)}>
 								Add Excel File
 							</Button>
+							<img className="mx-2" src={excel} alt="" />
 							<AddExcelModel show={modalShow2} onHide={() => setModalShow2(false)} />
 						</div>
 					</div>

@@ -8,6 +8,9 @@
     <style>
       .cls-1 {
         fill: #33336b;
+        stroke: #33336b;
+        stroke-width: 8px;
+        stroke-linecap: round;
       }
     </style>
 
