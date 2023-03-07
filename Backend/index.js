@@ -12,6 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api", require("./routes/student"), express.static("uploads"));
 
+var excel = require("./routes/excel");
+app.use("/data", excel);
 app.get("/api/", (req, res) => {
 	res.send("Hello!");
 });

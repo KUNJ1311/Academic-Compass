@@ -4,7 +4,7 @@ import MainNavbarExam from "./MainNavbarExam";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { Row, Col } from "react-bootstrap";
-const ManageStudents = () => {
+const ManageStudents = (props) => {
 	let navigate = useNavigate();
 	function handleLogout(e) {
 		e.preventDefault();

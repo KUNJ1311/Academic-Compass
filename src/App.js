@@ -29,7 +29,7 @@ function App() {
 	return (
 		<>
 			<Router>
-				<Alert alert={alert} />
+				<Alert alert={alert} style={{ transform: "translate(-87.3%,10%)" }} />
 				<Routes>
 					<Route exact path="/" element={<StudentLogin showAlert={showAlert} />} />
 					<Route path="/student-home" element={<Home showAlert={showAlert} />} />
@@ -41,7 +41,7 @@ function App() {
 					<Route exact path="/exam-cell-login" element={<ExamCellLogin />} />
 					<Route exact path="/super-admin-login" element={<SuperAdminLogin />} />
 					<Route path="/manageattendance" element={<ManageAttendance />} />
-					<Route path="/managemarks" element={<ManageMarks />} />
+					<Route path="/managemarks" element={<ManageMarks showAlert={showAlert} />} />
 				</Routes>
 			</Router>
 		</>

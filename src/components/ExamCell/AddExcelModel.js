@@ -2,8 +2,30 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
 import marks from "./svg/marks.svg";
-
+import { useState } from "react";
+import Spinner from "react-bootstrap/Spinner";
+import axios from "axios";
 const AddExcelModel = (props) => {
+	const [file, setFile] = useState("");
+	const [loading, setLoading] = useState(false);
+
+	const addExcel = async (e) => {
+		setLoading(true);
+		e.preventDefault();
+		const formData = new FormData();
+		formData.append("file", file);
+		try {
+			await axios.post(`http://localhost:5000/data/importexcel/${e.target.semester.value}/${e.target.test.value}`, formData);
+			props.showAlert("Data Added Successfully", "success");
+			setLoading(false);
+			props.onHide();
+		} catch (error) {
+			setLoading(false);
+			props.showAlert("Something Went Wrong!", "danger");
+			console.log(error);
+		}
+	};
+
 	return (
 		<div>
 			<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" backdrop="static" keyboard={false} centered>
@@ -13,55 +35,72 @@ const AddExcelModel = (props) => {
 						<span style={{ position: "relative", top: "3px", left: "5px" }}>&nbsp;Add Marks</span>
 					</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>
-					<Row className="d-flex">
-						<Col sm={3}>
-							<Form.Group>
-								<Form.Label>&nbsp;Select Semester</Form.Label>
-								<Form.Select defaultValue="">
-									<option disabled value="">
-										Select Semester
-									</option>
-									<option value="1">1st Semester</option>
-									<option value="2">2nd Semester</option>
-									<option value="3">3rd Semester</option>
-									<option value="4">4th Semester</option>
-									<option value="5">5th Semester</option>
-									<option value="6">6th Semester</option>
-									<option value="7">7th Semester</option>
-									<option value="8">8th Semester</option>
-								</Form.Select>
-							</Form.Group>
-						</Col>
-						<Col sm={3}>
-							<Form.Group>
-								<Form.Label>&nbsp;Select Test</Form.Label>
-								<Form.Select defaultValue="">
-									<option disabled value="">
-										Select Test
-									</option>
-									<option value="maths">First Test</option>
-									<option value="physics">Second Test</option>
-									<option value="chemistry">Final Test</option>
-								</Form.Select>
-							</Form.Group>
-						</Col>
-						<Col>
-							<Form.Group controlId="formFile">
-								<Form.Label>Add Excel File</Form.Label>
-								<Form.Control type="file" />
-							</Form.Group>
-						</Col>
-					</Row>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="danger" onClick={props.onHide}>
-						Close
-					</Button>
-					<Button variant="success" onClick={props.onHide}>
-						Add Data
-					</Button>
-				</Modal.Footer>
+				<Form onSubmit={addExcel} method="POST" encType="multipart/form-data">
+					<Modal.Body>
+						<Row className="d-flex">
+							<Col sm={3}>
+								<Form.Group>
+									<Form.Label>&nbsp;Select Semester</Form.Label>
+									<Form.Select id="semester" defaultValue="">
+										<option disabled value="">
+											Select Semester
+										</option>
+										<option value="sem1">1st Semester</option>
+										<option value="sem2">2nd Semester</option>
+										<option value="sem3">3rd Semester</option>
+										<option value="sem4">4th Semester</option>
+										<option value="sem5">5th Semester</option>
+										<option value="sem6">6th Semester</option>
+										<option value="sem7">7th Semester</option>
+										<option value="sem8">8th Semester</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={3}>
+								<Form.Group>
+									<Form.Label>&nbsp;Select Test</Form.Label>
+									<Form.Select id="test" defaultValue="">
+										<option disabled value="">
+											Select Test
+										</option>
+										<option value="testfirst">First Test</option>
+										<option value="testsecond">Second Test</option>
+										<option value="testfinal">Final Test</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group>
+									<Form.Label>Add Excel File</Form.Label>
+									<Form.Control
+										type="file"
+										name="file"
+										id="file"
+										onChange={(e) => {
+											setFile(e.target.files[0]);
+										}}
+									/>
+								</Form.Group>
+							</Col>
+						</Row>
+					</Modal.Body>
+					<Modal.Footer>
+						{loading ? (
+							<>
+								<Spinner animation="grow" variant="danger" />
+								<span style={{ color: "red" }}>Uploading...</span>
+							</>
+						) : (
+							""
+						)}
+						<Button variant="danger" onClick={props.onHide}>
+							Close
+						</Button>
+						<Button type="submit" variant="success">
+							Add Data
+						</Button>
+					</Modal.Footer>
+				</Form>
 			</Modal>
 		</div>
 	);

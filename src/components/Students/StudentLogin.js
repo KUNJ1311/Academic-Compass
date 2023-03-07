@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 const Login = (props) => {
-	const [credentials, setCredentials] = useState({ enrolment: "", dob: "" });
+	const [credentials, setCredentials] = useState({ enrolment: "", password: "" });
 	let navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -15,8 +15,9 @@ const Login = (props) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ enrolment: credentials.enrolment, dob: credentials.dob }),
+			body: JSON.stringify(credentials),
 		});
+		console.log(credentials);
 		const json = await response.json();
 		if (json.success) {
 			//Save the auth token and redirect
@@ -53,7 +54,7 @@ const Login = (props) => {
 							<path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
 						</svg>
 						<input value={credentials.enrolment} onChange={onChange} className="input-login" type="text" name="enrolment" id="enrolment" placeholder="Enrolment No." />
-						<input value={credentials.dob} onChange={onChange} name="dob" id="dob" className="input-login" type="password" placeholder="DDMMYYYY" />
+						<input value={credentials.password} onChange={onChange} name="password" id="password" className="input-login" type="password" placeholder="Password" />
 						<button type="submit" className="login-button mb-3">
 							Login
 						</button>

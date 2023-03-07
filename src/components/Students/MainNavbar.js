@@ -52,17 +52,21 @@ function MainNavbar(props) {
 					<li>
 						<img className="stuphoto" src={`${host}/api/${studentsdata.path}`} alt="Not Found" />
 					</li>
-					<li className="fw-bold px-3 py-3">
-						Name :&nbsp;<p className="fw-normal my-0 mx-1">{studentsdata.name}</p>
+					<li className="fw-bold pb-0 py-3">
+						Name:&nbsp;
+						<p className="fw-normal my-0 mx-1">{studentsdata.name}</p>
 					</li>
-					<li className="fw-bold px-3 py-3">
-						Enrolment No :&nbsp;<p className="fw-normal my-0 mx-1">{studentsdata.enrolment}</p>
+					<li className="fw-bold pb-0 py-3">
+						Enrolment No:&nbsp;
+						<p className="fw-normal my-0 mx-1">{studentsdata.enrolment}</p>
 					</li>
-					<li className="fw-bold px-3 py-3">
-						Branch :&nbsp;<p className="fw-normal my-0 mx-1">{studentsdata.branch}</p>
+					<li className="fw-bold pb-0 py-3">
+						Branch:&nbsp;
+						<p className="fw-normal my-0 mx-1">{studentsdata.branch}</p>
 					</li>
-					<li className="fw-bold px-3 py-3">
-						Course :&nbsp;<p className="fw-normal my-0 mx-1">{studentsdata.course}</p>
+					<li className="fw-bold pb-0 py-3">
+						Course:&nbsp;
+						<p className="fw-normal my-0 mx-1">{studentsdata.course}</p>
 					</li>
 				</div>
 			</ul>

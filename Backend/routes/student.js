@@ -13,7 +13,7 @@ const Sem6 = require("../models/Sem6");
 const Sem7 = require("../models/Sem7");
 const Sem8 = require("../models/Sem8");
 
-//Add data
+//Add data---------------------------------------------------------------------
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, "uploads");
@@ -55,7 +55,7 @@ router.post("/addstudentdata", upload.single("IU"), async (req, res) => {
 	res.json({ success });
 });
 
-//Get All data
+//Get All data---------------------------------------------------------------------
 router.get("/getstudentdata", async (req, res) => {
 	try {
 		const enrolment = req.body.id;
@@ -67,7 +67,7 @@ router.get("/getstudentdata", async (req, res) => {
 	}
 });
 
-//Get data by id
+//Get data by id---------------------------------------------------------------------
 router.get("/getstudentdata/:id", async (req, res) => {
 	try {
 		const student = await Studentdata.findById(req.params.id);
@@ -78,17 +78,17 @@ router.get("/getstudentdata/:id", async (req, res) => {
 	}
 });
 
-//Login
-router.post("/loginstudent", [body("enrolment", "Enter valid Enrolment No").exists(), body("dob", "Password can not be blank").exists()], async (req, res) => {
+//Login---------------------------------------------------------------------
+router.post("/loginstudent", [body("enrolment", "Enter valid Enrolment No").exists(), body("password", "Password can not be blank").exists()], async (req, res) => {
 	//If there are errors, return bad request
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		let success = false;
 		return res.status(400).json({ success, errors: "Please try to login with correct credentials" });
 	}
-	const { enrolment, dob } = req.body;
+	const { enrolment, password } = req.body;
 	try {
-		let user = await Studentdata.findOne({ enrolment, dob });
+		let user = await Studentdata.findOne({ enrolment, password });
 		if (!user) {
 			let success = false;
 			return res.status(400).json({ success, error: "Please try to login with correct credentials" });
@@ -100,240 +100,62 @@ router.post("/loginstudent", [body("enrolment", "Enter valid Enrolment No").exis
 		res.status(500).send("Internal Server Error");
 	}
 });
+const updateSemester = async (Semester, req, res) => {
+	try {
+		const { testfirst, testsecond, testfinal, attendance } = req.body;
+		let semester = await Semester.findOne({ user: req.params.id });
+
+		if (!semester) {
+			semester = new Semester({
+				user: req.params.id,
+				testfirst,
+				testsecond,
+				testfinal,
+				attendance,
+			});
+		} else {
+			semester.testfirst = testfirst;
+			semester.testsecond = testsecond;
+			semester.testfinal = testfinal;
+			semester.attendance = attendance;
+		}
+
+		const updatedSemester = await semester.save();
+		res.json(updatedSemester);
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).send("Internal Server Error");
+	}
+};
 
 router.put("/updatesem1/:id", async (req, res) => {
-	try {
-		const { testfirst, testsecond, testfinal, attendance } = req.body;
-		let sem1 = await Sem1.findOne({ user: req.params.id });
-
-		// If the resource doesn't exist, create a new one
-		if (!sem1) {
-			sem1 = new Sem1({
-				user: req.params.id,
-				testfirst,
-				testsecond,
-				testfinal,
-				attendance,
-			});
-		} else {
-			// Otherwise, update the existing resource
-			sem1.testfirst = testfirst;
-			sem1.testsecond = testsecond;
-			sem1.testfinal = testfinal;
-			sem1.attendance = attendance;
-		}
-
-		const updatedSem1 = await sem1.save();
-		res.json(updatedSem1);
-	} catch (error) {
-		console.error(error.message);
-		res.status(500).send("Internal Server Error");
-	}
+	await updateSemester(Sem1, req, res);
 });
+
 router.put("/updatesem2/:id", async (req, res) => {
-	try {
-		const { testfirst, testsecond, testfinal, attendance } = req.body;
-		let sem2 = await Sem2.findOne({ user: req.params.id });
-
-		// If the resource doesn't exist, create a new one
-		if (!sem2) {
-			sem2 = new Sem2({
-				user: req.params.id,
-				testfirst,
-				testsecond,
-				testfinal,
-				attendance,
-			});
-		} else {
-			// Otherwise, update the existing resource
-			sem2.testfirst = testfirst;
-			sem2.testsecond = testsecond;
-			sem2.testfinal = testfinal;
-			sem2.attendance = attendance;
-		}
-
-		const updatedSem2 = await sem2.save();
-		res.json(updatedSem2);
-	} catch (error) {
-		console.error(error.message);
-		res.status(500).send("Internal Server Error");
-	}
+	await updateSemester(Sem2, req, res);
 });
+
 router.put("/updatesem3/:id", async (req, res) => {
-	try {
-		const { testfirst, testsecond, testfinal, attendance } = req.body;
-		let sem3 = await Sem3.findOne({ user: req.params.id });
-
-		// If the resource doesn't exist, create a new one
-		if (!sem3) {
-			sem3 = new Sem3({
-				user: req.params.id,
-				testfirst,
-				testsecond,
-				testfinal,
-				attendance,
-			});
-		} else {
-			// Otherwise, update the existing resource
-			sem3.testfirst = testfirst;
-			sem3.testsecond = testsecond;
-			sem3.testfinal = testfinal;
-			sem3.attendance = attendance;
-		}
-
-		const updatedSem3 = await sem3.save();
-		res.json(updatedSem3);
-	} catch (error) {
-		console.error(error.message);
-		res.status(500).send("Internal Server Error");
-	}
+	await updateSemester(Sem3, req, res);
 });
+
 router.put("/updatesem4/:id", async (req, res) => {
-	try {
-		const { testfirst, testsecond, testfinal, attendance } = req.body;
-		let sem4 = await Sem4.findOne({ user: req.params.id });
-
-		// If the resource doesn't exist, create a new one
-		if (!sem4) {
-			sem4 = new Sem4({
-				user: req.params.id,
-				testfirst,
-				testsecond,
-				testfinal,
-				attendance,
-			});
-		} else {
-			// Otherwise, update the existing resource
-			sem4.testfirst = testfirst;
-			sem4.testsecond = testsecond;
-			sem4.testfinal = testfinal;
-			sem4.attendance = attendance;
-		}
-
-		const updatedSem4 = await sem4.save();
-		res.json(updatedSem4);
-	} catch (error) {
-		console.error(error.message);
-		res.status(500).send("Internal Server Error");
-	}
+	await updateSemester(Sem4, req, res);
 });
+
 router.put("/updatesem5/:id", async (req, res) => {
-	try {
-		const { testfirst, testsecond, testfinal, attendance } = req.body;
-		let sem5 = await Sem5.findOne({ user: req.params.id });
-
-		// If the resource doesn't exist, create a new one
-		if (!sem5) {
-			sem5 = new Sem5({
-				user: req.params.id,
-				testfirst,
-				testsecond,
-				testfinal,
-				attendance,
-			});
-		} else {
-			// Otherwise, update the existing resource
-			sem5.testfirst = testfirst;
-			sem5.testsecond = testsecond;
-			sem5.testfinal = testfinal;
-			sem5.attendance = attendance;
-		}
-
-		const updatedSem5 = await sem5.save();
-		res.json(updatedSem5);
-	} catch (error) {
-		console.error(error.message);
-		res.status(500).send("Internal Server Error");
-	}
+	await updateSemester(Sem5, req, res);
 });
 router.put("/updatesem6/:id", async (req, res) => {
-	try {
-		const { testfirst, testsecond, testfinal, attendance } = req.body;
-		let sem6 = await Sem6.findOne({ user: req.params.id });
-
-		// If the resource doesn't exist, create a new one
-		if (!sem6) {
-			sem6 = new Sem6({
-				user: req.params.id,
-				testfirst,
-				testsecond,
-				testfinal,
-				attendance,
-			});
-		} else {
-			// Otherwise, update the existing resource
-			sem6.testfirst = testfirst;
-			sem6.testsecond = testsecond;
-			sem6.testfinal = testfinal;
-			sem6.attendance = attendance;
-		}
-
-		const updatedSem6 = await sem6.save();
-		res.json(updatedSem6);
-	} catch (error) {
-		console.error(error.message);
-		res.status(500).send("Internal Server Error");
-	}
+	await updateSemester(Sem6, req, res);
 });
 router.put("/updatesem7/:id", async (req, res) => {
-	try {
-		const { testfirst, testsecond, testfinal, attendance } = req.body;
-		let sem7 = await Sem7.findOne({ user: req.params.id });
-
-		// If the resource doesn't exist, create a new one
-		if (!sem7) {
-			sem7 = new Sem7({
-				user: req.params.id,
-				testfirst,
-				testsecond,
-				testfinal,
-				attendance,
-			});
-		} else {
-			// Otherwise, update the existing resource
-			sem7.testfirst = testfirst;
-			sem7.testsecond = testsecond;
-			sem7.testfinal = testfinal;
-			sem7.attendance = attendance;
-		}
-
-		const updatedSem7 = await sem7.save();
-		res.json(updatedSem7);
-	} catch (error) {
-		console.error(error.message);
-		res.status(500).send("Internal Server Error");
-	}
+	await updateSemester(Sem7, req, res);
 });
 router.put("/updatesem8/:id", async (req, res) => {
-	try {
-		const { testfirst, testsecond, testfinal, attendance } = req.body;
-		let sem8 = await Sem8.findOne({ user: req.params.id });
-
-		// If the resource doesn't exist, create a new one
-		if (!sem8) {
-			sem8 = new Sem8({
-				user: req.params.id,
-				testfirst,
-				testsecond,
-				testfinal,
-				attendance,
-			});
-		} else {
-			// Otherwise, update the existing resource
-			sem8.testfirst = testfirst;
-			sem8.testsecond = testsecond;
-			sem8.testfinal = testfinal;
-			sem8.attendance = attendance;
-		}
-
-		const updatedSem8 = await sem8.save();
-		res.json(updatedSem8);
-	} catch (error) {
-		console.error(error.message);
-		res.status(500).send("Internal Server Error");
-	}
+	await updateSemester(Sem8, req, res);
 });
-
 //Get data sem vise
 router.get("/getalldata/semester-1/:id", async (req, res) => {
 	try {

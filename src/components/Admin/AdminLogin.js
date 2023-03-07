@@ -25,7 +25,7 @@ const AdminLogin = () => {
 						</svg>
 						<input className="input-login" type="text" placeholder="Enrolment No." />
 
-						<input className="input-login" type="password" placeholder="DDMMYYYY" />
+						<input className="input-login" type="password" placeholder="Password" />
 						<button onClick={handleSubmit} className="login-button mb-3">
 							Login
 						</button>
