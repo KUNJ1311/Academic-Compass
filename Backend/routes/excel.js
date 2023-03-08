@@ -20,7 +20,7 @@ const Sem8 = require("../models/Sem8");
 
 const Studentdata = require("../models/Studentdata");
 
-const excelpath = path.join(process.cwd(), "excel");
+const excelpath = path.join(process.cwd(), "/Backend/excel");
 var storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, excelpath);
