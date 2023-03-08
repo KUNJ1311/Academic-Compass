@@ -1,5 +1,11 @@
-const connectToMongo = require("./db");
-connectToMongo();
+const dotenv = require("dotenv");
+dotenv.config();
+const mongoose = require("mongoose");
+
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+	console.log("successfully connected");
+});
+
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");

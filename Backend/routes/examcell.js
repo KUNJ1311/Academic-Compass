@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "Kunj@signed_by_Kunj@1311";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 //ROUTE 1 : Create a examcell using: POST "/api/auth-examcell/createexamcell". No login required
 router.post("/createexamcell", [body("name", "Enter valid name").isLength({ min: 2 }), body("email", "Enter valid email").isEmail(), body("password", "Password must be atleast 8 characters").isLength({ min: 8 })], async (req, res) => {
