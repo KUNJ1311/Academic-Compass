@@ -23,7 +23,7 @@ const Studentdata = require("../models/Studentdata");
 excel.use(express.static(path.resolve(__dirname, "excel")));
 var storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, "../excel");
+		cb(null, "./excel");
 	},
 	filename: (req, file, cb) => {
 		if (file.mimetype !== "text/csv") {
