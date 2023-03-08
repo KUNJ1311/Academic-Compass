@@ -100,7 +100,7 @@ Semesters.forEach((semester) => {
 					}
 				}
 			}
-			fs.unlinkSync(req.file.path);
+			// fs.unlinkSync(req.file.path);
 			res.send({ status: 200, success: true, msg: "CSV Imported" });
 		} catch (error) {
 			res.send({ status: 400, success: false, msg: error.message });
@@ -164,7 +164,7 @@ Semesters.forEach((semester) => {
 					}
 				}
 			}
-			fs.unlinkSync(req.file.path);
+			// fs.unlinkSync(req.file.path);
 			res.send({ status: 200, success: true, msg: "CSV Imported" });
 		} catch (error) {
 			res.send({ status: 400, success: false, msg: error.message });
@@ -228,7 +228,7 @@ Semesters.forEach((semester) => {
 					}
 				}
 			}
-			fs.unlinkSync(req.file.path);
+			// fs.unlinkSync(req.file.path);
 			res.send({ status: 200, success: true, msg: "CSV Imported" });
 		} catch (error) {
 			res.send({ status: 400, success: false, msg: error.message });
