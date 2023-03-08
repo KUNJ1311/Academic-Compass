@@ -44,7 +44,7 @@ const Login = (props) => {
 			<div className="login-page">
 				<div className="wrapper">
 					<img alt="" src={logo} width="350" height="180" className="d-inline-block hidden-300 align-top logo-2" />
-					<h1 className="h1-login">Student Login :)</h1>
+					<h1 className="h1-login">Student Login</h1>
 					<form onSubmit={handleSubmit}>
 						<svg className="bi bi-person-fill icon icon-user" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
 							<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
