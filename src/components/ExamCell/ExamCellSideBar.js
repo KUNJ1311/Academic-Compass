@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import student from "./svg/student.svg";
 import marks from "./svg/marks.svg";
@@ -29,7 +30,14 @@ const ExamCellSideBar = () => {
 	const handleMouseLeave = () => {
 		setHoveredIndex(null);
 	};
+	let navigate = useNavigate();
 
+	useEffect(() => {
+		if (!localStorage.getItem("token")) {
+			navigate("/exam-cell-login");
+		}
+		//eslint-disable-next-line
+	}, []);
 	return (
 		<div className="examcellsidebar">
 			{items.map((item, index) => (

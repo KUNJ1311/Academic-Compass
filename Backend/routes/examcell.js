@@ -1,7 +1,6 @@
 const express = require("express");
 const ExamCell = require("../models/ExamCell");
 const router = express.Router();
-var fetchuser = require("../middleware/fetchUser");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
