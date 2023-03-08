@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ExamCellSideBar from "./ExamCellSideBar";
 import MainNavbarExam from "./MainNavbarExam";
 import { useNavigate } from "react-router-dom";
