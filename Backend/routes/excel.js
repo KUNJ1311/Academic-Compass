@@ -20,9 +20,10 @@ const Sem8 = require("../models/Sem8");
 
 const Studentdata = require("../models/Studentdata");
 
+excel.use(express.static(path.resolve(__dirname, "excel")));
 var storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, "excel");
+		cb(null, "../excel");
 	},
 	filename: (req, file, cb) => {
 		if (file.mimetype !== "text/csv") {
@@ -100,7 +101,7 @@ Semesters.forEach((semester) => {
 					}
 				}
 			}
-			fs.unlinkSync(req.file.path);
+			// fs.unlinkSync(req.file.path);
 			res.send({ status: 200, success: true, msg: "CSV Imported" });
 		} catch (error) {
 			res.send({ status: 400, success: false, msg: error.message });
@@ -164,7 +165,7 @@ Semesters.forEach((semester) => {
 					}
 				}
 			}
-			fs.unlinkSync(req.file.path);
+			// fs.unlinkSync(req.file.path);
 			res.send({ status: 200, success: true, msg: "CSV Imported" });
 		} catch (error) {
 			res.send({ status: 400, success: false, msg: error.message });
@@ -228,7 +229,7 @@ Semesters.forEach((semester) => {
 					}
 				}
 			}
-			fs.unlinkSync(req.file.path);
+			// fs.unlinkSync(req.file.path);
 			res.send({ status: 200, success: true, msg: "CSV Imported" });
 		} catch (error) {
 			res.send({ status: 400, success: false, msg: error.message });
