@@ -20,9 +20,10 @@ const Sem8 = require("../models/Sem8");
 
 const Studentdata = require("../models/Studentdata");
 
+const excelpath = path.join(process.cwd(), "excel");
 var storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, "excel");
+		cb(null, excelpath);
 	},
 	filename: (req, file, cb) => {
 		if (file.mimetype !== "text/csv") {
