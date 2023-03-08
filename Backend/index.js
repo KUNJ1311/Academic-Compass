@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api", require("./routes/student"), express.static("uploads"));
-
+app.use("/api/auth-examcell", require("./routes/examcell"));
 var excel = require("./routes/excel");
 app.use("/data", excel);
 app.get("/api/", (req, res) => {

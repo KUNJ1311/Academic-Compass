@@ -1,13 +1,31 @@
-import React from "react";
+import { React, useState } from "react";
 import logo from "../img/iuLogo2.jpeg";
 import logo2 from "../img/iuback.jpg";
 import { Link, useNavigate } from "react-router-dom";
-const ExamCellLogin = () => {
+const ExamCellLogin = (props) => {
+	const [credentials, setCredentials] = useState({ email: "", password: "" });
 	let navigate = useNavigate();
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		window.localStorage.setItem("token", "true");
-		navigate("/managestudent");
+		const response = await fetch(`http://localhost:5000/api/auth-examcell/login`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email: credentials.email, password: credentials.password }),
+		});
+		const json = await response.json();
+		if (json.success) {
+			//Save the auth token and redirect
+			localStorage.setItem("token", json.authtoken);
+			props.showAlert("Logged in Successfully", "success");
+			navigate("/managemarks");
+		} else {
+			props.showAlert("Invalid Details", "danger");
+		}
+	};
+	const onChange = (e) => {
+		setCredentials({ ...credentials, [e.target.name]: e.target.value });
 	};
 	return (
 		<>
@@ -23,9 +41,9 @@ const ExamCellLogin = () => {
 						<svg className="bi bi-key-fill icon icon-pass" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
 							<path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
 						</svg>
-						<input className="input-login" type="text" placeholder="Enrolment No." />
+						<input name="email" id="email" onChange={onChange} className="input-login" type="email" placeholder="Email ID" />
 
-						<input className="input-login" type="password" placeholder="Password" />
+						<input name="password" id="password" onChange={onChange} className="input-login" type="password" placeholder="Password" />
 						<button onClick={handleSubmit} className="login-button mb-3">
 							Login
 						</button>

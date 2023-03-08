@@ -1,6 +1,7 @@
 const express = require("express");
 const excel = express();
 const fs = require("fs");
+const fetchuser = require("../middleware/fetchUser");
 
 const multer = require("multer");
 const path = require("path");
@@ -24,6 +25,9 @@ var storage = multer.diskStorage({
 		cb(null, "excel");
 	},
 	filename: (req, file, cb) => {
+		if (file.mimetype !== "text/csv") {
+			return cb(new Error("Only CSV files are allowed"));
+		}
 		cb(null, Date.now() + "_" + file.originalname);
 	},
 });
@@ -41,7 +45,7 @@ const Semesters = [
 	// add more semesters if needed
 ];
 Semesters.forEach((semester) => {
-	excel.post(`/importexcel/sem${semester.number}/testfirst`, upload.single("file"), async (req, res) => {
+	excel.post(`/importexcel/sem${semester.number}/testfirst`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -105,7 +109,7 @@ Semesters.forEach((semester) => {
 });
 
 Semesters.forEach((semester) => {
-	excel.post(`/importexcel/sem${semester.number}/testsecond`, upload.single("file"), async (req, res) => {
+	excel.post(`/importexcel/sem${semester.number}/testsecond`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -169,7 +173,7 @@ Semesters.forEach((semester) => {
 });
 
 Semesters.forEach((semester) => {
-	excel.post(`/importexcel/sem${semester.number}/testfinal`, upload.single("file"), async (req, res) => {
+	excel.post(`/importexcel/sem${semester.number}/testfinal`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {

@@ -11,8 +11,8 @@ const ExamCellSideBar = () => {
 	const clickedIndexQueryParam = queryParams.get("clickedIndex");
 	const [clickedIndex, setClickedIndex] = useState(clickedIndexQueryParam ? Number(clickedIndexQueryParam) : 0);
 	const items = [
-		{ group: "Manage Students", svg: student, link: "/managestudent" },
 		{ group: "Manage Marks", svg: marks, link: "/managemarks" },
+		{ group: "Manage Students", svg: student, link: "/managestudent" },
 		{ group: "Manage Attendance", svg: attendance, link: "/manageattendance" },
 	];
 

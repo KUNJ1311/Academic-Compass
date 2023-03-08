@@ -100,6 +100,7 @@ router.post("/loginstudent", [body("enrolment", "Enter valid Enrolment No").exis
 		res.status(500).send("Internal Server Error");
 	}
 });
+
 const updateSemester = async (Semester, req, res) => {
 	try {
 		const { testfirst, testsecond, testfinal, attendance } = req.body;
@@ -127,23 +128,18 @@ const updateSemester = async (Semester, req, res) => {
 		res.status(500).send("Internal Server Error");
 	}
 };
-
 router.put("/updatesem1/:id", async (req, res) => {
 	await updateSemester(Sem1, req, res);
 });
-
 router.put("/updatesem2/:id", async (req, res) => {
 	await updateSemester(Sem2, req, res);
 });
-
 router.put("/updatesem3/:id", async (req, res) => {
 	await updateSemester(Sem3, req, res);
 });
-
 router.put("/updatesem4/:id", async (req, res) => {
 	await updateSemester(Sem4, req, res);
 });
-
 router.put("/updatesem5/:id", async (req, res) => {
 	await updateSemester(Sem5, req, res);
 });

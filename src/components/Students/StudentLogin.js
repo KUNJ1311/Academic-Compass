@@ -17,7 +17,6 @@ const Login = (props) => {
 			},
 			body: JSON.stringify(credentials),
 		});
-		console.log(credentials);
 		const json = await response.json();
 		if (json.success) {
 			//Save the auth token and redirect

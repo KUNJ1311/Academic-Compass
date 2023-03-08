@@ -10,7 +10,7 @@ function Alert(props) {
 	};
 
 	return (
-		<div style={{ height: "60px", position: "absolute", top: props.alert ? 0 : "-100px", width: "100%", zIndex: "9999", overflow: "hidden" }}>
+		<div style={{ height: "60px", position: "absolute", top: props.alert ? 0 : "-100px", width: "100%", zIndex: "9999", overflow: "hidden", transition: "0.5s ease-out" }}>
 			{props.alert && (
 				<div className={`alert alert-${props.alert.type} alert-dismissible sticky-onnav fade show`} role="alert">
 					<strong>{capitalize(props.alert.type)}</strong>: {props.alert.message}

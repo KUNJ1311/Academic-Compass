@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
 import marks from "./svg/marks.svg";
-import { useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 const AddExcelModel = (props) => {
 	const [file, setFile] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [dots, setDots] = useState("");
 
 	const addExcel = async (e) => {
 		setLoading(true);
@@ -15,17 +15,38 @@ const AddExcelModel = (props) => {
 		const formData = new FormData();
 		formData.append("file", file);
 		try {
-			await axios.post(`http://localhost:5000/data/importexcel/${e.target.semester.value}/${e.target.test.value}`, formData);
+			const headers = {
+				"auth-token": localStorage.getItem("token"),
+			};
+			await axios.post(`http://localhost:5000/data/importexcel/${e.target.semester.value}/${e.target.test.value}`, formData, { headers });
 			props.showAlert("Data Added Successfully", "success");
 			setLoading(false);
 			props.onHide();
 		} catch (error) {
 			setLoading(false);
-			props.showAlert("Something Went Wrong!", "danger");
+			props.showAlert("Only *.CSV files are allowed", "danger");
 			console.log(error);
 		}
 	};
+	useEffect(() => {
+		let interval;
+		if (loading) {
+			interval = setInterval(() => {
+				setDots((prevDots) => {
+					if (prevDots.length < 4) {
+						return prevDots + ".";
+					} else {
+						return "";
+					}
+				});
+			}, 500);
+		} else {
+			clearInterval(interval);
+			setDots("");
+		}
 
+		return () => clearInterval(interval);
+	}, [loading]);
 	return (
 		<div>
 			<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" backdrop="static" keyboard={false} centered>
@@ -88,7 +109,9 @@ const AddExcelModel = (props) => {
 						{loading ? (
 							<>
 								<Spinner animation="grow" variant="danger" />
-								<span style={{ color: "red" }}>Uploading...</span>
+								<span style={{ color: "red", boxSizing: "border-box", width: "100px", textAlign: "left" }}>
+									Uploading<strong>.{dots}</strong>
+								</span>
 							</>
 						) : (
 							""

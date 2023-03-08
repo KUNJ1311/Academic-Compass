@@ -22,7 +22,7 @@ function App() {
 		});
 		setTimeout(() => {
 			setAlert(null);
-		}, 1500);
+		}, 4000);
 	};
 	const isLoggedIn = window.localStorage.getItem("token");
 
@@ -33,14 +33,13 @@ function App() {
 				<Routes>
 					<Route exact path="/" element={<StudentLogin showAlert={showAlert} />} />
 					<Route path="/student-home" element={<Home showAlert={showAlert} />} />
-					<Route exact path="/" element={<AdminLogin />} />
 					<Route path="/admin-home" element={isLoggedIn === "true" ? <AdminHome /> : <AdminLogin />} />
-					<Route path="/managestudent" element={isLoggedIn === "true" ? <ManageStudents /> : <ExamCellLogin />} />
 					<Route path="/super-admin-home" element={isLoggedIn === "true" ? <SuperAdminHome /> : <SuperAdminLogin />} />
 					<Route exact path="/admin-login" element={<AdminLogin />} />
-					<Route exact path="/exam-cell-login" element={<ExamCellLogin />} />
+					<Route exact path="/exam-cell-login" element={<ExamCellLogin showAlert={showAlert} />} />
 					<Route exact path="/super-admin-login" element={<SuperAdminLogin />} />
 					<Route path="/manageattendance" element={<ManageAttendance />} />
+					<Route path="/managestudent" element={<ManageStudents />} />
 					<Route path="/managemarks" element={<ManageMarks showAlert={showAlert} />} />
 				</Routes>
 			</Router>
