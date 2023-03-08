@@ -46,7 +46,7 @@ const Semesters = [
 	// add more semesters if needed
 ];
 Semesters.forEach((semester) => {
-	excel.post(`/importexcel/sem${semester.number}/testfirst`, fetchuser, upload.single("file"), async (req, res) => {
+	excel.put(`/importexcel/sem${semester.number}/testfirst`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -110,7 +110,7 @@ Semesters.forEach((semester) => {
 });
 
 Semesters.forEach((semester) => {
-	excel.post(`/importexcel/sem${semester.number}/testsecond`, fetchuser, upload.single("file"), async (req, res) => {
+	excel.put(`/importexcel/sem${semester.number}/testsecond`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -174,7 +174,7 @@ Semesters.forEach((semester) => {
 });
 
 Semesters.forEach((semester) => {
-	excel.post(`/importexcel/sem${semester.number}/testfinal`, fetchuser, upload.single("file"), async (req, res) => {
+	excel.put(`/importexcel/sem${semester.number}/testfinal`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
