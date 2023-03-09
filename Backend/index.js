@@ -10,6 +10,7 @@ const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const port = 5000;
 
 app.use(cors());
 
@@ -23,6 +24,6 @@ app.get("/api/", (req, res) => {
 	res.send("Hello!");
 });
 
-app.listen(() => {
-	console.log(`backend listening at https://iu-project.vercel.app/`);
+app.listen(port, () => {
+	console.log(`backend listening at http://localhost:${port}`);
 });

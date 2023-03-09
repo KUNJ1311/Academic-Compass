@@ -23,7 +23,7 @@ const Studentdata = require("../models/Studentdata");
 excel.use(express.static(path.resolve(__dirname, "excel")));
 var storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, "./excel");
+		cb(null, "../excel");
 	},
 	filename: (req, file, cb) => {
 		if (file.mimetype !== "text/csv") {
@@ -46,7 +46,7 @@ const Semesters = [
 	// add more semesters if needed
 ];
 Semesters.forEach((semester) => {
-	excel.put(`/importexcel/sem${semester.number}/testfirst`, fetchuser, upload.single("file"), async (req, res) => {
+	excel.post(`/importexcel/sem${semester.number}/testfirst`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -101,7 +101,7 @@ Semesters.forEach((semester) => {
 					}
 				}
 			}
-			// fs.unlinkSync(req.file.path);
+			fs.unlinkSync(req.file.path);
 			res.send({ status: 200, success: true, msg: "CSV Imported" });
 		} catch (error) {
 			res.send({ status: 400, success: false, msg: error.message });
@@ -110,7 +110,7 @@ Semesters.forEach((semester) => {
 });
 
 Semesters.forEach((semester) => {
-	excel.put(`/importexcel/sem${semester.number}/testsecond`, fetchuser, upload.single("file"), async (req, res) => {
+	excel.post(`/importexcel/sem${semester.number}/testsecond`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -165,7 +165,7 @@ Semesters.forEach((semester) => {
 					}
 				}
 			}
-			// fs.unlinkSync(req.file.path);
+			fs.unlinkSync(req.file.path);
 			res.send({ status: 200, success: true, msg: "CSV Imported" });
 		} catch (error) {
 			res.send({ status: 400, success: false, msg: error.message });
@@ -174,7 +174,7 @@ Semesters.forEach((semester) => {
 });
 
 Semesters.forEach((semester) => {
-	excel.put(`/importexcel/sem${semester.number}/testfinal`, fetchuser, upload.single("file"), async (req, res) => {
+	excel.post(`/importexcel/sem${semester.number}/testfinal`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -229,7 +229,7 @@ Semesters.forEach((semester) => {
 					}
 				}
 			}
-			// fs.unlinkSync(req.file.path);
+			fs.unlinkSync(req.file.path);
 			res.send({ status: 200, success: true, msg: "CSV Imported" });
 		} catch (error) {
 			res.send({ status: 400, success: false, msg: error.message });

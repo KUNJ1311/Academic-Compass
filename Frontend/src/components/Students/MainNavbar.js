@@ -11,7 +11,7 @@ function MainNavbar(props) {
 		//eslint-disable-next-line
 	}, []);
 
-	const host = "https://iu-project.vercel.app/";
+	const host = "http://localhost:5000";
 	//Get Students
 	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "", path: "" });
 	const getStudents = async () => {

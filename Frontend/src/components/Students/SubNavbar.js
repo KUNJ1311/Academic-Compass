@@ -13,7 +13,7 @@ import Nav from "react-bootstrap/Nav";
 import Table from "react-bootstrap/Table";
 
 function SubNavbar() {
-	const host = "https://iu-project.vercel.app/";
+	const host = "http://localhost:5000";
 	let [data, setData] = useState({ testfirst: [], testsecond: [], testfinal: [], attendance: [] });
 	const [selectedSemester, setSelectedSemester] = useState("semester-1");
 	const id = localStorage.getItem("key");
