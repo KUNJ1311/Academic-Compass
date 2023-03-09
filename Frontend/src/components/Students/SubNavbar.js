@@ -5,8 +5,9 @@ import TestSecond from "./TestSecond";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import TestFinal from "./TestFinal";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import Form from "react-bootstrap/Form";
+// import Dropdown from "react-bootstrap/Dropdown";
+// import DropdownButton from "react-bootstrap/DropdownButton";
 import { useState } from "react";
 import { useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
@@ -15,20 +16,25 @@ import Table from "react-bootstrap/Table";
 function SubNavbar() {
 	const host = "http://localhost:5000";
 	let [data, setData] = useState({ testfirst: [], testsecond: [], testfinal: [], attendance: [] });
-	const [selectedSemester, setSelectedSemester] = useState("semester-1");
+	const [selectedSemester, setSelectedSemester] = useState("");
 	const id = localStorage.getItem("key");
 	useEffect(() => {
 		const getData = async () => {
+			if (!selectedSemester) return;
 			//API Call
 			const response = await fetch(`${host}/api/getalldata/${selectedSemester}/${id}`, {
 				method: "GET",
 			});
+
 			const json = await response.json();
 			setData(json);
 		};
 		getData();
 		//eslint-disable-next-line
 	}, [selectedSemester]);
+	const handleSemesterChange = (event) => {
+		setSelectedSemester(event.target.value);
+	};
 
 	return (
 		<>
@@ -133,72 +139,21 @@ function SubNavbar() {
 							)}
 						</Tab>
 					</Tabs>
-					<DropdownButton id="dropdown-basic-button" className="drop-down d-flex" title="Semesters">
-						<Dropdown.Item
-							onClick={() => {
-								setSelectedSemester("semester-1");
-							}}
-							href="#/semester-1"
-						>
-							Semester-1
-						</Dropdown.Item>
-						<Dropdown.Item
-							onClick={() => {
-								setSelectedSemester("semester-2");
-							}}
-							href="#/semester-2"
-						>
-							Semester-2
-						</Dropdown.Item>
-						<Dropdown.Item
-							onClick={() => {
-								setSelectedSemester("semester-3");
-							}}
-							href="#/semester-3"
-						>
-							Semester-3
-						</Dropdown.Item>
-						<Dropdown.Item
-							onClick={() => {
-								setSelectedSemester("semester-4");
-							}}
-							href="#/semester-4"
-						>
-							Semester-4
-						</Dropdown.Item>
-						<Dropdown.Item
-							onClick={() => {
-								setSelectedSemester("semester-5");
-							}}
-							href="#/semester-5"
-						>
-							Semester-5
-						</Dropdown.Item>
-						<Dropdown.Item
-							onClick={() => {
-								setSelectedSemester("semester-6");
-							}}
-							href="#/semester-6"
-						>
-							Semester-6
-						</Dropdown.Item>
-						<Dropdown.Item
-							onClick={() => {
-								setSelectedSemester("semester-7");
-							}}
-							href="#/semester-7"
-						>
-							Semester-7
-						</Dropdown.Item>
-						<Dropdown.Item
-							onClick={() => {
-								setSelectedSemester("semester-8");
-							}}
-							href="#/semester-8"
-						>
-							Semester-8
-						</Dropdown.Item>
-					</DropdownButton>
+					<Form.Group className="drop-down d-flex" style={{ height: "40px" }}>
+						<Form.Select id="semester" value={selectedSemester} onChange={handleSemesterChange}>
+							<option disabled value="">
+								Select Semester
+							</option>
+							<option value="semester-1">1st Semester</option>
+							<option value="semester-2">2nd Semester</option>
+							<option value="semester-3">3rd Semester</option>
+							<option value="semester-4">4th Semester</option>
+							<option value="semester-5">5th Semester</option>
+							<option value="semester-6">6th Semester</option>
+							<option value="semester-7">7th Semester</option>
+							<option value="semester-8">8th Semester</option>
+						</Form.Select>
+					</Form.Group>
 				</div>
 			</div>
 		</>

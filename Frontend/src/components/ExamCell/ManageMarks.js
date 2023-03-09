@@ -61,7 +61,7 @@ const ManageMarks = () => {
 		});
 		setTimeout(() => {
 			setAlert(null);
-		}, 4000);
+		}, 3000);
 	};
 	let navigate = useNavigate();
 	function handleLogout(e) {

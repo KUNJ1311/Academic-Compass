@@ -22,7 +22,7 @@ function App() {
 		});
 		setTimeout(() => {
 			setAlert(null);
-		}, 4000);
+		}, 3000);
 	};
 	const isLoggedIn = window.localStorage.getItem("token");
 
