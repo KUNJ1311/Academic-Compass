@@ -38,7 +38,7 @@ function SubNavbar() {
 
 	return (
 		<>
-			<div className="content ">
+			<div className="content">
 				<div className="subnav-sticky">
 					<Tabs defaultActiveKey="attendance" id="uncontrolled-tab-example" className="bg-subnav mb-3">
 						<Nav.Item className="ml-auto"></Nav.Item>
@@ -139,22 +139,22 @@ function SubNavbar() {
 							)}
 						</Tab>
 					</Tabs>
-					<Form.Group className="drop-down d-flex" style={{ height: "40px" }}>
-						<Form.Select id="semester" value={selectedSemester} onChange={handleSemesterChange}>
-							<option disabled value="">
-								Select Semester
-							</option>
-							<option value="semester-1">1st Semester</option>
-							<option value="semester-2">2nd Semester</option>
-							<option value="semester-3">3rd Semester</option>
-							<option value="semester-4">4th Semester</option>
-							<option value="semester-5">5th Semester</option>
-							<option value="semester-6">6th Semester</option>
-							<option value="semester-7">7th Semester</option>
-							<option value="semester-8">8th Semester</option>
-						</Form.Select>
-					</Form.Group>
 				</div>
+				<Form.Group className="drop-down" style={{ height: "40px" }}>
+					<Form.Select id="semester" value={selectedSemester} onChange={handleSemesterChange}>
+						<option disabled value="">
+							Select Semester
+						</option>
+						<option value="semester-1">1st Semester</option>
+						<option value="semester-2">2nd Semester</option>
+						<option value="semester-3">3rd Semester</option>
+						<option value="semester-4">4th Semester</option>
+						<option value="semester-5">5th Semester</option>
+						<option value="semester-6">6th Semester</option>
+						<option value="semester-7">7th Semester</option>
+						<option value="semester-8">8th Semester</option>
+					</Form.Select>
+				</Form.Group>
 			</div>
 		</>
 	);

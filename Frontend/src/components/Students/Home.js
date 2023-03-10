@@ -21,10 +21,10 @@ const Home = (props) => {
 	}, []);
 
 	return (
-		<div>
+		<>
 			<MainNavbar handleLogout={handleLogout} />
 			<SubNavbar />
-		</div>
+		</>
 	);
 };
 
