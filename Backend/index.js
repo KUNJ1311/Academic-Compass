@@ -18,8 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api", require("./routes/student"), express.static("uploads"));
 app.use("/api/auth-examcell", require("./routes/examcell"));
-var excel = require("./routes/excel");
-app.use("/data", excel);
+app.use("/data-students", require("./routes/excelstudents"));
+app.use("/data-marks", require("./routes/excelmarks"));
 app.get("/api/", (req, res) => {
 	res.send("Hello!");
 });

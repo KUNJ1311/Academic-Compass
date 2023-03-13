@@ -18,7 +18,7 @@ const AddMarksExcel = (props) => {
 			const headers = {
 				"auth-token": localStorage.getItem("token"),
 			};
-			await axios.post(`http://localhost:5000/data/importexcel/${e.target.semester.value}/${e.target.test.value}`, formData, { headers });
+			await axios.post(`http://localhost:5000/data-marks/importexcel/${e.target.semester.value}/${e.target.test.value}`, formData, { headers });
 			props.showAlert("Data Added Successfully", "success");
 			setLoading(false);
 			props.onHide();

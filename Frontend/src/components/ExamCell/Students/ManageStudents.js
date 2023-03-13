@@ -24,6 +24,18 @@ const ManageStudents = () => {
 			Branch: "B.Tech",
 			Course: "CSE",
 		},
+		{
+			"Enrolment No.": "210110101019",
+			Name: "NO",
+			Branch: "B.Tech",
+			Course: "CSE",
+		},
+		{
+			"Enrolment No.": "2101",
+			Name: "Test",
+			Branch: "B.Tech",
+			Course: "CSE",
+		},
 	];
 	const showAlert = (message, type) => {
 		setAlert({
@@ -40,24 +52,6 @@ const ManageStudents = () => {
 		window.localStorage.clear();
 		navigate("/exam-cell-login");
 	}
-
-	// //  State variables for branch, semester, and subject
-	// const [branch, setBranch] = useState("");
-	// const [semester, setSemester] = useState("");
-	// const [subject, setSubject] = useState("");
-
-	// //  Handle change events for branch, semester, and subject
-	// const handleBranchChange = (event) => {
-	// 	setBranch(event.target.value);
-	// };
-
-	// const handleSemesterChange = (event) => {
-	// 	setSemester(event.target.value);
-	// };
-
-	// const handleSubjectChange = (event) => {
-	// 	setSubject(event.target.value);
-	// };
 
 	return (
 		<>
@@ -87,7 +81,7 @@ const ManageStudents = () => {
 								Add Excel File
 							</Button>
 							<img className="mx-2" src={excel} alt="" />
-							{/* <AddStudentsExcel showAlert={showAlert} show={modalShow2} onHide={() => setModalShow2(false)} /> */}
+							<AddStudentsExcel showAlert={showAlert} show={modalShow2} onHide={() => setModalShow2(false)} />
 						</div>
 					</div>
 					<hr className="my-2" style={{ border: "1px solid black" }} />

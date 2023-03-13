@@ -19,12 +19,9 @@ const StudentdataSchema = new Schema({
 		type: String,
 		// required: true,
 	},
-	dob: {
-		type: String,
-		// required: true,
-	},
 	password: {
 		type: String,
+		default: "IU@1234",
 		// required: true,
 	},
 	// img: {

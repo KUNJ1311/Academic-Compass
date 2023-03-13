@@ -1,5 +1,5 @@
 const express = require("express");
-const excel = express();
+const excelmarks = express();
 const fs = require("fs");
 const fetchuser = require("../middleware/fetchUser");
 
@@ -7,8 +7,7 @@ const multer = require("multer");
 const path = require("path");
 const bodyParser = require("body-parser");
 var csv = require("csvtojson");
-excel.use(bodyParser.urlencoded({ extended: true }));
-excel.use(express.static(path.resolve(__dirname, "excel")));
+excelmarks.use(bodyParser.urlencoded({ extended: true }));
 const Sem1 = require("../models/Sem1");
 const Sem2 = require("../models/Sem2");
 const Sem3 = require("../models/Sem3");
@@ -20,7 +19,7 @@ const Sem8 = require("../models/Sem8");
 
 const Studentdata = require("../models/Studentdata");
 
-excel.use(express.static(path.resolve(__dirname, "excel")));
+excelmarks.use(express.static(path.resolve(__dirname, "excel")));
 var storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, "../excel");
@@ -46,7 +45,7 @@ const Semesters = [
 	// add more semesters if needed
 ];
 Semesters.forEach((semester) => {
-	excel.post(`/importexcel/sem${semester.number}/testfirst`, fetchuser, upload.single("file"), async (req, res) => {
+	excelmarks.post(`/importexcel/sem${semester.number}/testfirst`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -57,35 +56,16 @@ Semesters.forEach((semester) => {
 				subjectMarks.push({ subject: subject, course_code: subjectCode, marks: marks });
 				const semesterData = {
 					enrolment: jsonArray[x].enrolment,
-					name: jsonArray[x].name,
 					testfirst: subjectMarks,
 				};
-				const { enrolment, name, testfirst, testsecond, testfinal } = semesterData;
+				const { testfirst, testsecond, testfinal } = semesterData;
 				let studentdata = await Studentdata.findOne({ enrolment: semesterData.enrolment });
-				if (!studentdata) {
-					studentdata = new Studentdata({
-						enrolment,
-						name,
-						password: "IU@123",
-					});
-					const semesterModel = new semester.model({
-						user: studentdata._id,
-						enrolment,
-						name,
-						testfirst,
-						testsecond,
-						testfinal,
-					});
-					await studentdata.save();
-					await semesterModel.save();
-				} else {
+				if (studentdata) {
 					let studentdata = await Studentdata.findOne({ enrolment: semesterData.enrolment });
 					let semesterModel = await semester.model.findOne({ user: studentdata._id });
 					if (!semesterModel) {
 						const semesterModel = new semester.model({
 							user: studentdata._id,
-							enrolment,
-							name,
 							testfirst,
 							testsecond,
 							testfinal,
@@ -94,10 +74,26 @@ Semesters.forEach((semester) => {
 					} else {
 						if (!semesterModel.testfirst) {
 							semesterModel.testfirst = testfirst;
+							await semesterModel.save();
 						} else {
-							semesterModel.testfirst = [...semesterModel.testfirst, ...testfirst];
+							// Check if course code already exists in testfirst array
+							const existingCourseIndex = semesterModel.testfirst.findIndex((course) => course.course_code === subjectCode);
+							if (existingCourseIndex !== -1) {
+								// Update marks for existing course code
+								const updateQuery = {
+									$set: { [`testfirst.${existingCourseIndex}.marks`]: marks },
+								};
+								const json = await semesterModel.updateOne(updateQuery);
+								console.log(json);
+							} else {
+								// Add new course code to testfirst array
+								const updateQuery = {
+									$push: { testfirst: { subject: subject, course_code: subjectCode, marks: marks } },
+								};
+								const json = await semesterModel.updateOne(updateQuery);
+								console.log(json);
+							}
 						}
-						await semesterModel.save();
 					}
 				}
 			}
@@ -110,7 +106,7 @@ Semesters.forEach((semester) => {
 });
 
 Semesters.forEach((semester) => {
-	excel.post(`/importexcel/sem${semester.number}/testsecond`, fetchuser, upload.single("file"), async (req, res) => {
+	excelmarks.post(`/importexcel/sem${semester.number}/testsecond`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -121,35 +117,16 @@ Semesters.forEach((semester) => {
 				subjectMarks.push({ subject: subject, course_code: subjectCode, marks: marks });
 				const semesterData = {
 					enrolment: jsonArray[x].enrolment,
-					name: jsonArray[x].name,
 					testsecond: subjectMarks,
 				};
-				const { enrolment, name, testsecond, testfinal, testfirst } = semesterData;
+				const { testfirst, testsecond, testfinal } = semesterData;
 				let studentdata = await Studentdata.findOne({ enrolment: semesterData.enrolment });
-				if (!studentdata) {
-					studentdata = new Studentdata({
-						enrolment,
-						name,
-						password: "IU@123",
-					});
-					const semesterModel = new semester.model({
-						user: studentdata._id,
-						enrolment,
-						name,
-						testfirst,
-						testsecond,
-						testfinal,
-					});
-					await studentdata.save();
-					await semesterModel.save();
-				} else {
+				if (studentdata) {
 					let studentdata = await Studentdata.findOne({ enrolment: semesterData.enrolment });
 					let semesterModel = await semester.model.findOne({ user: studentdata._id });
 					if (!semesterModel) {
 						const semesterModel = new semester.model({
 							user: studentdata._id,
-							enrolment,
-							name,
 							testfirst,
 							testsecond,
 							testfinal,
@@ -158,10 +135,24 @@ Semesters.forEach((semester) => {
 					} else {
 						if (!semesterModel.testsecond) {
 							semesterModel.testsecond = testsecond;
+							await semesterModel.save();
 						} else {
-							semesterModel.testsecond = [...semesterModel.testsecond, ...testsecond];
+							// Check if course code already exists in testsecond array
+							const existingCourseIndex = semesterModel.testsecond.findIndex((course) => course.course_code === subjectCode);
+							if (existingCourseIndex !== -1) {
+								// Update marks for existing course code
+								const updateQuery = {
+									$set: { [`testsecond.${existingCourseIndex}.marks`]: marks },
+								};
+								await semesterModel.updateOne(updateQuery);
+							} else {
+								// Add new course code to testsecond array
+								const updateQuery = {
+									$push: { testsecond: { subject: subject, course_code: subjectCode, marks: marks } },
+								};
+								await semesterModel.updateOne(updateQuery);
+							}
 						}
-						await semesterModel.save();
 					}
 				}
 			}
@@ -174,7 +165,7 @@ Semesters.forEach((semester) => {
 });
 
 Semesters.forEach((semester) => {
-	excel.post(`/importexcel/sem${semester.number}/testfinal`, fetchuser, upload.single("file"), async (req, res) => {
+	excelmarks.post(`/importexcel/sem${semester.number}/testfinal`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
@@ -185,35 +176,16 @@ Semesters.forEach((semester) => {
 				subjectMarks.push({ subject: subject, course_code: subjectCode, marks: marks });
 				const semesterData = {
 					enrolment: jsonArray[x].enrolment,
-					name: jsonArray[x].name,
 					testfinal: subjectMarks,
 				};
-				const { enrolment, name, testfinal, testfirst, testsecond } = semesterData;
+				const { testfirst, testsecond, testfinal } = semesterData;
 				let studentdata = await Studentdata.findOne({ enrolment: semesterData.enrolment });
-				if (!studentdata) {
-					studentdata = new Studentdata({
-						enrolment,
-						name,
-						password: "IU@123",
-					});
-					const semesterModel = new semester.model({
-						user: studentdata._id,
-						enrolment,
-						name,
-						testfirst,
-						testsecond,
-						testfinal,
-					});
-					await studentdata.save();
-					await semesterModel.save();
-				} else {
+				if (studentdata) {
 					let studentdata = await Studentdata.findOne({ enrolment: semesterData.enrolment });
 					let semesterModel = await semester.model.findOne({ user: studentdata._id });
 					if (!semesterModel) {
 						const semesterModel = new semester.model({
 							user: studentdata._id,
-							enrolment,
-							name,
 							testfirst,
 							testsecond,
 							testfinal,
@@ -222,10 +194,24 @@ Semesters.forEach((semester) => {
 					} else {
 						if (!semesterModel.testfinal) {
 							semesterModel.testfinal = testfinal;
+							await semesterModel.save();
 						} else {
-							semesterModel.testfinal = [...semesterModel.testfinal, ...testfinal];
+							// Check if course code already exists in testfinal array
+							const existingCourseIndex = semesterModel.testfinal.findIndex((course) => course.course_code === subjectCode);
+							if (existingCourseIndex !== -1) {
+								// Update marks for existing course code
+								const updateQuery = {
+									$set: { [`testfinal.${existingCourseIndex}.marks`]: marks },
+								};
+								await semesterModel.updateOne(updateQuery);
+							} else {
+								// Add new course code to testfinal array
+								const updateQuery = {
+									$push: { testfinal: { subject: subject, course_code: subjectCode, marks: marks } },
+								};
+								await semesterModel.updateOne(updateQuery);
+							}
 						}
-						await semesterModel.save();
 					}
 				}
 			}
@@ -236,4 +222,4 @@ Semesters.forEach((semester) => {
 		}
 	});
 });
-module.exports = excel;
+module.exports = excelmarks;
