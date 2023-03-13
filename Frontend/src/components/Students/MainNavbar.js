@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../img/IuLogo.png";
+import noimg from "../img/noimg.webp";
 import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -59,9 +60,7 @@ function MainNavbar(props) {
 			<ul id="sidebar" className="d-lg-block list-group mb-3 list-unstyled">
 				<div className="sidebar">
 					<div className="scroller">
-						<li>
-							<img className="stuphoto" src={`${host}/api/${studentsdata.path}`} alt="Not Found" />
-						</li>
+						<li>{studentsdata?.path ? <img className="stuphoto" src={`${host}/api/${studentsdata.path}`} alt="Not Found" /> : <img className="stuphoto" src={noimg} alt="Not Found" />}</li>
 						<li className="fw-bold pb-0 py-3">
 							Name:&nbsp;
 							<p className="fw-normal my-0 mx-1">{studentsdata.name}</p>
