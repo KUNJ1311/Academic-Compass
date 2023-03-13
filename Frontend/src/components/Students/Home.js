@@ -22,7 +22,7 @@ const Home = (props) => {
 
 	return (
 		<>
-			<MainNavbar handleLogout={handleLogout} />
+			<MainNavbar showAlert={props.showAlert} handleLogout={handleLogout} />
 			<SubNavbar />
 		</>
 	);

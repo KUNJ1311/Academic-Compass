@@ -2,12 +2,11 @@
 body {
 	margin: 0;
 	background-color: white;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	overflow: hidden;
-	height: 100%;
-	width: 100%;
+	height: 100vh;
+	width: 100vw;
 }
 * {
 	margin: 0;
@@ -65,7 +64,7 @@ code {
 	-ms-overflow-style: none;
 	z-index: 0;
 	padding: 0;
-	width: 285px;
+	width: 320px;
 	border-right: 1px solid rgb(173, 173, 173);
 	background-color: aliceblue;
 	position: fixed;
@@ -73,7 +72,7 @@ code {
 	overflow: auto;
 }
 .scroller {
-	height: calc(100% - 78px);
+	height: calc(100vh - 78px);
 	overflow: auto;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
@@ -88,7 +87,7 @@ code {
 	flex: 1 1 auto;
 }
 .scroller-t {
-	height: calc(100% - 120px);
+	height: calc(100vh - 120px);
 	overflow: auto;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
@@ -112,28 +111,32 @@ code {
 	height: 100vh;
 	overflow: auto;
 	box-sizing: border-box;
-	width: calc(100% - 290px);
+	width: calc(100vw - 325px);
 	padding-left: 5px;
 	padding-bottom: 5px;
 }
 .sidebar li {
 	display: flex;
 	color: rgb(0, 0, 0);
-	padding: 16px;
+	padding: 10px;
 	text-decoration: none;
 }
 .content {
 	z-index: 1;
 	position: relative;
-	margin-left: 285px;
+	margin-left: 320px;
 	margin-top: -16px;
 }
 .stuphoto {
 	border: 2px solid black;
 	width: 250px;
 	height: 250px;
+	text-align: center;
 	justify-content: center;
 	align-items: center;
+	margin-left: 20px;
+	margin-top: 5px;
+	margin-bottom: -5px;
 	display: flex;
 }
 
@@ -152,12 +155,12 @@ code {
 		top: 41px;
 	}
 	.scroller-t {
-		height: calc(100% - 160px);
+		height: calc(100vh - 160px);
 	}
 }
 @media screen and (max-width: 880px) {
 	.scroller-t {
-		height: calc(100% - 200px);
+		height: calc(100vh - 200px);
 	}
 }
 
@@ -172,17 +175,17 @@ code {
 	}
 	.sidebar {
 		border-bottom: 1px solid rgb(173, 173, 173);
-		width: 100%;
+		width: 100vw;
 		height: 180px;
 		position: fixed;
 		overflow: auto;
 	}
 	.scroller-t {
-		height: calc(100% - 160px - 180px);
+		height: calc(100vh - 160px - 180px);
 	}
 	.box-table {
-		width: calc(100% - 5px);
-		height: 100%;
+		width: calc(100vw - 5px);
+		height: 100vh;
 	}
 	.scroller {
 		height: 180px;
@@ -205,31 +208,17 @@ code {
 		text-align: center;
 		float: left;
 	}
-	.subnav-sticky {
-		width: 133vw;
-	}
-	.nav-color {
-		width: 133vw;
-	}
 }
 @media screen and (max-width: 400px) {
-	.nav-color {
-		width: 143vw;
-	}
 	.stuphoto {
 		width: 140px;
 		height: 140px;
 	}
-	.subnav-sticky {
-		width: 143vw;
-	}
 	.hidden-300 {
 		font-size: 10px;
 	}
-}
-@media screen and (max-width: 400px) {
 	.scroller-t {
-		height: calc(100% - 200px - 180px);
+		height: calc(100vh - 200px - 180px);
 	}
 }
 

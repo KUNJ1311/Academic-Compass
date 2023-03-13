@@ -9,14 +9,13 @@ import Table from "react-bootstrap/Table";
 import AddMarksModal from "./AddMarksModal";
 import add from "../svg/adds.svg";
 import excel from "../svg/excel.svg";
-import AddExcelModel from "./AddMarksExcel";
+import AddMarksExcel from "./AddMarksExcel";
 import setting from "../svg/settings.svg";
 import UpdateMarksModel from "./UpdateMarksModel";
 import Alert from "../../Alert";
 
 const ManageMarks = () => {
 	const [alert, setAlert] = useState(null);
-
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
 	const [selectedStudent, setSelectedStudent] = useState(null);
@@ -102,7 +101,7 @@ const ManageMarks = () => {
 								Add Excel File
 							</Button>
 							<img className="mx-2" src={excel} alt="" />
-							<AddExcelModel showAlert={showAlert} show={modalShow2} onHide={() => setModalShow2(false)} />
+							<AddMarksExcel showAlert={showAlert} show={modalShow2} onHide={() => setModalShow2(false)} />
 						</div>
 					</div>
 					<hr className="my-2" style={{ border: "1px solid black" }} />

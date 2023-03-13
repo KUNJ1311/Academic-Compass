@@ -100,6 +100,24 @@ router.post("/loginstudent", [body("enrolment", "Enter valid Enrolment No").exis
 		res.status(500).send("Internal Server Error");
 	}
 });
+//Change Password---------------------------------------
+router.put("/changepass/:id", async (req, res) => {
+	const id = req.params.id;
+	const newPass = req.body.newPass;
+
+	const studentdata = await Studentdata.findById(id);
+	try {
+		if (!studentdata) {
+			return res.status(404).send({ error: "User not found" });
+		} else {
+			studentdata.password = newPass;
+			await studentdata.save();
+			res.send({ message: "Password updated successfully" });
+		}
+	} catch (error) {
+		res.status(400).send({ error: error.message });
+	}
+});
 
 const updateSemester = async (Semester, req, res) => {
 	try {

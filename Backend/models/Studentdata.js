@@ -13,16 +13,16 @@ const StudentdataSchema = new Schema({
 	},
 	branch: {
 		type: String,
-		// required: true,
+		required: true,
 	},
 	course: {
 		type: String,
-		// required: true,
+		required: true,
 	},
 	password: {
 		type: String,
 		default: "IU@1234",
-		// required: true,
+		required: true,
 	},
 	// img: {
 	// 	data: Buffer,

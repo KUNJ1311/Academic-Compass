@@ -4,8 +4,11 @@ import logo from "../img/IuLogo.png";
 import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
 import { useState } from "react";
+import ChangePassModal from "./ChangePassModal";
 
 function MainNavbar(props) {
+	// const [alert, setAlert] = useState(null);
+	const [modalShow, setModalShow] = useState(false);
 	useEffect(() => {
 		getStudents();
 		//eslint-disable-next-line
@@ -39,6 +42,12 @@ function MainNavbar(props) {
 					</Navbar.Brand>
 					<Navbar.Toggle />
 					<Navbar.Collapse className="justify-content-end mx-4">
+						<Navbar.Text>
+							<Button variant="warning" className="mx-2" onClick={() => setModalShow(true)}>
+								Change Password
+							</Button>
+							<ChangePassModal showAlert={props.showAlert} show={modalShow} onHide={() => setModalShow(false)} />
+						</Navbar.Text>
 						<Navbar.Text>
 							<Button onClick={props.handleLogout} variant="danger mx-2">
 								Logout
