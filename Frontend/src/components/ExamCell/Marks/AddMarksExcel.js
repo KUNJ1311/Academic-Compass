@@ -24,7 +24,7 @@ const AddMarksExcel = (props) => {
 			props.onHide();
 		} catch (error) {
 			setLoading(false);
-			props.showAlert("Only *.CSV files are allowed", "danger");
+			props.showAlert("Only .CSV files are allowed", "danger");
 			console.log(error);
 		}
 	};

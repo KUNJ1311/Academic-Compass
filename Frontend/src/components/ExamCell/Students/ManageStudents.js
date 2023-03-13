@@ -21,7 +21,8 @@ const ManageStudents = () => {
 		{
 			"Enrolment No.": "210110101016",
 			Name: "Kunj Faladu Sureshbhai",
-			Branch: "CSE",
+			Branch: "B.Tech",
+			Course: "CSE",
 		},
 	];
 	const showAlert = (message, type) => {
@@ -92,12 +93,24 @@ const ManageStudents = () => {
 					<hr className="my-2" style={{ border: "1px solid black" }} />
 					<div style={{ backgroundColor: "white", position: "sticky", top: "0", zIndex: "999" }}>
 						<Row className="d-flex mb-3">
-							<Col sm={5}>
+							<Col sm={4}>
 								<Form.Group>
 									<Form.Label>&nbsp;Select Branch</Form.Label>
 									<Form.Select defaultValue="">
 										<option disabled value="">
 											Select Branch
+										</option>
+										<option value="1">B.Tech</option>
+										<option value="2">M.Tech</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={5}>
+								<Form.Group>
+									<Form.Label>&nbsp;Select Course</Form.Label>
+									<Form.Select defaultValue="">
+										<option disabled value="">
+											Select Course
 										</option>
 										<option value="1">Computer Science & Engineering</option>
 										<option value="2">Electronics & Communication Engineering</option>
@@ -120,6 +133,9 @@ const ManageStudents = () => {
 									<th className="col-sticky" style={{ backgroundColor: "white" }}>
 										Branch
 									</th>
+									<th className="col-sticky" style={{ backgroundColor: "white" }}>
+										Course
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -128,6 +144,7 @@ const ManageStudents = () => {
 										<td>{data["Enrolment No."]}</td>
 										<td>{data.Name}</td>
 										<td>{data.Branch}</td>
+										<td>{data.Course}</td>
 									</tr>
 								))}
 							</tbody>
