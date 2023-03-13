@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
-import marks from "./svg/marks.svg";
+import marks from "../svg/marks.svg";
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
-const AddExcelModel = (props) => {
+const AddMarksExcel = (props) => {
 	const [file, setFile] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [dots, setDots] = useState("");
@@ -129,4 +129,4 @@ const AddExcelModel = (props) => {
 	);
 };
 
-export default AddExcelModel;
+export default AddMarksExcel;

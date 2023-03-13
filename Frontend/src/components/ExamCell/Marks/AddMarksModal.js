@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
-import marks from "./svg/marks.svg";
+import marks from "../svg/marks.svg";
 
 function AddMarksModal(props) {
 	return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
-import marksimg from "./svg/marks.svg";
+import marksimg from "../svg/marks.svg";
 
 const UpdateMarksModel = (props) => {
 	const [marks, setMarks] = useState(null);

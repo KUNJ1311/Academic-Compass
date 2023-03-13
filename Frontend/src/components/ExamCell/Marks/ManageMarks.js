@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import ExamCellSideBar from "./ExamCellSideBar";
+import ExamCellSideBar from "../ExamCellSideBar";
 import Button from "react-bootstrap/Button";
-import MainNavbarExam from "./MainNavbarExam";
+import MainNavbarExam from "../MainNavbarExam";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { Row, Col } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import AddMarksModal from "./AddMarksModal";
-import add from "./svg/adds.svg";
-import excel from "./svg/excel.svg";
-import AddExcelModel from "./AddExcelModel";
-import setting from "./svg/settings.svg";
+import add from "../svg/adds.svg";
+import excel from "../svg/excel.svg";
+import AddExcelModel from "./AddMarksExcel";
+import setting from "../svg/settings.svg";
 import UpdateMarksModel from "./UpdateMarksModel";
-import Alert from "../Alert";
+import Alert from "../../Alert";
 
 const ManageMarks = () => {
 	const [alert, setAlert] = useState(null);

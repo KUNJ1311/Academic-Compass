@@ -9,9 +9,9 @@ import SuperAdminHome from "./components/SuperAdmin/SuperAdminHome";
 import AdminLogin from "./components/Admin/AdminLogin";
 import ExamCellLogin from "./components/ExamCell/ExamCellLogin";
 import SuperAdminLogin from "./components/SuperAdmin/SuperAdminLogin";
-import ManageStudents from "./components/ExamCell/ManageStudents";
+import ManageStudents from "./components/ExamCell/Students/ManageStudents";
 import ManageAttendance from "./components/ExamCell/ManageAttendance";
-import ManageMarks from "./components/ExamCell/ManageMarks";
+import ManageMarks from "./components/ExamCell/Marks/ManageMarks";
 
 function App() {
 	const [alert, setAlert] = useState(null);
