@@ -19,7 +19,6 @@ const Login = (props) => {
 		});
 		const json = await response.json();
 		if (json.success) {
-			//Save the auth token and redirect
 			localStorage.setItem("key", json.data._id);
 			props.showAlert("Logged in Successfully", "success");
 			navigate("/student-home");

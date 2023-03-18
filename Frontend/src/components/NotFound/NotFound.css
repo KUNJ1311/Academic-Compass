@@ -1,0 +1,11 @@
+.btn-goback {
+	position: relative;
+	margin-top: 20px;
+	font-size: 24px;
+	padding: 7px 40px;
+	color: #442f86;
+	background: linear-gradient(to right, #c2c2fa, #bdbdfa, #b8b8f9, #b3b3f9, #afaef9, #aaa9f8, #a5a5f8, #a0a0f7, #9b9bf7, #9696f6);
+	border: 0px;
+	border-radius: 30px;
+	font-weight: 500;
+}

@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import { useEffect } from "react";
 import logo from "../img/iuLogo2.jpeg";
 import logo2 from "../img/iuback.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,7 +17,6 @@ const ExamCellLogin = (props) => {
 		});
 		const json = await response.json();
 		if (json.success) {
-			//Save the auth token and redirect
 			localStorage.setItem("token", json.authtoken);
 			props.showAlert("Logged in Successfully", "success");
 			navigate("/managemarks");
@@ -24,6 +24,12 @@ const ExamCellLogin = (props) => {
 			props.showAlert("Invalid Details", "danger");
 		}
 	};
+	useEffect(() => {
+		if (localStorage.getItem("token")) {
+			navigate("/managemarks");
+		}
+		//eslint-disable-next-line
+	}, []);
 	const onChange = (e) => {
 		setCredentials({ ...credentials, [e.target.name]: e.target.value });
 	};

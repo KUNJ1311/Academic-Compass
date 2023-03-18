@@ -12,6 +12,7 @@ import SuperAdminLogin from "./components/SuperAdmin/SuperAdminLogin";
 import ManageStudents from "./components/ExamCell/Students/ManageStudents";
 import ManageAttendance from "./components/ExamCell/ManageAttendance";
 import ManageMarks from "./components/ExamCell/Marks/ManageMarks";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
 	const [alert, setAlert] = useState(null);
@@ -41,6 +42,7 @@ function App() {
 					<Route path="/manageattendance" element={<ManageAttendance />} />
 					<Route path="/managestudent" element={<ManageStudents />} />
 					<Route path="/managemarks" element={<ManageMarks showAlert={showAlert} />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>
 		</>
