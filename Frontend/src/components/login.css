@@ -10,7 +10,8 @@
 	background-repeat: no-repeat;
 }
 .login-page {
-	margin-top: 20vh;
+	top: 20vh;
+	position: relative;
 }
 .icon {
 	position: absolute;

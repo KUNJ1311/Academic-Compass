@@ -13,6 +13,8 @@ import ManageStudents from "./components/ExamCell/Students/ManageStudents";
 import ManageAttendance from "./components/ExamCell/ManageAttendance";
 import ManageMarks from "./components/ExamCell/Marks/ManageMarks";
 import NotFound from "./components/NotFound/NotFound";
+import "./components/ExamCell/ExamCell.css";
+import "./components/Students/Students.css";
 
 function App() {
 	const [alert, setAlert] = useState(null);

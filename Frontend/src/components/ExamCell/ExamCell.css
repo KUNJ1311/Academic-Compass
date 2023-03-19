@@ -1,0 +1,87 @@
+/* -------------------------------
+						sidebar
+------------------------------- */
+.examcellsidebar {
+	background-color: #2a3042;
+	height: 100vh;
+	width: 270px;
+	flex-shrink: 0;
+	font-size: 15px;
+	overflow: auto;
+	left: 0;
+}
+.examcell-nav {
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	flex: 1 1 auto;
+	min-height: 0;
+	position: relative;
+}
+.examcell-nav header {
+	background-color: #2b2d31;
+	position: relative;
+	font-weight: 500;
+	padding: 12px 16px;
+	box-sizing: border-box;
+	z-index: 3;
+	transition: background-color 0.2s linear;
+	box-shadow: 0 1px 0 #202124, 0 1.5px 0 #202124, 0 2px 0 #202124;
+}
+.examcell-nav header:hover {
+	background-color: #35373c;
+}
+.div {
+	text-decoration: none;
+	color: #ebeced;
+}
+.arrow {
+	position: absolute;
+	right: 5px;
+}
+.link {
+	text-decoration: none;
+}
+/* -------------------------------
+				Exam cell content
+------------------------------- */
+.main-content {
+	box-sizing: border-box;
+	height: calc(100vh - 95px);
+	width: calc(100vw - 270px);
+}
+.main-content-table {
+	box-sizing: border-box;
+	height: calc(100vh - 180px - 59px);
+	width: calc(100vw - 279px);
+	overflow: auto;
+	padding-right: 8px;
+	white-space: nowrap;
+}
+.col-sticky {
+	position: sticky;
+	top: -1px;
+}
+.table-my {
+	border-collapse: collapse;
+}
+
+.table-my thead th {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 1px;
+	z-index: 2;
+	box-shadow: inset -1px 0px 1px rgb(121, 121, 121), inset 0px -1px 1px rgb(121, 121, 121), inset 1px 0 1px rgb(121, 121, 121), inset 0px 1px 1px rgb(121, 121, 121);
+	border-top: 1px solid transparent;
+}
+.table-my td {
+	cursor: pointer;
+}
+.btn-my {
+	background-color: #4343c4;
+	border: #4343c4;
+}
+.btn-my:hover {
+	background-color: #33336b;
+	border: #33336b;
+}

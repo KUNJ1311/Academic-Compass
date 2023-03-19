@@ -40,11 +40,11 @@ function SubNavbar() {
 		<>
 			<div className="content">
 				<div className="subnav-sticky">
-					<Tabs defaultActiveKey="attendance" id="uncontrolled-tab-example" className="bg-subnav mb-3">
+					<Tabs defaultActiveKey="attendance" id="uncontrolled-tab-example" className="bg-subnav" style={{ overflow: "hidden" }}>
 						<Nav.Item className="ml-auto"></Nav.Item>
 						<Tab eventKey="attendance" title="Attendance">
 							{!data || !data.attendance ? (
-								<div className="container-fluid height-max">
+								<div className="box-table height-max">
 									<Table bordered hover>
 										<thead>
 											<tr>
@@ -68,7 +68,7 @@ function SubNavbar() {
 						</Tab>
 						<Tab eventKey="test-first" title="First Test">
 							{!data || !data.testfirst ? (
-								<div className="container-fluid height-max">
+								<div className="box-table height-max">
 									<Table bordered hover>
 										<thead>
 											<tr>
@@ -92,7 +92,7 @@ function SubNavbar() {
 						</Tab>
 						<Tab eventKey="test-second" title="Second Test">
 							{!data || !data.testsecond ? (
-								<div className="container-fluid height-max">
+								<div className="box-table height-max">
 									<Table bordered hover>
 										<thead>
 											<tr>
@@ -116,7 +116,7 @@ function SubNavbar() {
 						</Tab>
 						<Tab eventKey="test-final" title="Final Test">
 							{!data || !data.testfinal ? (
-								<div className="container-fluid height-max">
+								<div className="box-table height-max">
 									<Table bordered hover>
 										<thead>
 											<tr>
@@ -140,7 +140,7 @@ function SubNavbar() {
 						</Tab>
 					</Tabs>
 				</div>
-				<Form.Group className="drop-down" style={{ height: "40px" }}>
+				<Form.Group className="drop-down">
 					<Form.Select id="semester" value={selectedSemester} onChange={handleSemesterChange}>
 						<option disabled value="">
 							Select Semester
