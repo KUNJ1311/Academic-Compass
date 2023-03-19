@@ -166,7 +166,7 @@ const ManageMarks = () => {
 							</Col>
 						</Row>
 					</div>
-					<div className="main-content-table scroller">
+					<div className="main-content-table">
 						<Table bordered hover className="table-my mb-2">
 							<thead className="col-sticky" style={{ backgroundColor: "white" }}>
 								<tr className="col-sticky" style={{ backgroundColor: "white" }}>

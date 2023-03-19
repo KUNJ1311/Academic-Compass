@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Form } from "react-bootstrap";
-// import marks from "../svg/marks.svg";
+import pass from "./pass.svg";
 import axios from "axios";
 const ChangePassModal = (props) => {
 	const changepassword = async (e) => {
@@ -23,36 +23,34 @@ const ChangePassModal = (props) => {
 	};
 
 	return (
-		<div>
-			<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" backdrop="static" keyboard={false} centered>
-				<Modal.Header style={{ backgroundColor: "#33336b", color: "white" }}>
-					<Modal.Title id="contained-modal-title-vcenter">
-						{/* <img src={marks} alt="" width="40px" /> */}
-						<span style={{ position: "relative", top: "3px", left: "5px" }}>&nbsp;Change Password</span>
-					</Modal.Title>
-				</Modal.Header>
-				<Form onSubmit={changepassword} method="PUT" encType="multipart/form-data">
-					<Modal.Body>
-						<Form.Group className="mb-3" controlId="password">
-							<Form.Label>New Password</Form.Label>
-							<Form.Control type="password" placeholder="Password" />
-						</Form.Group>
-						<Form.Group className="mb-3" controlId="repassword">
-							<Form.Label>Confirm New Password</Form.Label>
-							<Form.Control type="repassword" placeholder="Password" />
-						</Form.Group>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button variant="danger" onClick={props.onHide}>
-							Close
-						</Button>
-						<Button type="submit" variant="success">
-							Change Password
-						</Button>
-					</Modal.Footer>
-				</Form>
-			</Modal>
-		</div>
+		<Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" backdrop="static" keyboard={false} centered>
+			<Modal.Header style={{ backgroundColor: "#33336b", color: "white" }}>
+				<Modal.Title id="contained-modal-title-vcenter">
+					<img src={pass} alt="" width="40px" />
+					<span style={{ position: "relative", top: "3px", left: "5px" }}>&nbsp;Change Password</span>
+				</Modal.Title>
+			</Modal.Header>
+			<Form onSubmit={changepassword} method="PUT" encType="multipart/form-data">
+				<Modal.Body>
+					<Form.Group className="mb-3" controlId="password">
+						<Form.Label>New Password</Form.Label>
+						<Form.Control type="password" placeholder="Password" />
+					</Form.Group>
+					<Form.Group className="mb-3" controlId="repassword">
+						<Form.Label>Confirm New Password</Form.Label>
+						<Form.Control type="password" placeholder="Password" />
+					</Form.Group>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="danger" onClick={props.onHide}>
+						Close
+					</Button>
+					<Button type="submit" variant="success">
+						Change Password
+					</Button>
+				</Modal.Footer>
+			</Form>
+		</Modal>
 	);
 };
 

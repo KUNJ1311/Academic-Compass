@@ -54,7 +54,7 @@
 	overflow: auto;
 }
 .scroller {
-	height: calc(100vh - 78px);
+	height: calc(100svh - 78px);
 	overflow: auto;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
@@ -69,7 +69,7 @@
 	flex: 1 1 auto;
 }
 .scroller-t {
-	height: calc(100vh - 44px - 78px);
+	height: calc(100svh - 44px - 78px);
 	overflow: auto;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
@@ -134,9 +134,8 @@
 	border: 0;
 }
 .menu-btn {
-	border: 1px solid rgba(215, 215, 215, 0.775);
+	border: none;
 	background-color: transparent;
-	border-radius: 10px;
 	display: none;
 }
 #sidebar {
@@ -153,7 +152,7 @@
 		margin-left: 0;
 	}
 	.scroller-t {
-		height: calc(100vh - 78px - 44px);
+		height: calc(100svh - 78px - 44px);
 	}
 	.btn-nav {
 		font-size: 13px;
@@ -177,7 +176,7 @@
 
 @media screen and (max-width: 700px) {
 	.scroller {
-		height: calc(100vh - 73px);
+		height: calc(100svh - 73px);
 	}
 	.iu-logo {
 		width: 130px;
@@ -186,7 +185,7 @@
 		margin-left: 0px !important;
 	}
 	.scroller-t {
-		height: calc(100vh - 73px - 44px);
+		height: calc(100svh - 73px - 44px);
 	}
 	.menu-btn {
 		margin-left: 0.5rem !important;
@@ -204,7 +203,7 @@
 		left: 350px;
 	}
 	.scroller-t {
-		height: calc(100vh - 73px - 41px);
+		height: calc(100svh - 73px - 41px);
 	}
 	#semester {
 		padding: 0.375rem 1.15rem 0.375rem 0.25rem;
@@ -233,7 +232,7 @@
 		margin-left: 0px;
 	}
 	.scroller-t {
-		height: calc(100vh - 73px - 32px);
+		height: calc(100svh - 73px - 32px);
 	}
 	body {
 		font-size: 12px;
@@ -258,7 +257,7 @@
 }
 @media screen and (max-width: 370px) {
 	.scroller {
-		height: calc(100vh - 62px);
+		height: calc(100svh - 62px);
 	}
 	.iu-logo {
 		width: 100px;
@@ -277,7 +276,7 @@
 		padding: 5px 5px;
 	}
 	.scroller-t {
-		height: calc(100vh - 62px - 32px);
+		height: calc(100svh - 62px - 32px);
 	}
 }
 

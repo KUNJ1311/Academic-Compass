@@ -6,14 +6,14 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import TestFinal from "./TestFinal";
 import Form from "react-bootstrap/Form";
-// import Dropdown from "react-bootstrap/Dropdown";
-// import DropdownButton from "react-bootstrap/DropdownButton";
 import { useState } from "react";
 import { useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Table from "react-bootstrap/Table";
+import Progressbar from "../../Progressbar";
 
 function SubNavbar() {
+	const [loading, setLoading] = useState(false);
 	const host = "http://localhost:5000";
 	let [data, setData] = useState({ testfirst: [], testsecond: [], testfinal: [], attendance: [] });
 	const [selectedSemester, setSelectedSemester] = useState("");
@@ -21,6 +21,7 @@ function SubNavbar() {
 	useEffect(() => {
 		const getData = async () => {
 			if (!selectedSemester) return;
+			setLoading(true);
 			//API Call
 			const response = await fetch(`${host}/api/getalldata/${selectedSemester}/${id}`, {
 				method: "GET",
@@ -28,6 +29,7 @@ function SubNavbar() {
 
 			const json = await response.json();
 			setData(json);
+			setLoading(false);
 		};
 		getData();
 		//eslint-disable-next-line
@@ -38,6 +40,7 @@ function SubNavbar() {
 
 	return (
 		<>
+			{loading && <Progressbar loading={loading} />}
 			<div className="content">
 				<div className="subnav-sticky">
 					<Tabs defaultActiveKey="attendance" id="uncontrolled-tab-example" className="bg-subnav" style={{ overflow: "hidden" }}>
