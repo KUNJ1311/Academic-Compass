@@ -22,8 +22,10 @@ const Home = (props) => {
 
 	return (
 		<>
-			<MainNavbar showAlert={props.showAlert} handleLogout={handleLogout} />
-			<SubNavbar />
+			<div className="stu-main-div">
+				<MainNavbar showAlert={props.showAlert} handleLogout={handleLogout} />
+				<SubNavbar />
+			</div>
 		</>
 	);
 };

@@ -9,27 +9,28 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import { useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
+import LoadingBar from "react-top-loading-bar";
 import Table from "react-bootstrap/Table";
-import Progressbar from "../../Progressbar";
 
 function SubNavbar() {
-	const [loading, setLoading] = useState(false);
+	const [progress, setProgress] = useState(0);
 	const host = "http://localhost:5000";
 	let [data, setData] = useState({ testfirst: [], testsecond: [], testfinal: [], attendance: [] });
 	const [selectedSemester, setSelectedSemester] = useState("");
 	const id = localStorage.getItem("key");
 	useEffect(() => {
 		const getData = async () => {
-			if (!selectedSemester) return;
-			setLoading(true);
-			//API Call
-			const response = await fetch(`${host}/api/getalldata/${selectedSemester}/${id}`, {
-				method: "GET",
-			});
-
-			const json = await response.json();
-			setData(json);
-			setLoading(false);
+			try {
+				if (!selectedSemester) return;
+				setProgress(Math.floor(Math.random() * 51) + 30);
+				//API Call
+				const response = await fetch(`${host}/api/getalldata/${selectedSemester}/${id}`, {
+					method: "GET",
+				});
+				const json = await response.json();
+				setData(json);
+				setProgress(100);
+			} catch (error) {}
 		};
 		getData();
 		//eslint-disable-next-line
@@ -40,7 +41,7 @@ function SubNavbar() {
 
 	return (
 		<>
-			{loading && <Progressbar loading={loading} />}
+			<LoadingBar color="#fd2155" progress={progress} height={3} onLoaderFinished={() => setProgress(0)} />
 			<div className="content">
 				<div className="subnav-sticky">
 					<Tabs defaultActiveKey="attendance" id="uncontrolled-tab-example" className="bg-subnav" style={{ overflow: "hidden" }}>

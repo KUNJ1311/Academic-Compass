@@ -196,7 +196,7 @@
 	}
 }
 @media screen and (max-width: 645px) {
-	body {
+	.stu-main-div {
 		font-size: 14px;
 	}
 	.drop-down {
@@ -234,7 +234,7 @@
 	.scroller-t {
 		height: calc(100svh - 73px - 32px);
 	}
-	body {
+	.stu-main-div {
 		font-size: 12px;
 	}
 	.btn-nav {

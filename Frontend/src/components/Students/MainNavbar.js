@@ -6,40 +6,40 @@ import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
 import { useState } from "react";
 import ChangePassModal from "./ChangePassModal";
+import LoadingBar from "react-top-loading-bar";
 import axios from "axios";
-import Progressbar from "../../Progressbar";
 function MainNavbar(props) {
+	const [progress, setProgress] = useState(0);
 	// const [alert, setAlert] = useState(null);
-	const [loading, setLoading] = useState(false);
 	const [modalShow, setModalShow] = useState(false);
-	useEffect(() => {
-		getStudents();
-		//eslint-disable-next-line
-	}, []);
 
 	const host = "http://localhost:5000";
 	//Get Students
 	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "", path: "" });
-	const getStudents = async () => {
-		const id = localStorage.getItem("key");
-		try {
-			setLoading(true);
-			const response = await axios.get(`${host}/api/getstudentdata/${id}`);
-			const data = response.data;
-			setStudentsdata(data);
-			setLoading(false);
-		} catch (error) {
-			console.error(error.message);
-			setStudentsdata([]);
-		}
-	};
+	useEffect(() => {
+		const getStudents = async () => {
+			const id = localStorage.getItem("key");
+			try {
+				setProgress(Math.floor(Math.random() * 51) + 30);
+				const response = await axios.get(`${host}/api/getstudentdata/${id}`);
+				const data = response.data;
+				setStudentsdata(data);
+				setProgress(100);
+			} catch (error) {
+				console.error(error.message);
+				setStudentsdata([]);
+			}
+		};
+		getStudents();
+		//eslint-disable-next-line
+	}, []);
 	const [visible, setVisible] = useState(false);
 	const handleMenuclick = () => {
 		setVisible(!visible);
 	};
 	return (
 		<>
-			{loading && <Progressbar loading={loading} />}
+			<LoadingBar color="#fd2155" progress={progress} height={3} onLoaderFinished={() => setProgress(0)} />
 			<div className="nav-color nav-stu sticky-top">
 				<Navbar variant="dark">
 					<button onClick={handleMenuclick} className="mx-2 menu-btn">
