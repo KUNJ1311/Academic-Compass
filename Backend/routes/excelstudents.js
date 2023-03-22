@@ -39,6 +39,8 @@ excelstudents.post(`/importexcel`, fetchuser, upload.single("file"), async (req,
 					name,
 					branch: req.body.branch,
 					course: req.body.course,
+					school: req.body.school,
+					year: req.body.year,
 				});
 				await saveData.save();
 			}

@@ -46,7 +46,7 @@ function AddMarksModal(props) {
 				<Row className="d-flex">
 					<Col sm={3}>
 						<Form.Group className="mb-3">
-							<Form.Label>Select Semester</Form.Label>
+							<Form.Label>Semester</Form.Label>
 							<Form.Select defaultValue="">
 								<option disabled value="">
 									Select Semester
@@ -64,7 +64,7 @@ function AddMarksModal(props) {
 					</Col>
 					<Col sm={3}>
 						<Form.Group className="mb-3">
-							<Form.Label>Select Test</Form.Label>
+							<Form.Label>Test</Form.Label>
 							<Form.Select defaultValue="">
 								<option disabled value="">
 									Select Test
@@ -77,7 +77,7 @@ function AddMarksModal(props) {
 					</Col>
 					<Col>
 						<Form.Group className="mb-3">
-							<Form.Label>Select Subject</Form.Label>
+							<Form.Label>Subject</Form.Label>
 							<Form.Select defaultValue="">
 								<option disabled value="">
 									Select Subject

@@ -60,7 +60,7 @@ const UpdateMarksModel = (props) => {
 						</Col>
 						<Col sm={3}>
 							<Form.Group className="mb-3">
-								<Form.Label>Select Test</Form.Label>
+								<Form.Label>Test</Form.Label>
 								<Form.Select defaultValue={props.test}>
 									<option value="1">First Test</option>
 									<option value="2">Second Test</option>
@@ -70,7 +70,7 @@ const UpdateMarksModel = (props) => {
 						</Col>
 						<Col>
 							<Form.Group className="mb-3">
-								<Form.Label>Select Subject</Form.Label>
+								<Form.Label>Subject</Form.Label>
 								<Form.Select defaultValue={props.subject}>
 									<option value="1">Mathematics</option>
 									<option value="2">Physics</option>

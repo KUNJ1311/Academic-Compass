@@ -4,6 +4,7 @@ import { Modal, Form } from "react-bootstrap";
 import pass from "./pass.svg";
 import axios from "axios";
 const ChangePassModal = (props) => {
+	const host = process.env.REACT_APP_HOST;
 	const changepassword = async (e) => {
 		e.preventDefault();
 		const id = localStorage.getItem("key");
@@ -11,7 +12,7 @@ const ChangePassModal = (props) => {
 		const repassword = e.target.elements.repassword.value;
 		if (newPass === repassword) {
 			try {
-				await axios.put(`http://localhost:5000/api/changepass/${id}`, { newPass });
+				await axios.put(`${host}/api/changepass/${id}`, { newPass });
 				props.showAlert("Password Changed Successfully", "success");
 				props.onHide();
 			} catch (error) {

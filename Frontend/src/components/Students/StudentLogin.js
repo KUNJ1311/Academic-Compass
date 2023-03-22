@@ -6,11 +6,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 const Login = (props) => {
+	const host = process.env.REACT_APP_HOST;
 	const [credentials, setCredentials] = useState({ enrolment: "", password: "" });
 	let navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const response = await fetch(`http://localhost:5000/api/loginstudent`, {
+		const response = await fetch(`${host}/api/loginstudent`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

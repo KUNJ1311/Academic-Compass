@@ -109,7 +109,7 @@ const ManageMarks = () => {
 						<Row className="d-flex mb-3">
 							<Col sm={2}>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Test</Form.Label>
+									<Form.Label>&nbsp;Test</Form.Label>
 									<Form.Select value={selectedTest} onChange={(e) => setSelectedTest(e.target.value)}>
 										<option disabled value="">
 											Select Test
@@ -122,7 +122,7 @@ const ManageMarks = () => {
 							</Col>
 							<Col>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Branch</Form.Label>
+									<Form.Label>&nbsp;Branch</Form.Label>
 									<Form.Select defaultValue="">
 										<option disabled value="">
 											Select Branch
@@ -135,7 +135,7 @@ const ManageMarks = () => {
 							</Col>
 							<Col sm={2}>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Semester</Form.Label>
+									<Form.Label>&nbsp;Semester</Form.Label>
 									<Form.Select value={selectedSemester} onChange={(e) => setSelectedSemester(e.target.value)}>
 										<option disabled value="">
 											Select Semester
@@ -153,7 +153,7 @@ const ManageMarks = () => {
 							</Col>
 							<Col>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Subject</Form.Label>
+									<Form.Label>&nbsp;Subject</Form.Label>
 									<Form.Select value={selectedSubject} onChange={(e) => setSelectedSubject(e.target.value)}>
 										<option disabled value="">
 											Select Subject

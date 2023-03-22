@@ -14,7 +14,7 @@ import Table from "react-bootstrap/Table";
 
 function SubNavbar() {
 	const [progress, setProgress] = useState(0);
-	const host = "http://localhost:5000";
+	const host = process.env.REACT_APP_HOST;
 	let [data, setData] = useState({ testfirst: [], testsecond: [], testfinal: [], attendance: [] });
 	const [selectedSemester, setSelectedSemester] = useState("");
 	const id = localStorage.getItem("key");

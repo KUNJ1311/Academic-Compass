@@ -87,9 +87,33 @@ const ManageStudents = () => {
 					<hr className="my-2" style={{ border: "1px solid black" }} />
 					<div style={{ backgroundColor: "white", position: "sticky", top: "0", zIndex: "999" }}>
 						<Row className="d-flex mb-3">
-							<Col sm={4}>
+							<Col sm={2}>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Branch</Form.Label>
+									<Form.Label>&nbsp;Academic Year</Form.Label>
+									<Form.Select id="branch" defaultValue="">
+										<option disabled value="">
+											Select Academic
+										</option>
+										<option value="1">2021-2022</option>
+										<option value="2">2022-2023</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={3}>
+								<Form.Group>
+									<Form.Label>&nbsp;School</Form.Label>
+									<Form.Select id="course" defaultValue="">
+										<option disabled value="">
+											Select School
+										</option>
+										<option value="1">School of Engineering &#40;SOE&#41;</option>
+										<option value="2">School of Science &#40;SOS&#41;</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={2}>
+								<Form.Group>
+									<Form.Label>&nbsp;Branch</Form.Label>
 									<Form.Select defaultValue="">
 										<option disabled value="">
 											Select Branch
@@ -99,16 +123,16 @@ const ManageStudents = () => {
 									</Form.Select>
 								</Form.Group>
 							</Col>
-							<Col sm={5}>
+							<Col>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Course</Form.Label>
+									<Form.Label>&nbsp;Course</Form.Label>
 									<Form.Select defaultValue="">
 										<option disabled value="">
 											Select Course
 										</option>
-										<option value="1">Computer Science & Engineering</option>
-										<option value="2">Electronics & Communication Engineering</option>
-										<option value="3">Mechanical Engineering</option>
+										<option value="1">Computer Science & Engineering &#40;CSE&#41;</option>
+										<option value="2">Electronics & Communication Engineering &#40;ECE&#41;</option>
+										<option value="3">Mechanical Engineering &#40;ME&#41;</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>

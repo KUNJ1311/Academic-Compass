@@ -4,11 +4,12 @@ import logo from "../img/iuLogo2.jpeg";
 import logo2 from "../img/iuback.jpg";
 import { Link, useNavigate } from "react-router-dom";
 const ExamCellLogin = (props) => {
+	const host = process.env.REACT_APP_HOST;
 	const [credentials, setCredentials] = useState({ email: "", password: "" });
 	let navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const response = await fetch(`http://localhost:5000/api/auth-examcell/login`, {
+		const response = await fetch(`${host}/api/auth-examcell/login`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

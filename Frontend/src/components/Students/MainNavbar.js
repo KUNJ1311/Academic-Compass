@@ -13,7 +13,7 @@ function MainNavbar(props) {
 	// const [alert, setAlert] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
 
-	const host = "http://localhost:5000";
+	const host = process.env.REACT_APP_HOST;
 	//Get Students
 	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "", path: "" });
 	useEffect(() => {

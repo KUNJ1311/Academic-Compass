@@ -24,6 +24,14 @@ const StudentdataSchema = new Schema({
 		default: "IU@1234",
 		required: true,
 	},
+	school: {
+		type: String,
+		required: true,
+	},
+	year: {
+		type: String,
+		required: true,
+	},
 	// img: {
 	// 	data: Buffer,
 	// 	contentType: String,

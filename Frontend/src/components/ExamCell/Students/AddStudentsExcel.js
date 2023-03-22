@@ -10,6 +10,7 @@ const AddStudentsExcel = (props) => {
 	const [dots, setDots] = useState("");
 
 	const addExcel = async (e) => {
+		const host = process.env.REACT_APP_HOST;
 		setLoading(true);
 		e.preventDefault();
 		const formData = new FormData();
@@ -20,7 +21,7 @@ const AddStudentsExcel = (props) => {
 			const headers = {
 				"auth-token": localStorage.getItem("token"),
 			};
-			await axios.post("http://localhost:5000/data-students/importexcel", formData, { headers });
+			await axios.post(`${host}/data-students/importexcel`, formData, { headers });
 			props.showAlert("Data Added Successfully", "success");
 			setLoading(false);
 			props.onHide();
@@ -62,7 +63,31 @@ const AddStudentsExcel = (props) => {
 						<Row className="d-flex mb-3">
 							<Col sm={3}>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Branch</Form.Label>
+									<Form.Label>&nbsp;Academic Year</Form.Label>
+									<Form.Select id="branch" defaultValue="">
+										<option disabled value="">
+											Select Academic
+										</option>
+										<option value="1">2021-2022</option>
+										<option value="2">2022-2023</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group>
+									<Form.Label>&nbsp;School</Form.Label>
+									<Form.Select id="course" defaultValue="">
+										<option disabled value="">
+											Select School
+										</option>
+										<option value="1">School of Engineering &#40;SOE&#41;</option>
+										<option value="2">School of Science &#40;SOS&#41;</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={3}>
+								<Form.Group>
+									<Form.Label>&nbsp;Branch</Form.Label>
 									<Form.Select id="branch" defaultValue="">
 										<option disabled value="">
 											Select Branch
@@ -72,9 +97,11 @@ const AddStudentsExcel = (props) => {
 									</Form.Select>
 								</Form.Group>
 							</Col>
+						</Row>
+						<Row className="d-flex mb-3">
 							<Col>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Course</Form.Label>
+									<Form.Label>&nbsp;Course</Form.Label>
 									<Form.Select id="course" defaultValue="">
 										<option disabled value="">
 											Select Course
@@ -85,11 +112,9 @@ const AddStudentsExcel = (props) => {
 									</Form.Select>
 								</Form.Group>
 							</Col>
-						</Row>
-						<Row>
 							<Col>
 								<Form.Group>
-									<Form.Label>Add Excel File</Form.Label>
+									<Form.Label>Excel File</Form.Label>
 									<Form.Control
 										type="file"
 										name="file"

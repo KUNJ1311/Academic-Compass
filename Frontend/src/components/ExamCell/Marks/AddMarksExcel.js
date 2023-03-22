@@ -10,6 +10,7 @@ const AddMarksExcel = (props) => {
 	const [dots, setDots] = useState("");
 
 	const addExcel = async (e) => {
+		const host = process.env.REACT_APP_HOST;
 		setLoading(true);
 		e.preventDefault();
 		const formData = new FormData();
@@ -18,7 +19,7 @@ const AddMarksExcel = (props) => {
 			const headers = {
 				"auth-token": localStorage.getItem("token"),
 			};
-			await axios.post(`http://localhost:5000/data-marks/importexcel/${e.target.semester.value}/${e.target.test.value}`, formData, { headers });
+			await axios.post(`${host}/data-marks/importexcel/${e.target.semester.value}/${e.target.test.value}`, formData, { headers });
 			props.showAlert("Data Added Successfully", "success");
 			setLoading(false);
 			props.onHide();
@@ -61,7 +62,7 @@ const AddMarksExcel = (props) => {
 						<Row className="d-flex">
 							<Col sm={3}>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Semester</Form.Label>
+									<Form.Label>&nbsp;Semester</Form.Label>
 									<Form.Select id="semester" defaultValue="">
 										<option disabled value="">
 											Select Semester
@@ -79,7 +80,7 @@ const AddMarksExcel = (props) => {
 							</Col>
 							<Col sm={3}>
 								<Form.Group>
-									<Form.Label>&nbsp;Select Test</Form.Label>
+									<Form.Label>&nbsp;Test</Form.Label>
 									<Form.Select id="test" defaultValue="">
 										<option disabled value="">
 											Select Test
@@ -92,7 +93,7 @@ const AddMarksExcel = (props) => {
 							</Col>
 							<Col>
 								<Form.Group>
-									<Form.Label>Add Excel File</Form.Label>
+									<Form.Label>Excel File</Form.Label>
 									<Form.Control
 										type="file"
 										name="file"
