@@ -28,7 +28,7 @@
 	left: 58px;
 }
 .wrapper {
-	opacity: 0.8;
+	opacity: 1;
 	position: relative;
 	width: 430px;
 	padding: 2rem 1rem;
@@ -37,25 +37,14 @@
 	border-radius: 10px;
 	text-align: center;
 	box-shadow: 0 20px 35px rgb(38, 38, 38);
-	transition: all 0.35s cubic-bezier(0.47, 0, 0.745, 0.715);
 }
-.wrapper:hover {
-	opacity: 1;
-	transform: scale(1.1);
-}
+
 @media screen and (max-width: 700px) {
 	.wrapper {
-		opacity: 1;
-		transition: none;
 		width: 370px;
 	}
-	.wrapper:hover {
-		transform: none;
-	}
 }
-.iu-back .wrapper:hover {
-	opacity: 0.4;
-}
+
 .h1-login {
 	font-size: 2rem;
 	color: darkblue;

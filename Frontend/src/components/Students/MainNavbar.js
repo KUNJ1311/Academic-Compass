@@ -15,7 +15,7 @@ function MainNavbar(props) {
 
 	const host = process.env.REACT_APP_HOST;
 	//Get Students
-	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", branch: "", course: "", path: "" });
+	const [studentsdata, setStudentsdata] = useState({ enrolment: "", dob: "", name: "", year: "", school: "", branch: "", course: "", path: "" });
 	useEffect(() => {
 		const getStudents = async () => {
 			const id = localStorage.getItem("key");
@@ -81,12 +81,20 @@ function MainNavbar(props) {
 							<p className="fw-normal my-0 mx-1">{studentsdata.enrolment}</p>
 						</li>
 						<li className="fw-bold pb-0 py-3">
+							School:&nbsp;
+							<p className="fw-normal my-0 mx-1">{studentsdata.school}</p>
+						</li>
+						<li className="fw-bold pb-0 py-3">
 							Branch:&nbsp;
 							<p className="fw-normal my-0 mx-1">{studentsdata.branch}</p>
 						</li>
 						<li className="fw-bold pb-0 py-3">
 							Course:&nbsp;
 							<p className="fw-normal my-0 mx-1">{studentsdata.course}</p>
+						</li>
+						<li className="fw-bold pb-0 py-3">
+							Academic Year:&nbsp;
+							<p className="fw-normal my-0 mx-1">{studentsdata.year}</p>
 						</li>
 					</div>
 				</div>

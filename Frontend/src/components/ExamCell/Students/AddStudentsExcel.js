@@ -17,6 +17,8 @@ const AddStudentsExcel = (props) => {
 		formData.append("file", file);
 		formData.append("branch", e.target.branch.options[e.target.branch.value].text);
 		formData.append("course", e.target.course.options[e.target.course.value].text);
+		formData.append("year", e.target.year.options[e.target.year.value].text);
+		formData.append("school", e.target.school.options[e.target.school.value].text);
 		try {
 			const headers = {
 				"auth-token": localStorage.getItem("token"),
@@ -61,12 +63,12 @@ const AddStudentsExcel = (props) => {
 				<Form onSubmit={addExcel} method="POST" encType="multipart/form-data">
 					<Modal.Body>
 						<Row className="d-flex mb-3">
-							<Col sm={3}>
+							<Col sm={4}>
 								<Form.Group>
 									<Form.Label>&nbsp;Academic Year</Form.Label>
-									<Form.Select id="branch" defaultValue="">
+									<Form.Select id="year" defaultValue="">
 										<option disabled value="">
-											Select Academic
+											Select Academic Year
 										</option>
 										<option value="1">2021-2022</option>
 										<option value="2">2022-2023</option>
@@ -76,7 +78,7 @@ const AddStudentsExcel = (props) => {
 							<Col>
 								<Form.Group>
 									<Form.Label>&nbsp;School</Form.Label>
-									<Form.Select id="course" defaultValue="">
+									<Form.Select id="school" defaultValue="">
 										<option disabled value="">
 											Select School
 										</option>
@@ -106,9 +108,9 @@ const AddStudentsExcel = (props) => {
 										<option disabled value="">
 											Select Course
 										</option>
-										<option value="1">Computer Science & Engineering</option>
-										<option value="2">Electronics & Communication Engineering</option>
-										<option value="3">Mechanical Engineering</option>
+										<option value="1">Computer Science & Engineering &#40;CSE&#41;</option>
+										<option value="2">Electronics & Communication Engineering &#40;ECE&#41;</option>
+										<option value="3">Mechanical Engineering &#40;ME&#41;</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>

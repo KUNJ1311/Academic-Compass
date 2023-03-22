@@ -28,6 +28,10 @@ var upload = multer({ storage: storage });
 
 excelstudents.post(`/importexcel`, fetchuser, upload.single("file"), async (req, res) => {
 	try {
+		const branch = req.body.branch;
+		const course = req.body.course;
+		const school = req.body.school;
+		const year = req.body.year;
 		const jsonArray = await csv().fromFile(req.file.path);
 		for (let x = 0; x < jsonArray.length; x++) {
 			const enrolment = jsonArray[x].enrolment;
@@ -37,10 +41,10 @@ excelstudents.post(`/importexcel`, fetchuser, upload.single("file"), async (req,
 				const saveData = new Studentdata({
 					enrolment,
 					name,
-					branch: req.body.branch,
-					course: req.body.course,
-					school: req.body.school,
-					year: req.body.year,
+					branch,
+					course,
+					school,
+					year,
 				});
 				await saveData.save();
 			}

@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../img/iuLogo2.jpeg";
-import logo2 from "../img/iuback.jpg";
+import logo2 from "../img/iuback.jpeg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";

@@ -47,7 +47,7 @@ function AddMarksModal(props) {
 					<Col sm={3}>
 						<Form.Group className="mb-3">
 							<Form.Label>Semester</Form.Label>
-							<Form.Select defaultValue="">
+							<Form.Select id="semester" defaultValue="">
 								<option disabled value="">
 									Select Semester
 								</option>
@@ -65,7 +65,7 @@ function AddMarksModal(props) {
 					<Col sm={3}>
 						<Form.Group className="mb-3">
 							<Form.Label>Test</Form.Label>
-							<Form.Select defaultValue="">
+							<Form.Select id="test" defaultValue="">
 								<option disabled value="">
 									Select Test
 								</option>
@@ -78,7 +78,7 @@ function AddMarksModal(props) {
 					<Col>
 						<Form.Group className="mb-3">
 							<Form.Label>Subject</Form.Label>
-							<Form.Select defaultValue="">
+							<Form.Select id="subject" defaultValue="">
 								<option disabled value="">
 									Select Subject
 								</option>
