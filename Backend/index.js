@@ -20,6 +20,7 @@ app.use("/api", require("./routes/student"), express.static("uploads"));
 app.use("/api/auth-examcell", require("./routes/examcell"));
 app.use("/data-students", require("./routes/excelstudents"));
 app.use("/data-marks", require("./routes/excelmarks"));
+app.use("/fetch", require("./routes/fetchdatatable"));
 app.get("/api/", (req, res) => {
 	res.send("Hello!");
 });

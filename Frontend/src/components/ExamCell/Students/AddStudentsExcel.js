@@ -82,8 +82,8 @@ const AddStudentsExcel = (props) => {
 										<option disabled value="">
 											Select School
 										</option>
-										<option value="1">School of Engineering &#40;SOE&#41;</option>
-										<option value="2">School of Science &#40;SOS&#41;</option>
+										<option value="1">School of Engineering (SOE)</option>
+										<option value="2">School of Science (SOS)</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
@@ -108,9 +108,9 @@ const AddStudentsExcel = (props) => {
 										<option disabled value="">
 											Select Course
 										</option>
-										<option value="1">Computer Science & Engineering &#40;CSE&#41;</option>
-										<option value="2">Electronics & Communication Engineering &#40;ECE&#41;</option>
-										<option value="3">Mechanical Engineering &#40;ME&#41;</option>
+										<option value="1">Computer Science & Engineering (CSE)</option>
+										<option value="2">Electronics & Communication Engineering (ECE)</option>
+										<option value="3">Mechanical Engineering (ME)</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
