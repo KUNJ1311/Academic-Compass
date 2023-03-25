@@ -71,7 +71,7 @@ const AddSubjectsModal = (props) => {
 								</Form.Select>
 							</Form.Group>
 						</Col>
-						<Col sm={4}>
+						<Col sm={3}>
 							<Form.Group>
 								<Form.Label>&nbsp;Branch</Form.Label>
 								<Form.Select id="branch" value={branch} onChange={handleBranchChange} required>
@@ -80,7 +80,7 @@ const AddSubjectsModal = (props) => {
 								</Form.Select>
 							</Form.Group>
 						</Col>
-						<Col sm={4}>
+						<Col>
 							<Form.Group>
 								<Form.Label>&nbsp;Course</Form.Label>
 								<Form.Select id="course" value={course} onChange={handleCourseChange} required>

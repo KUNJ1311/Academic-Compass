@@ -1,11 +1,13 @@
 import { createContext, useState } from "react";
-
+import axios from "axios";
 const SubjectsContext = createContext();
 
 const SubjectsProvider = (props) => {
+	const host = process.env.REACT_APP_HOST;
 	const [school, setSchool] = useState("");
 	const [branch, setBranch] = useState("");
 	const [course, setCourse] = useState("");
+	const [semester, setSemester] = useState("");
 	const currentYear = new Date().getFullYear();
 	const [year, setYear] = useState(currentYear);
 	const startYear = 2018;
@@ -62,21 +64,55 @@ const SubjectsProvider = (props) => {
 
 	// Map the course options for the selected branch to a list of <option> elements
 	const courseOptionsList = branch && branchOptions[branch] ? branchOptions[branch].map((course) => <option key={course}>{course}</option>) : "";
+	const handleSemesterChange = (event) => {
+		const newSemester = event.target.value;
+		setSemester(newSemester);
+		getSubjects(newSemester);
+	};
+	const getSubjects = async (semester) => {
+		const formData = new FormData();
+		formData.append("branch", branch);
+		formData.append("school", school);
+		formData.append("course", course);
+		formData.append("semester", semester);
+		try {
+			const headers = {
+				"auth-token": localStorage.getItem("token"),
+			};
+			const response = await axios.post(`${host}/api/get/subjects`, formData, { headers });
+			console.log(response.data.subjects, response.data.courseCodes);
+			if (response.data.success) {
+				return {
+					success: true,
+					subjects: response.data.subjects,
+					courseCodes: response.data.courseCodes,
+				};
+			} else {
+				throw new Error(response.data.msg);
+			}
+		} catch (error) {
+			return {
+				success: false,
+				error: error.message,
+			};
+		}
+	};
 	const contextValue = {
 		school,
 		branch,
 		course,
 		year,
+		semester,
 		handleSchoolChange,
 		handleBranchChange,
 		handleCourseChange,
 		handleYearChange,
+		handleSemesterChange,
 		yearOptionsList,
 		schoolOptionsList,
 		branchOptionsList,
 		courseOptionsList,
 	};
-
 	return <SubjectsContext.Provider value={contextValue}>{props.children}</SubjectsContext.Provider>;
 };
 export { SubjectsContext, SubjectsProvider };

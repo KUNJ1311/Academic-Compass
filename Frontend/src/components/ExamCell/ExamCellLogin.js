@@ -22,14 +22,14 @@ const ExamCellLogin = () => {
 		if (json.success) {
 			localStorage.setItem("token", json.authtoken);
 			showAlert("Logged in Successfully", "success");
-			navigate("/managemarks");
+			navigate("/managestudent");
 		} else {
 			showAlert("Invalid Details", "danger");
 		}
 	};
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
-			navigate("/managemarks");
+			navigate("/managestudent");
 		}
 		//eslint-disable-next-line
 	}, []);

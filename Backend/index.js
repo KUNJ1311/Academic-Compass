@@ -16,7 +16,7 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use("/api", require("./routes/student"), express.static("uploads"), require("./routes/excelstudents"), require("./routes/excelmarks"), require("./routes/addsubjects"));
+app.use("/api", require("./routes/student"), express.static("uploads"), require("./routes/excelstudents"), require("./routes/excelmarks"), require("./routes/addgetsubjects"));
 app.use("/api/auth/examcell", require("./routes/examcell"));
 app.use("/fetch", require("./routes/fetchdatatable"));
 app.get("/api/", (req, res) => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { SubjectsContext } from "../../context/SubjectsContext";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
 import marks from "../svg/marks.svg";
@@ -7,7 +8,7 @@ import axios from "axios";
 import { AlertContext } from "../../context/AlertContext";
 const AddMarksExcel = (props) => {
 	const { showAlert } = useContext(AlertContext);
-
+	const { school, branch, course, semester, handleSchoolChange, handleBranchChange, handleCourseChange, schoolOptionsList, branchOptionsList, courseOptionsList, handleSemesterChange } = useContext(SubjectsContext);
 	const [file, setFile] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [dots, setDots] = useState("");
@@ -64,10 +65,39 @@ const AddMarksExcel = (props) => {
 				<Form onSubmit={addExcel} method="POST" encType="multipart/form-data">
 					<Modal.Body>
 						<Row className="d-flex mb-3">
+							<Col sm={4}>
+								<Form.Group>
+									<Form.Label>&nbsp;School</Form.Label>
+									<Form.Select id="school" value={school} onChange={handleSchoolChange} required>
+										<option>Select School</option>
+										{schoolOptionsList}
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group>
+									<Form.Label>&nbsp;Branch</Form.Label>
+									<Form.Select id="branch" value={branch} onChange={handleBranchChange} required>
+										<option>Select Branch</option>
+										{branchOptionsList}
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={5}>
+								<Form.Group>
+									<Form.Label>&nbsp;Course</Form.Label>
+									<Form.Select id="course" value={course} onChange={handleCourseChange} required>
+										<option>Select Course</option>
+										{courseOptionsList}
+									</Form.Select>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Row className="mb-3">
 							<Col sm={3}>
 								<Form.Group>
 									<Form.Label>&nbsp;Semester</Form.Label>
-									<Form.Select id="semester" defaultValue="">
+									<Form.Select id="semester" defaultValue="" onChange={handleSemesterChange} required>
 										<option disabled value="">
 											Select Semester
 										</option>
@@ -82,19 +112,6 @@ const AddMarksExcel = (props) => {
 									</Form.Select>
 								</Form.Group>
 							</Col>
-							<Col sm={3}>
-								<Form.Group>
-									<Form.Label>&nbsp;Test</Form.Label>
-									<Form.Select id="test" defaultValue="">
-										<option disabled value="">
-											Select Test
-										</option>
-										<option value="testfirst">First Test</option>
-										<option value="testsecond">Second Test</option>
-										<option value="testfinal">Final Test</option>
-									</Form.Select>
-								</Form.Group>
-							</Col>
 							<Col>
 								<Form.Group>
 									<Form.Label>&nbsp;Subject</Form.Label>
@@ -105,6 +122,19 @@ const AddMarksExcel = (props) => {
 										<option value="1">Maths</option>
 										<option value="2">Computer Network</option>
 										<option value="3">WT</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={3}>
+								<Form.Group>
+									<Form.Label>&nbsp;Test</Form.Label>
+									<Form.Select id="test" defaultValue="">
+										<option disabled value="">
+											Select Test
+										</option>
+										<option value="testfirst">First Test</option>
+										<option value="testsecond">Second Test</option>
+										<option value="testfinal">Final Test</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>

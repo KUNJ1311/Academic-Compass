@@ -1,15 +1,15 @@
 const express = require("express");
-const addsubjects = express();
+const addgetsubjects = express();
 const fs = require("fs");
 const fetchuser = require("../middleware/fetchUser");
 const multer = require("multer");
 const path = require("path");
 const bodyParser = require("body-parser");
 var csv = require("csvtojson");
-addsubjects.use(bodyParser.urlencoded({ extended: true }));
+addgetsubjects.use(bodyParser.urlencoded({ extended: true }));
 
 const School = require("../models/School");
-addsubjects.use(express.static(path.resolve(__dirname, "excel")));
+addgetsubjects.use(express.static(path.resolve(__dirname, "excel")));
 var storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, "../excel");
@@ -22,7 +22,7 @@ var storage = multer.diskStorage({
 	},
 });
 var upload = multer({ storage: storage });
-addsubjects.post(`/importexcel/subjects`, fetchuser, upload.single("file"), async (req, res) => {
+addgetsubjects.post(`/importexcel/subjects`, fetchuser, upload.single("file"), async (req, res) => {
 	try {
 		const branch = req.body.branch;
 		const course = req.body.course;
@@ -69,4 +69,31 @@ addsubjects.post(`/importexcel/subjects`, fetchuser, upload.single("file"), asyn
 	}
 });
 
-module.exports = addsubjects;
+addgetsubjects.post(`/get/subjects`, fetchuser, upload.single("file"), async (req, res) => {
+	try {
+		const branch = req.body.branch;
+		const course = req.body.course;
+		const school = req.body.school;
+		const semester = req.body.semester;
+		const query = {
+			school,
+			branch,
+			course,
+		};
+		console.log(branch, course, school, semester);
+		let schoolDoc = await School.findOne(query);
+		console.log(schoolDoc);
+		const semCourses = schoolDoc.semesters[semester];
+		if (semCourses.length > 0) {
+			const subjects = semCourses.map((course) => course.subject);
+			const courseCodes = semCourses.map((course) => course.courseCode);
+			res.send({ status: 200, success: true, subjects, courseCodes });
+		} else {
+			res.send({ status: 400, success: false, msg: error.message });
+		}
+	} catch (error) {
+		res.send({ status: 400, success: false, msg: error.message });
+		console.log(error);
+	}
+});
+module.exports = addgetsubjects;
