@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
 import marks from "../svg/marks.svg";
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
+import { AlertContext } from "../../context/AlertContext";
 const AddMarksExcel = (props) => {
+	const { showAlert } = useContext(AlertContext);
+
 	const [file, setFile] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [dots, setDots] = useState("");
@@ -15,17 +18,18 @@ const AddMarksExcel = (props) => {
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append("file", file);
+		formData.append("subject", e.target.subject.options[e.target.subject.value].text);
 		try {
 			const headers = {
 				"auth-token": localStorage.getItem("token"),
 			};
-			await axios.post(`${host}/data-marks/importexcel/${e.target.semester.value}/${e.target.test.value}`, formData, { headers });
-			props.showAlert("Data Added Successfully", "success");
+			await axios.post(`${host}/api/importexcel/${e.target.semester.value}/${e.target.test.value}`, formData, { headers });
+			showAlert("Data Added Successfully", "success");
 			setLoading(false);
 			props.onHide();
 		} catch (error) {
 			setLoading(false);
-			props.showAlert("Only .CSV files are allowed", "danger");
+			showAlert("Only .CSV files are allowed", "danger");
 			console.log(error);
 		}
 	};
@@ -59,7 +63,7 @@ const AddMarksExcel = (props) => {
 				</Modal.Header>
 				<Form onSubmit={addExcel} method="POST" encType="multipart/form-data">
 					<Modal.Body>
-						<Row className="d-flex">
+						<Row className="d-flex mb-3">
 							<Col sm={3}>
 								<Form.Group>
 									<Form.Label>&nbsp;Semester</Form.Label>
@@ -93,7 +97,22 @@ const AddMarksExcel = (props) => {
 							</Col>
 							<Col>
 								<Form.Group>
-									<Form.Label>Excel File</Form.Label>
+									<Form.Label>&nbsp;Subject</Form.Label>
+									<Form.Select id="subject" defaultValue="">
+										<option disabled value="">
+											Select Subject
+										</option>
+										<option value="1">Maths</option>
+										<option value="2">Computer Network</option>
+										<option value="3">WT</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Row>
+							<Col>
+								<Form.Group>
+									<Form.Label>&nbsp;Excel File</Form.Label>
 									<Form.Control
 										type="file"
 										name="file"

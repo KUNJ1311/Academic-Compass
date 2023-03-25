@@ -2,10 +2,12 @@ import React from "react";
 import logo from "../img/iuLogo2.jpeg";
 import logo2 from "../img/iuback.jpeg";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-const Login = (props) => {
+import { AlertContext } from "../context/AlertContext";
+const Login = () => {
+	const { showAlert } = useContext(AlertContext);
 	const host = process.env.REACT_APP_HOST;
 	const [credentials, setCredentials] = useState({ enrolment: "", password: "" });
 	let navigate = useNavigate();
@@ -21,10 +23,10 @@ const Login = (props) => {
 		const json = await response.json();
 		if (json.success) {
 			localStorage.setItem("key", json.data._id);
-			props.showAlert("Logged in Successfully", "success");
+			showAlert("Logged in Successfully", "success");
 			navigate("/student-home");
 		} else {
-			props.showAlert("Invalid Details", "danger");
+			showAlert("Invalid Details", "danger");
 		}
 	};
 	useEffect(() => {

@@ -42,16 +42,15 @@ const Semesters = [
 	{ number: 6, model: Sem6 },
 	{ number: 7, model: Sem7 },
 	{ number: 8, model: Sem8 },
-	// add more semesters if needed
 ];
 Semesters.forEach((semester) => {
 	excelmarks.post(`/importexcel/sem${semester.number}/testfirst`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
+			const subject = req.body.subject;
+			const subjectCode = req.body.subjectCode;
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
 				const subjectMarks = [];
-				const subject = jsonArray[x].subject;
-				const subjectCode = jsonArray[x].course_code;
 				const marks = jsonArray[x].marks;
 				subjectMarks.push({ subject: subject, course_code: subjectCode, marks: marks });
 				const semesterData = {

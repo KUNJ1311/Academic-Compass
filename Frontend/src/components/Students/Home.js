@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import MainNavbar from "./MainNavbar";
 import SubNavbar from "./SubNavbar";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const Home = (props) => {
+import { AlertContext } from "../context/AlertContext";
+const Home = () => {
+	const { showAlert } = useContext(AlertContext);
 	let navigate = useNavigate();
 	function handleLogout(e) {
 		e.preventDefault();
-		props.showAlert("Logged Out Successfully", "success");
+		showAlert("Logged Out Successfully", "success");
 		window.localStorage.clear();
 		navigate("/");
 	}
@@ -23,7 +25,7 @@ const Home = (props) => {
 	return (
 		<>
 			<div className="stu-main-div">
-				<MainNavbar showAlert={props.showAlert} handleLogout={handleLogout} />
+				<MainNavbar handleLogout={handleLogout} />
 				<SubNavbar />
 			</div>
 		</>

@@ -58,7 +58,7 @@ function MainNavbar(props) {
 							<Button className="btn-nav mx-2" variant="warning" onClick={() => setModalShow(true)}>
 								Change Password
 							</Button>
-							<ChangePassModal showAlert={props.showAlert} show={modalShow} onHide={() => setModalShow(false)} />
+							<ChangePassModal show={modalShow} onHide={() => setModalShow(false)} />
 						</Navbar.Text>
 						<Navbar.Text>
 							<Button className="btn-nav" onClick={props.handleLogout} variant="danger mx-2">

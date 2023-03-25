@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import student from "./svg/student.svg";
 import marks from "./svg/marks.svg";
 import attendance from "./svg/attendance.svg";
+import book from "./svg/book.svg";
 import { useLocation } from "react-router-dom";
 
 const ExamCellSideBar = () => {
@@ -12,8 +13,9 @@ const ExamCellSideBar = () => {
 	const clickedIndexQueryParam = queryParams.get("clickedIndex");
 	const [clickedIndex, setClickedIndex] = useState(clickedIndexQueryParam ? Number(clickedIndexQueryParam) : 0);
 	const items = [
-		{ group: "Manage Marks", svg: marks, link: "/managemarks" },
 		{ group: "Manage Students", svg: student, link: "/managestudent" },
+		{ group: "Manage Subjects", svg: book, link: "/managesubjects" },
+		{ group: "Manage Marks", svg: marks, link: "/managemarks" },
 		{ group: "Manage Attendance", svg: attendance, link: "/manageattendance" },
 	];
 

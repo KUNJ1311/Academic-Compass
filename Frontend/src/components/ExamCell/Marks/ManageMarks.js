@@ -12,10 +12,8 @@ import excel from "../svg/excel.svg";
 import AddMarksExcel from "./AddMarksExcel";
 import setting from "../svg/settings.svg";
 import UpdateMarksModel from "./UpdateMarksModel";
-import Alert from "../../Alert";
 
 const ManageMarks = () => {
-	const [alert, setAlert] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
 	const [selectedStudent, setSelectedStudent] = useState(null);
@@ -53,15 +51,7 @@ const ManageMarks = () => {
 			Marks: "20",
 		},
 	];
-	const showAlert = (message, type) => {
-		setAlert({
-			message: message,
-			type: type,
-		});
-		setTimeout(() => {
-			setAlert(null);
-		}, 3000);
-	};
+
 	let navigate = useNavigate();
 	function handleLogout(e) {
 		e.preventDefault();
@@ -75,7 +65,6 @@ const ManageMarks = () => {
 
 	return (
 		<>
-			<Alert alert={alert} />
 			<MainNavbarExam handleLogout={handleLogout} />
 			<div className="d-flex">
 				<ExamCellSideBar />
@@ -101,7 +90,7 @@ const ManageMarks = () => {
 								Add Excel File
 							</Button>
 							<img className="mx-2" src={excel} alt="" />
-							<AddMarksExcel showAlert={showAlert} show={modalShow2} onHide={() => setModalShow2(false)} />
+							<AddMarksExcel show={modalShow2} onHide={() => setModalShow2(false)} />
 						</div>
 					</div>
 					<hr className="my-2" style={{ border: "1px solid black" }} />

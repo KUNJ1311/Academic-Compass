@@ -26,7 +26,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-excelstudents.post(`/importexcel`, fetchuser, upload.single("file"), async (req, res) => {
+excelstudents.post(`/importexcel/students`, fetchuser, upload.single("file"), async (req, res) => {
 	try {
 		const branch = req.body.branch;
 		const course = req.body.course;

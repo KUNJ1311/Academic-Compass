@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Form } from "react-bootstrap";
 import pass from "./pass.svg";
 import axios from "axios";
+import { AlertContext } from "../context/AlertContext";
 const ChangePassModal = (props) => {
+	const { showAlert } = useContext(AlertContext);
 	const host = process.env.REACT_APP_HOST;
 	const changepassword = async (e) => {
 		e.preventDefault();
@@ -13,13 +15,13 @@ const ChangePassModal = (props) => {
 		if (newPass === repassword) {
 			try {
 				await axios.put(`${host}/api/changepass/${id}`, { newPass });
-				props.showAlert("Password Changed Successfully", "success");
+				showAlert("Password Changed Successfully", "success");
 				props.onHide();
 			} catch (error) {
-				props.showAlert("Failed to change password", "danger");
+				showAlert("Failed to change password", "danger");
 			}
 		} else {
-			props.showAlert("Passwords do not match", "danger");
+			showAlert("Passwords do not match", "danger");
 		}
 	};
 

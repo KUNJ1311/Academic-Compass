@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import { Modal, Row, Col, Form } from "react-bootstrap";
 import student from "../svg/student.svg";
 import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
+import { AlertContext } from "../../context/AlertContext";
 const AddStudentsExcel = (props) => {
+	const { showAlert } = useContext(AlertContext);
 	const [file, setFile] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [dots, setDots] = useState("");
@@ -23,13 +25,13 @@ const AddStudentsExcel = (props) => {
 			const headers = {
 				"auth-token": localStorage.getItem("token"),
 			};
-			await axios.post(`${host}/data-students/importexcel`, formData, { headers });
-			props.showAlert("Data Added Successfully", "success");
+			await axios.post(`${host}/api/importexcel/students`, formData, { headers });
+			showAlert("Data Added Successfully", "success");
 			setLoading(false);
 			props.onHide();
 		} catch (error) {
 			setLoading(false);
-			props.showAlert("Only .CSV files are allowed", "danger");
+			showAlert("Only .CSV files are allowed", "danger");
 		}
 	};
 	useEffect(() => {
@@ -82,8 +84,8 @@ const AddStudentsExcel = (props) => {
 										<option disabled value="">
 											Select School
 										</option>
-										<option value="1">School of Engineering (SOE)</option>
-										<option value="2">School of Science (SOS)</option>
+										<option value="1">School of Engineering</option>
+										<option value="2">School of Science</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
@@ -108,9 +110,9 @@ const AddStudentsExcel = (props) => {
 										<option disabled value="">
 											Select Course
 										</option>
-										<option value="1">Computer Science & Engineering (CSE)</option>
-										<option value="2">Electronics & Communication Engineering (ECE)</option>
-										<option value="3">Mechanical Engineering (ME)</option>
+										<option value="1">Computer Science & Engineering</option>
+										<option value="2">Electronics & Communication Engineering</option>
+										<option value="3">Mechanical Engineering</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>

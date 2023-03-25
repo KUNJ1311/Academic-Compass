@@ -16,10 +16,8 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use("/api", require("./routes/student"), express.static("uploads"));
-app.use("/api/auth-examcell", require("./routes/examcell"));
-app.use("/data-students", require("./routes/excelstudents"));
-app.use("/data-marks", require("./routes/excelmarks"));
+app.use("/api", require("./routes/student"), express.static("uploads"), require("./routes/excelstudents"), require("./routes/excelmarks"), require("./routes/addsubjects"));
+app.use("/api/auth/examcell", require("./routes/examcell"));
 app.use("/fetch", require("./routes/fetchdatatable"));
 app.get("/api/", (req, res) => {
 	res.send("Hello!");

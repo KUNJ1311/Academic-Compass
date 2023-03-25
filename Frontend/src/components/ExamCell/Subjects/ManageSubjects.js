@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ExamCellSideBar from "../ExamCellSideBar";
 import Button from "react-bootstrap/Button";
 import MainNavbarExam from "../MainNavbarExam";
@@ -8,18 +8,19 @@ import { Row, Col } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import add from "../svg/adds.svg";
 import excel from "../svg/excel.svg";
+import AddSubjectsExcel from "./AddSubjectsExcel";
 import setting from "../svg/settings.svg";
 
-import AddStudentsExcel from "./AddStudentsExcel";
-import AddStudentsModal from "./AddStudentsModal";
+import { SubjectsContext } from "../../context/SubjectsContext";
 
-const ManageStudents = () => {
+const ManageMarks = () => {
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
-	const stu = [
+	const { school, branch, course, handleSchoolChange, handleBranchChange, handleCourseChange, schoolOptionsList, branchOptionsList, courseOptionsList } = useContext(SubjectsContext);
+	const sub = [
 		{
-			"Enrolment No.": "210110101016",
-			Name: "Kunj Faladu Sureshbhai",
+			"Course Code": "CSE101",
+			Subject: "Computer Network",
 		},
 	];
 
@@ -40,15 +41,15 @@ const ManageStudents = () => {
 						<div className="mr-auto">
 							<img className="mx-2" src={add} alt="" />
 							<Button className="btn-my" onClick={() => setModalShow(true)}>
-								Add Students
+								Add Subjects
 							</Button>
-							{/* <AddStudentsModal show={modalShow} onHide={() => setModalShow(false)} /> */}
+							{/* <AddMarksModal show={modalShow} onHide={() => setModalShow(false)} /> */}
 						</div>
 						<span className="mx-auto">
 							<h3 className="mb-0">
 								<img className="mx-1" src={setting} alt="" />
 								<strong className="mx-1" style={{ position: "relative", top: "2px" }}>
-									Manage Students
+									Manage Subjects
 								</strong>
 							</h3>
 						</span>
@@ -57,7 +58,7 @@ const ManageStudents = () => {
 								Add Excel File
 							</Button>
 							<img className="mx-2" src={excel} alt="" />
-							<AddStudentsExcel show={modalShow2} onHide={() => setModalShow2(false)} />
+							<AddSubjectsExcel show={modalShow2} onHide={() => setModalShow2(false)} />
 						</div>
 					</div>
 					<hr className="my-2" style={{ border: "1px solid black" }} />
@@ -65,50 +66,46 @@ const ManageStudents = () => {
 						<Row className="d-flex mb-3">
 							<Col sm={3}>
 								<Form.Group>
-									<Form.Label>&nbsp;Academic Year</Form.Label>
-									<Form.Select id="year" defaultValue="">
-										<option disabled value="">
-											Select Academic Year
-										</option>
-										<option value="1">2021-2022</option>
-										<option value="2">2022-2023</option>
-									</Form.Select>
-								</Form.Group>
-							</Col>
-							<Col sm={3}>
-								<Form.Group>
 									<Form.Label>&nbsp;School</Form.Label>
-									<Form.Select id="school" defaultValue="">
-										<option disabled value="">
-											Select School
-										</option>
-										<option value="1">School of Engineering</option>
-										<option value="2">School of Science</option>
+									<Form.Select id="school" value={school} onChange={handleSchoolChange} required>
+										<option>Select School</option>
+										{schoolOptionsList}
 									</Form.Select>
 								</Form.Group>
 							</Col>
 							<Col sm={2}>
 								<Form.Group>
 									<Form.Label>&nbsp;Branch</Form.Label>
-									<Form.Select id="branch" defaultValue="">
-										<option disabled value="">
-											Select Branch
-										</option>
-										<option value="1">B.Tech</option>
-										<option value="2">M.Tech</option>
+									<Form.Select id="branch" value={branch} onChange={handleBranchChange} required>
+										<option>Select Branch</option>
+										{branchOptionsList}
 									</Form.Select>
 								</Form.Group>
 							</Col>
-							<Col>
+							<Col sm={4}>
 								<Form.Group>
 									<Form.Label>&nbsp;Course</Form.Label>
-									<Form.Select id="course" defaultValue="">
+									<Form.Select id="course" value={course} onChange={handleCourseChange} required>
+										<option>Select Course</option>
+										{courseOptionsList}
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={3}>
+								<Form.Group>
+									<Form.Label>&nbsp;Semester</Form.Label>
+									<Form.Select id="semester" defaultValue="">
 										<option disabled value="">
-											Select Course
+											Select Semester
 										</option>
-										<option value="1">Computer Science & Engineering</option>
-										<option value="2">Electronics & Communication Engineering</option>
-										<option value="3">Mechanical Engineering</option>
+										<option value="sem1">1st Semester</option>
+										<option value="sem2">2nd Semester</option>
+										<option value="sem3">3rd Semester</option>
+										<option value="sem4">4th Semester</option>
+										<option value="sem5">5th Semester</option>
+										<option value="sem6">6th Semester</option>
+										<option value="sem7">7th Semester</option>
+										<option value="sem8">8th Semester</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
@@ -119,18 +116,18 @@ const ManageStudents = () => {
 							<thead className="col-sticky" style={{ backgroundColor: "white" }}>
 								<tr className="col-sticky" style={{ backgroundColor: "white" }}>
 									<th className="col-sticky" style={{ backgroundColor: "white" }}>
-										Enrolment No.
+										Course Code
 									</th>
 									<th className="col-sticky" style={{ backgroundColor: "white" }}>
-										Name
+										Subject
 									</th>
 								</tr>
 							</thead>
 							<tbody>
-								{stu.map((data) => (
-									<tr key={data["Enrolment No."]} className="table-row-hover">
-										<td>{data["Enrolment No."]}</td>
-										<td>{data.Name}</td>
+								{sub.map((data) => (
+									<tr key={data["Course Code"]} className="table-row-hover">
+										<td>{data["Course Code"]}</td>
+										<td>{data.Subject}</td>
 									</tr>
 								))}
 							</tbody>
@@ -142,4 +139,4 @@ const ManageStudents = () => {
 	);
 };
 
-export default ManageStudents;
+export default ManageMarks;

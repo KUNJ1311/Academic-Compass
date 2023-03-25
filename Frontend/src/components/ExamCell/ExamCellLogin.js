@@ -1,15 +1,17 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { useEffect } from "react";
 import logo from "../img/iuLogo2.jpeg";
 import logo2 from "../img/iuback.jpeg";
 import { Link, useNavigate } from "react-router-dom";
-const ExamCellLogin = (props) => {
+import { AlertContext } from "../context/AlertContext";
+const ExamCellLogin = () => {
+	const { showAlert } = useContext(AlertContext);
 	const host = process.env.REACT_APP_HOST;
 	const [credentials, setCredentials] = useState({ email: "", password: "" });
 	let navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const response = await fetch(`${host}/api/auth-examcell/login`, {
+		const response = await fetch(`${host}/api/auth/examcell/login`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -19,10 +21,10 @@ const ExamCellLogin = (props) => {
 		const json = await response.json();
 		if (json.success) {
 			localStorage.setItem("token", json.authtoken);
-			props.showAlert("Logged in Successfully", "success");
+			showAlert("Logged in Successfully", "success");
 			navigate("/managemarks");
 		} else {
-			props.showAlert("Invalid Details", "danger");
+			showAlert("Invalid Details", "danger");
 		}
 	};
 	useEffect(() => {
