@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ExamCellSideBar from "../ExamCellSideBar";
 import Button from "react-bootstrap/Button";
 import MainNavbarExam from "../MainNavbarExam";
@@ -9,11 +9,12 @@ import Table from "react-bootstrap/Table";
 import add from "../svg/adds.svg";
 import excel from "../svg/excel.svg";
 import setting from "../svg/settings.svg";
-
+import { SubjectsContext } from "../../context/SubjectsContext";
 import AddStudentsExcel from "./AddStudentsExcel";
 import AddStudentsModal from "./AddStudentsModal";
 
 const ManageStudents = () => {
+	const { school, branch, course, year, handleYearChange, handleSchoolChange, handleBranchChange, handleCourseChange, yearOptionsList, schoolOptionsList, branchOptionsList, courseOptionsList } = useContext(SubjectsContext);
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
 	const stu = [
@@ -66,49 +67,36 @@ const ManageStudents = () => {
 							<Col sm={3}>
 								<Form.Group>
 									<Form.Label>&nbsp;Academic Year</Form.Label>
-									<Form.Select id="year" defaultValue="">
-										<option disabled value="">
-											Select Academic Year
-										</option>
-										<option value="1">2021-2022</option>
-										<option value="2">2022-2023</option>
+									<Form.Select id="year" value={year} onChange={handleYearChange} required>
+										<option>Select Academic Year</option>
+										{yearOptionsList}
 									</Form.Select>
 								</Form.Group>
 							</Col>
 							<Col sm={3}>
 								<Form.Group>
 									<Form.Label>&nbsp;School</Form.Label>
-									<Form.Select id="school" defaultValue="">
-										<option disabled value="">
-											Select School
-										</option>
-										<option value="1">School of Engineering</option>
-										<option value="2">School of Science</option>
+									<Form.Select id="school" value={school} onChange={handleSchoolChange} required>
+										<option>Select School</option>
+										{schoolOptionsList}
 									</Form.Select>
 								</Form.Group>
 							</Col>
 							<Col sm={2}>
 								<Form.Group>
 									<Form.Label>&nbsp;Branch</Form.Label>
-									<Form.Select id="branch" defaultValue="">
-										<option disabled value="">
-											Select Branch
-										</option>
-										<option value="1">B.Tech</option>
-										<option value="2">M.Tech</option>
+									<Form.Select id="branch" value={branch} onChange={handleBranchChange} required>
+										<option>Select Branch</option>
+										{branchOptionsList}
 									</Form.Select>
 								</Form.Group>
 							</Col>
 							<Col>
 								<Form.Group>
 									<Form.Label>&nbsp;Course</Form.Label>
-									<Form.Select id="course" defaultValue="">
-										<option disabled value="">
-											Select Course
-										</option>
-										<option value="1">Computer Science & Engineering</option>
-										<option value="2">Electronics & Communication Engineering</option>
-										<option value="3">Mechanical Engineering</option>
+									<Form.Select id="course" value={course} onChange={handleCourseChange} required>
+										<option>Select Course</option>
+										{courseOptionsList}
 									</Form.Select>
 								</Form.Group>
 							</Col>

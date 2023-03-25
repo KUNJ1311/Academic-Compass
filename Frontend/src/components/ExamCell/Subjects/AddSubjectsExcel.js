@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Modal, Form, Row, Col } from "react-bootstrap";
+import { Modal, Form, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import { SubjectsContext } from "../../context/SubjectsContext";
@@ -135,12 +135,12 @@ const AddSubjectsModal = (props) => {
 					) : (
 						""
 					)}
-					<button className="btn btn-primary btn-md" type="submit">
-						Add
-					</button>
-					<button className="btn btn-danger btn-md" onClick={props.onHide}>
+					<Button variant="danger" onClick={props.onHide}>
 						Close
-					</button>
+					</Button>
+					<Button type="submit" variant="success">
+						Add Data
+					</Button>
 				</Modal.Footer>
 			</Form>
 		</Modal>

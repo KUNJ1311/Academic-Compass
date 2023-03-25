@@ -6,6 +6,17 @@ const SubjectsProvider = (props) => {
 	const [school, setSchool] = useState("");
 	const [branch, setBranch] = useState("");
 	const [course, setCourse] = useState("");
+	const currentYear = new Date().getFullYear();
+	const [year, setYear] = useState(currentYear);
+	const startYear = 2018;
+	const yearOptions = [];
+	for (let getyear = startYear; getyear <= currentYear; getyear++) {
+		const academicYear = `${getyear}-${getyear + 1}`;
+		yearOptions.push(academicYear);
+	}
+	const handleYearChange = (event) => {
+		setYear(event.target.value);
+	};
 	// Define objects to hold dropdown options for each school and branch
 	const schoolOptions = {
 		"School of Engineering": ["B.Tech"],
@@ -40,6 +51,8 @@ const SubjectsProvider = (props) => {
 		const courseName = event.target.value;
 		setCourse(courseName);
 	};
+	// Map the year options to a list of <option> elements
+	const yearOptionsList = yearOptions.map((year) => <option key={year}>{year}</option>);
 
 	// Map the school options to a list of <option> elements
 	const schoolOptionsList = Object.keys(schoolOptions).map((school) => <option key={school}>{school}</option>);
@@ -53,9 +66,12 @@ const SubjectsProvider = (props) => {
 		school,
 		branch,
 		course,
+		year,
 		handleSchoolChange,
 		handleBranchChange,
 		handleCourseChange,
+		handleYearChange,
+		yearOptionsList,
 		schoolOptionsList,
 		branchOptionsList,
 		courseOptionsList,

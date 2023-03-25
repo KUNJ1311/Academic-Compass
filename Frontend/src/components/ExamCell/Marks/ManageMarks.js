@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { SubjectsContext } from "../../context/SubjectsContext";
 import ExamCellSideBar from "../ExamCellSideBar";
 import Button from "react-bootstrap/Button";
 import MainNavbarExam from "../MainNavbarExam";
@@ -14,6 +15,8 @@ import setting from "../svg/settings.svg";
 import UpdateMarksModel from "./UpdateMarksModel";
 
 const ManageMarks = () => {
+	const { school, branch, course, year, handleYearChange, handleSchoolChange, handleBranchChange, handleCourseChange, yearOptionsList, schoolOptionsList, branchOptionsList, courseOptionsList } = useContext(SubjectsContext);
+
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
 	const [selectedStudent, setSelectedStudent] = useState(null);
@@ -96,6 +99,44 @@ const ManageMarks = () => {
 					<hr className="my-2" style={{ border: "1px solid black" }} />
 					<div style={{ backgroundColor: "white", position: "sticky", top: "0", zIndex: "999" }}>
 						<Row className="d-flex mb-3">
+							<Col>
+								<Form.Group>
+									<Form.Label>&nbsp;Academic Year</Form.Label>
+									<Form.Select id="year" value={year} onChange={handleYearChange} required>
+										<option>Select Academic Year</option>
+										{yearOptionsList}
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={3}>
+								<Form.Group>
+									<Form.Label>&nbsp;School</Form.Label>
+									<Form.Select id="school" value={school} onChange={handleSchoolChange} required>
+										<option>Select School</option>
+										{schoolOptionsList}
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={2}>
+								<Form.Group>
+									<Form.Label>&nbsp;Branch</Form.Label>
+									<Form.Select id="branch" value={branch} onChange={handleBranchChange} required>
+										<option>Select Branch</option>
+										{branchOptionsList}
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={4}>
+								<Form.Group>
+									<Form.Label>&nbsp;Course</Form.Label>
+									<Form.Select id="course" value={course} onChange={handleCourseChange} required>
+										<option>Select Course</option>
+										{courseOptionsList}
+									</Form.Select>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Row className="d-flex mb-3">
 							<Col sm={2}>
 								<Form.Group>
 									<Form.Label>&nbsp;Test</Form.Label>
@@ -109,20 +150,7 @@ const ManageMarks = () => {
 									</Form.Select>
 								</Form.Group>
 							</Col>
-							<Col>
-								<Form.Group>
-									<Form.Label>&nbsp;Branch</Form.Label>
-									<Form.Select defaultValue="">
-										<option disabled value="">
-											Select Branch
-										</option>
-										<option value="1">Computer Science & Engineering</option>
-										<option value="2">Electronics & Communication Engineering</option>
-										<option value="3">Mechanical Engineering</option>
-									</Form.Select>
-								</Form.Group>
-							</Col>
-							<Col sm={2}>
+							<Col sm={3}>
 								<Form.Group>
 									<Form.Label>&nbsp;Semester</Form.Label>
 									<Form.Select value={selectedSemester} onChange={(e) => setSelectedSemester(e.target.value)}>
