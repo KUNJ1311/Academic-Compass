@@ -47,10 +47,7 @@ const ManageStudents = () => {
 						</div>
 						<span className="mx-auto">
 							<h3 className="mb-0">
-								<img className="mx-1" src={setting} alt="" />
-								<strong className="mx-1" style={{ position: "relative", top: "2px" }}>
-									Manage Students
-								</strong>
+								<strong style={{ position: "relative", top: "2px", color: "rgb(60 60 179)" }}>Manage Students</strong>
 							</h3>
 						</span>
 						<div className="ml-auto">

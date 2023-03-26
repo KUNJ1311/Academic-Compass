@@ -52,28 +52,48 @@
 }
 .main-content-table {
 	box-sizing: border-box;
-	height: calc(100vh - 180px - 59px);
+	height: calc(100vh - 180px - 58px);
 	width: calc(100vw - 279px);
 	overflow: auto;
 	padding-right: 8px;
 	white-space: nowrap;
 }
-.col-sticky {
-	position: sticky;
-	top: -1px;
+.main-content-table.for-marks {
+	box-sizing: border-box;
+	height: calc(100vh - 203px - 78px - 43px);
+	width: calc(100vw - 280px);
+	overflow: auto;
+	padding-right: 8px;
+	white-space: nowrap;
 }
+
 .table-my {
-	border-collapse: collapse;
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.table-my th {
+	border-top: 1px solid #b3bac2;
+	border-bottom: 1px solid #b3bac2;
+	border-right: 1px solid #b3bac2;
+}
+
+.table-my td {
+	border-bottom: 1px solid #b3bac2;
+	border-right: 1px solid #b3bac2;
+}
+
+.table-my th:first-child,
+.table-my td:first-child {
+	border-left: 1px solid #b3bac2;
 }
 
 .table-my thead th {
-	position: -webkit-sticky;
 	position: sticky;
-	top: 1px;
-	z-index: 2;
-	box-shadow: inset -1px 0px 1px rgb(121, 121, 121), inset 0px -1px 1px rgb(121, 121, 121), inset 1px 0 1px rgb(121, 121, 121), inset 0px 1px 1px rgb(121, 121, 121);
-	border-top: 1px solid transparent;
+	top: 0;
 }
+
 .table-my td {
 	cursor: pointer;
 }
@@ -84,6 +104,23 @@
 .btn-my:hover {
 	background-color: #33336b;
 	border: #33336b;
+}
+.form-nonselect {
+	display: block;
+	width: 100%;
+	padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+	-moz-padding-start: calc(0.75rem - 3px);
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	background-color: #fff;
+	border: 1px solid #ced4da;
+	border-radius: 0.375rem;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+#course-code {
+	padding: 0.375rem 0.75rem 0.375rem 0.75rem;
 }
 .main-content-table::-webkit-scrollbar {
 	height: 12px;

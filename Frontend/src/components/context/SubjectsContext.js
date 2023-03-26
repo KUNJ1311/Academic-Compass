@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 const SubjectsContext = createContext();
 
@@ -8,6 +8,9 @@ const SubjectsProvider = (props) => {
 	const [branch, setBranch] = useState("");
 	const [course, setCourse] = useState("");
 	const [semester, setSemester] = useState("");
+	const [courseCodes, setCourseCodes] = useState({});
+	const [subjects, setSubjects] = useState({});
+
 	const currentYear = new Date().getFullYear();
 	const [year, setYear] = useState(currentYear);
 	const startYear = 2018;
@@ -50,8 +53,21 @@ const SubjectsProvider = (props) => {
 
 	// Handle changes to the course dropdown
 	const handleCourseChange = (event) => {
-		const courseName = event.target.value;
-		setCourse(courseName);
+		try {
+			const courseName = event.target.value;
+			if (courseName) {
+				setCourse(courseName);
+				setSemester("");
+				setSubjects({});
+				courseCodeRef.current.value = "Select Subject First";
+				getSubjects(courseName, "");
+			}
+		} catch (error) {
+			return {
+				success: false,
+				error: error.message,
+			};
+		}
 	};
 	// Map the year options to a list of <option> elements
 	const yearOptionsList = yearOptions.map((year) => <option key={year}>{year}</option>);
@@ -64,10 +80,21 @@ const SubjectsProvider = (props) => {
 
 	// Map the course options for the selected branch to a list of <option> elements
 	const courseOptionsList = branch && branchOptions[branch] ? branchOptions[branch].map((course) => <option key={course}>{course}</option>) : "";
+
 	const handleSemesterChange = (event) => {
-		const newSemester = event.target.value;
-		setSemester(newSemester);
-		getSubjects(newSemester);
+		const newSemester = event?.target?.value;
+		if (newSemester) {
+			setSemester(newSemester);
+			setSubjects({});
+			courseCodeRef.current.value = "Select Subject First";
+			getSubjects(newSemester);
+		}
+	};
+	const courseCodeRef = useRef(null);
+	const handleSubjectChange = (event) => {
+		const subjectId = event.target.value;
+		const courseCode = courseCodes[subjectId];
+		courseCodeRef.current.value = courseCode;
 	};
 	const getSubjects = async (semester) => {
 		const formData = new FormData();
@@ -80,12 +107,11 @@ const SubjectsProvider = (props) => {
 				"auth-token": localStorage.getItem("token"),
 			};
 			const response = await axios.post(`${host}/api/get/subjects`, formData, { headers });
-			console.log(response.data.subjects, response.data.courseCodes);
 			if (response.data.success) {
+				setCourseCodes(response.data.courseCodes);
+				setSubjects(response.data.subjects);
 				return {
 					success: true,
-					subjects: response.data.subjects,
-					courseCodes: response.data.courseCodes,
 				};
 			} else {
 				throw new Error(response.data.msg);
@@ -97,17 +123,32 @@ const SubjectsProvider = (props) => {
 			};
 		}
 	};
+	const subjectRef = useRef(null);
+	useEffect(() => {
+		const subjectSelect = subjectRef.current;
+		if (subjectSelect) {
+			const selectedSubjectId = subjectSelect.value;
+			const courseCodeInput = document.getElementById("course-code");
+			const courseCode = courseCodes[selectedSubjectId];
+			courseCodeInput.value = courseCode;
+		}
+	}, [courseCodes]);
 	const contextValue = {
 		school,
 		branch,
 		course,
 		year,
 		semester,
+		courseCodes,
+		subjects,
+		courseCodeRef,
+		setCourse,
 		handleSchoolChange,
 		handleBranchChange,
 		handleCourseChange,
 		handleYearChange,
 		handleSemesterChange,
+		handleSubjectChange,
 		yearOptionsList,
 		schoolOptionsList,
 		branchOptionsList,

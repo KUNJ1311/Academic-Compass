@@ -15,15 +15,13 @@ import setting from "../svg/settings.svg";
 import UpdateMarksModel from "./UpdateMarksModel";
 
 const ManageMarks = () => {
-	const { school, branch, course, year, handleYearChange, handleSchoolChange, handleBranchChange, handleCourseChange, yearOptionsList, schoolOptionsList, branchOptionsList, courseOptionsList } = useContext(SubjectsContext);
+	const { school, branch, course, year, semester, courseCodeRef, subjects, handleSchoolChange, handleBranchChange, handleCourseChange, handleYearChange, handleSubjectChange, schoolOptionsList, yearOptionsList, branchOptionsList, courseOptionsList, handleSemesterChange } = useContext(SubjectsContext);
 
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
 	const [selectedStudent, setSelectedStudent] = useState(null);
 	const [showUpdateModal, setShowUpdateModal] = useState(false);
-	const [selectedSemester, setSelectedSemester] = useState("");
-	const [selectedSubject, setSelectedSubject] = useState("");
-	const [selectedTest, setSelectedTest] = useState("");
+
 	const stu = [
 		{
 			"Enrolment No.": "210110101016",
@@ -82,10 +80,7 @@ const ManageMarks = () => {
 						</div>
 						<span className="mx-auto">
 							<h3 className="mb-0">
-								<img className="mx-1" src={setting} alt="" />
-								<strong className="mx-1" style={{ position: "relative", top: "2px" }}>
-									Manage Marks
-								</strong>
+								<strong style={{ position: "relative", top: "2px", color: "rgb(60 60 179)" }}>Manage Marks</strong>
 							</h3>
 						</span>
 						<div className="ml-auto">
@@ -137,53 +132,57 @@ const ManageMarks = () => {
 							</Col>
 						</Row>
 						<Row className="d-flex mb-3">
-							<Col sm={2}>
-								<Form.Group>
-									<Form.Label>&nbsp;Test</Form.Label>
-									<Form.Select value={selectedTest} onChange={(e) => setSelectedTest(e.target.value)}>
-										<option disabled value="">
-											Select Test
-										</option>
-										<option value="1">First Test</option>
-										<option value="2">Second Test</option>
-										<option value="3">Final Test</option>
-									</Form.Select>
-								</Form.Group>
-							</Col>
 							<Col sm={3}>
 								<Form.Group>
 									<Form.Label>&nbsp;Semester</Form.Label>
-									<Form.Select value={selectedSemester} onChange={(e) => setSelectedSemester(e.target.value)}>
-										<option disabled value="">
-											Select Semester
-										</option>
-										<option value="1">1st Semester</option>
-										<option value="2">2nd Semester</option>
-										<option value="3">3rd Semester</option>
-										<option value="4">4th Semester</option>
-										<option value="5">5th Semester</option>
-										<option value="6">6th Semester</option>
-										<option value="7">7th Semester</option>
-										<option value="8">8th Semester</option>
+									<Form.Select id="semester" value={semester} onChange={handleSemesterChange} required>
+										<option value="">Select Semester</option>
+										<option value="sem1">1st Semester</option>
+										<option value="sem2">2nd Semester</option>
+										<option value="sem3">3rd Semester</option>
+										<option value="sem4">4th Semester</option>
+										<option value="sem5">5th Semester</option>
+										<option value="sem6">6th Semester</option>
+										<option value="sem7">7th Semester</option>
+										<option value="sem8">8th Semester</option>
+									</Form.Select>
+								</Form.Group>
+							</Col>
+							<Col sm={5}>
+								<Form.Group>
+									<Form.Label>&nbsp;Subject</Form.Label>
+									<Form.Select id="subject" defaultValue="" onChange={handleSubjectChange} required>
+										<option value="">Select Subject</option>
+										{Object.keys(subjects).map((subjectId) => (
+											<option key={subjectId} value={subjectId}>
+												{subjects[subjectId]}
+											</option>
+										))}
 									</Form.Select>
 								</Form.Group>
 							</Col>
 							<Col>
 								<Form.Group>
-									<Form.Label>&nbsp;Subject</Form.Label>
-									<Form.Select value={selectedSubject} onChange={(e) => setSelectedSubject(e.target.value)}>
+									<Form.Label>&nbsp;Course Code</Form.Label>
+									<Form.Control className="form-nonselect" plaintext readOnly defaultValue={"Select Subject First"} id="course-code" ref={courseCodeRef} />
+								</Form.Group>
+							</Col>
+							<Col sm={2}>
+								<Form.Group>
+									<Form.Label>&nbsp;Test</Form.Label>
+									<Form.Select id="test" defaultValue="">
 										<option disabled value="">
-											Select Subject
+											Select Test
 										</option>
-										<option value="1">Mathematics</option>
-										<option value="2">Physics</option>
-										<option value="3">Chemistry</option>
+										<option value="testfirst">First Test</option>
+										<option value="testsecond">Second Test</option>
+										<option value="testfinal">Final Test</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
 						</Row>
 					</div>
-					<div className="main-content-table">
+					<div className="main-content-table for-marks">
 						<Table bordered hover className="table-my mb-2">
 							<thead className="col-sticky" style={{ backgroundColor: "white" }}>
 								<tr className="col-sticky" style={{ backgroundColor: "white" }}>
@@ -216,7 +215,7 @@ const ManageMarks = () => {
 								))}
 							</tbody>
 						</Table>
-						{selectedStudent && <UpdateMarksModel show={showUpdateModal} onHide={() => setShowUpdateModal(false)} student={selectedStudent} semester={selectedSemester} subject={selectedSubject} test={selectedTest} />}
+						{selectedStudent && <UpdateMarksModel show={showUpdateModal} onHide={() => setShowUpdateModal(false)} student={selectedStudent} />}
 					</div>
 				</div>
 			</div>

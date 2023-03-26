@@ -107,11 +107,11 @@ Semesters.forEach((semester) => {
 Semesters.forEach((semester) => {
 	excelmarks.post(`/importexcel/sem${semester.number}/testsecond`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
+			const subject = req.body.subject;
+			const subjectCode = req.body.subjectCode;
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
 				const subjectMarks = [];
-				const subject = jsonArray[x].subject;
-				const subjectCode = jsonArray[x].course_code;
 				const marks = jsonArray[x].marks;
 				subjectMarks.push({ subject: subject, course_code: subjectCode, marks: marks });
 				const semesterData = {
@@ -143,13 +143,15 @@ Semesters.forEach((semester) => {
 								const updateQuery = {
 									$set: { [`testsecond.${existingCourseIndex}.marks`]: marks },
 								};
-								await semesterModel.updateOne(updateQuery);
+								const json = await semesterModel.updateOne(updateQuery);
+								console.log(json);
 							} else {
 								// Add new course code to testsecond array
 								const updateQuery = {
 									$push: { testsecond: { subject: subject, course_code: subjectCode, marks: marks } },
 								};
-								await semesterModel.updateOne(updateQuery);
+								const json = await semesterModel.updateOne(updateQuery);
+								console.log(json);
 							}
 						}
 					}
@@ -166,11 +168,11 @@ Semesters.forEach((semester) => {
 Semesters.forEach((semester) => {
 	excelmarks.post(`/importexcel/sem${semester.number}/testfinal`, fetchuser, upload.single("file"), async (req, res) => {
 		try {
+			const subject = req.body.subject;
+			const subjectCode = req.body.subjectCode;
 			const jsonArray = await csv().fromFile(req.file.path);
 			for (let x = 0; x < jsonArray.length; x++) {
 				const subjectMarks = [];
-				const subject = jsonArray[x].subject;
-				const subjectCode = jsonArray[x].course_code;
 				const marks = jsonArray[x].marks;
 				subjectMarks.push({ subject: subject, course_code: subjectCode, marks: marks });
 				const semesterData = {
@@ -202,13 +204,15 @@ Semesters.forEach((semester) => {
 								const updateQuery = {
 									$set: { [`testfinal.${existingCourseIndex}.marks`]: marks },
 								};
-								await semesterModel.updateOne(updateQuery);
+								const json = await semesterModel.updateOne(updateQuery);
+								console.log(json);
 							} else {
 								// Add new course code to testfinal array
 								const updateQuery = {
 									$push: { testfinal: { subject: subject, course_code: subjectCode, marks: marks } },
 								};
-								await semesterModel.updateOne(updateQuery);
+								const json = await semesterModel.updateOne(updateQuery);
+								console.log(json);
 							}
 						}
 					}

@@ -8,7 +8,7 @@ import axios from "axios";
 import { AlertContext } from "../../context/AlertContext";
 const AddMarksExcel = (props) => {
 	const { showAlert } = useContext(AlertContext);
-	const { school, branch, course, semester, handleSchoolChange, handleBranchChange, handleCourseChange, schoolOptionsList, branchOptionsList, courseOptionsList, handleSemesterChange } = useContext(SubjectsContext);
+	const { school, branch, course, semester, courseCodeRef, subjects, handleSchoolChange, handleBranchChange, handleCourseChange, handleSubjectChange, schoolOptionsList, branchOptionsList, courseOptionsList, handleSemesterChange } = useContext(SubjectsContext);
 	const [file, setFile] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [dots, setDots] = useState("");
@@ -19,7 +19,8 @@ const AddMarksExcel = (props) => {
 		e.preventDefault();
 		const formData = new FormData();
 		formData.append("file", file);
-		formData.append("subject", e.target.subject.options[e.target.subject.value].text);
+		formData.append("subject", subjects[e.target.subject.value]);
+		formData.append("subjectCode", courseCodeRef.current.value);
 		try {
 			const headers = {
 				"auth-token": localStorage.getItem("token"),
@@ -97,10 +98,8 @@ const AddMarksExcel = (props) => {
 							<Col sm={3}>
 								<Form.Group>
 									<Form.Label>&nbsp;Semester</Form.Label>
-									<Form.Select id="semester" defaultValue="" onChange={handleSemesterChange} required>
-										<option disabled value="">
-											Select Semester
-										</option>
+									<Form.Select id="semester" value={semester} onChange={handleSemesterChange} required>
+										<option value="">Select Semester</option>
 										<option value="sem1">1st Semester</option>
 										<option value="sem2">2nd Semester</option>
 										<option value="sem3">3rd Semester</option>
@@ -112,19 +111,27 @@ const AddMarksExcel = (props) => {
 									</Form.Select>
 								</Form.Group>
 							</Col>
-							<Col>
+							<Col sm={5}>
 								<Form.Group>
 									<Form.Label>&nbsp;Subject</Form.Label>
-									<Form.Select id="subject" defaultValue="">
-										<option disabled value="">
-											Select Subject
-										</option>
-										<option value="1">Maths</option>
-										<option value="2">Computer Network</option>
-										<option value="3">WT</option>
+									<Form.Select id="subject" defaultValue="" onChange={handleSubjectChange} required>
+										<option value="">Select Subject</option>
+										{Object.keys(subjects).map((subjectId) => (
+											<option key={subjectId} value={subjectId}>
+												{subjects[subjectId]}
+											</option>
+										))}
 									</Form.Select>
 								</Form.Group>
 							</Col>
+							<Col>
+								<Form.Group>
+									<Form.Label>&nbsp;Course Code</Form.Label>
+									<Form.Control className="form-nonselect" plaintext readOnly defaultValue={"Select Subject First"} id="course-code" ref={courseCodeRef} />
+								</Form.Group>
+							</Col>
+						</Row>
+						<Row>
 							<Col sm={3}>
 								<Form.Group>
 									<Form.Label>&nbsp;Test</Form.Label>
@@ -138,8 +145,6 @@ const AddMarksExcel = (props) => {
 									</Form.Select>
 								</Form.Group>
 							</Col>
-						</Row>
-						<Row>
 							<Col>
 								<Form.Group>
 									<Form.Label>&nbsp;Excel File</Form.Label>

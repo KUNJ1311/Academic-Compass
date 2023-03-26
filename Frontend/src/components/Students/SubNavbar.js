@@ -45,8 +45,7 @@ function SubNavbar() {
 			<div className="content">
 				<div className="subnav-sticky">
 					<Tabs defaultActiveKey="attendance" id="uncontrolled-tab-example" className="bg-subnav" style={{ overflow: "hidden" }}>
-						<Nav.Item className="ml-auto"></Nav.Item>
-						<Tab eventKey="attendance" title="Attendance">
+						<Tab className="tab-subnav" eventKey="attendance" title="Attendance">
 							{!data || !data.attendance ? (
 								<div className="box-table height-max">
 									<Table bordered hover>

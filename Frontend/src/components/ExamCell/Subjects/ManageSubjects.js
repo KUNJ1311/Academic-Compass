@@ -47,10 +47,7 @@ const ManageMarks = () => {
 						</div>
 						<span className="mx-auto">
 							<h3 className="mb-0">
-								<img className="mx-1" src={setting} alt="" />
-								<strong className="mx-1" style={{ position: "relative", top: "2px" }}>
-									Manage Subjects
-								</strong>
+								<strong style={{ position: "relative", top: "2px", color: "rgb(60 60 179)" }}>Manage Subjects</strong>
 							</h3>
 						</span>
 						<div className="ml-auto">
@@ -114,13 +111,9 @@ const ManageMarks = () => {
 					<div className="main-content-table">
 						<Table bordered hover className="table-my mb-2">
 							<thead className="col-sticky" style={{ backgroundColor: "white" }}>
-								<tr className="col-sticky" style={{ backgroundColor: "white" }}>
-									<th className="col-sticky" style={{ backgroundColor: "white" }}>
-										Course Code
-									</th>
-									<th className="col-sticky" style={{ backgroundColor: "white" }}>
-										Subject
-									</th>
+								<tr style={{ backgroundColor: "white" }}>
+									<th style={{ backgroundColor: "white" }}>Course Code</th>
+									<th style={{ backgroundColor: "white" }}>Subject</th>
 								</tr>
 							</thead>
 							<tbody>

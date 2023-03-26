@@ -7,7 +7,7 @@ import axios from "axios";
 import { SubjectsContext } from "../../context/SubjectsContext";
 import { AlertContext } from "../../context/AlertContext";
 const AddStudentsExcel = (props) => {
-	const { school, branch, course, year, handleYearChange, handleSchoolChange, handleBranchChange, handleCourseChange, yearOptionsList, schoolOptionsList, branchOptionsList, courseOptionsList } = useContext(SubjectsContext);
+	const { school, branch, course, year, handleYearChange, handleSchoolChange, setCourse, handleBranchChange, handleCourseChange, yearOptionsList, schoolOptionsList, branchOptionsList, courseOptionsList } = useContext(SubjectsContext);
 	const { showAlert } = useContext(AlertContext);
 	const [file, setFile] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -99,7 +99,14 @@ const AddStudentsExcel = (props) => {
 							<Col>
 								<Form.Group>
 									<Form.Label>&nbsp;Course</Form.Label>
-									<Form.Select id="course" value={course} onChange={handleCourseChange} required>
+									<Form.Select
+										id="course"
+										value={course}
+										onChange={(e) => {
+											setCourse(e.target.value);
+										}}
+										required
+									>
 										<option>Select Course</option>
 										{courseOptionsList}
 									</Form.Select>

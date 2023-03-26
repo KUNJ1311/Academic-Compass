@@ -80,16 +80,18 @@ addgetsubjects.post(`/get/subjects`, fetchuser, upload.single("file"), async (re
 			branch,
 			course,
 		};
-		console.log(branch, course, school, semester);
 		let schoolDoc = await School.findOne(query);
-		console.log(schoolDoc);
-		const semCourses = schoolDoc.semesters[semester];
-		if (semCourses.length > 0) {
-			const subjects = semCourses.map((course) => course.subject);
-			const courseCodes = semCourses.map((course) => course.courseCode);
-			res.send({ status: 200, success: true, subjects, courseCodes });
+		if (schoolDoc) {
+			const semCourses = schoolDoc.semesters[semester];
+			if (semCourses && semCourses.length > 0) {
+				const subjects = semCourses.map((course) => course.subject);
+				const courseCodes = semCourses.map((course) => course.courseCode);
+				res.send({ status: 200, success: true, subjects, courseCodes });
+			} else {
+				res.send({ status: 400, success: false, msg: "No courses found for this semester." });
+			}
 		} else {
-			res.send({ status: 400, success: false, msg: error.message });
+			res.send({ status: 400, success: false, msg: "School not found." });
 		}
 	} catch (error) {
 		res.send({ status: 400, success: false, msg: error.message });
