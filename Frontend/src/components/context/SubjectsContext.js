@@ -15,7 +15,7 @@ const SubjectsProvider = (props) => {
 	const [year, setYear] = useState(currentYear);
 	const startYear = 2018;
 	const yearOptions = [];
-	for (let getyear = startYear; getyear <= currentYear; getyear++) {
+	for (let getyear = currentYear; getyear >= startYear; getyear--) {
 		const academicYear = `${getyear}-${getyear + 1}`;
 		yearOptions.push(academicYear);
 	}

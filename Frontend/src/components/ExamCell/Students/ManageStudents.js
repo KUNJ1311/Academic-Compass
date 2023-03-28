@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ExamCellSideBar from "../ExamCellSideBar";
 import Button from "react-bootstrap/Button";
 import MainNavbarExam from "../MainNavbarExam";
@@ -12,17 +12,38 @@ import setting from "../svg/settings.svg";
 import { SubjectsContext } from "../../context/SubjectsContext";
 import AddStudentsExcel from "./AddStudentsExcel";
 import AddStudentsModal from "./AddStudentsModal";
-
+import axios from "axios";
 const ManageStudents = () => {
 	const { school, branch, course, year, handleYearChange, handleSchoolChange, handleBranchChange, handleCourseChange, yearOptionsList, schoolOptionsList, branchOptionsList, courseOptionsList } = useContext(SubjectsContext);
+	const [stu, setStu] = useState([]);
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
-	const stu = [
-		{
-			"Enrolment No.": "210110101016",
-			Name: "Kunj Faladu Sureshbhai",
-		},
-	];
+	useEffect(() => {
+		const host = process.env.REACT_APP_HOST;
+		const headers = {
+			"auth-token": localStorage.getItem("token"),
+		};
+		// Make API call when all dropdowns have values
+		if (year && school && branch && course) {
+			axios
+				.post(
+					`${host}/fetch/students/data`,
+					{
+						year: year,
+						school: school,
+						branch: branch,
+						course: course,
+					},
+					{ headers }
+				)
+				.then((response) => {
+					setStu(response.data.data);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		}
+	}, [year, school, branch, course]);
 
 	let navigate = useNavigate();
 	function handleLogout(e) {
@@ -113,9 +134,9 @@ const ManageStudents = () => {
 							</thead>
 							<tbody>
 								{stu.map((data) => (
-									<tr key={data["Enrolment No."]} className="table-row-hover">
-										<td>{data["Enrolment No."]}</td>
-										<td>{data.Name}</td>
+									<tr key={data.enrolment} className="table-row-hover">
+										<td>{data.enrolment}</td>
+										<td>{data.name}</td>
 									</tr>
 								))}
 							</tbody>

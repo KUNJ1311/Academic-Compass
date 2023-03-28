@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../img/IuLogo.png";
-import noimg from "../img/noimg.webp";
+import noimg from "../img/noimg.svg";
 import Button from "react-bootstrap/Button";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -10,7 +10,6 @@ import LoadingBar from "react-top-loading-bar";
 import axios from "axios";
 function MainNavbar(props) {
 	const [progress, setProgress] = useState(0);
-	// const [alert, setAlert] = useState(null);
 	const [modalShow, setModalShow] = useState(false);
 
 	const host = process.env.REACT_APP_HOST;
