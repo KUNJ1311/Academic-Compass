@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import Attendance from "./Attendance";
 import TestFirst from "./TestFirst";
 import TestSecond from "./TestSecond";
@@ -6,9 +6,6 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import TestFinal from "./TestFinal";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
-import { useEffect } from "react";
-import Nav from "react-bootstrap/Nav";
 import LoadingBar from "react-top-loading-bar";
 import Table from "react-bootstrap/Table";
 

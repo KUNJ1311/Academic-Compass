@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import ExamCellSideBar from "../ExamCellSideBar";
 import Button from "react-bootstrap/Button";
 import MainNavbarExam from "../MainNavbarExam";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { Row, Col } from "react-bootstrap";
 import Table from "react-bootstrap/Table";

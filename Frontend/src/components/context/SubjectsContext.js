@@ -22,7 +22,6 @@ const SubjectsProvider = (props) => {
 	const handleYearChange = (event) => {
 		setYear(event.target.value);
 	};
-	// Define objects to hold dropdown options for each school and branch
 	const schoolOptions = {
 		"School of Engineering": ["B.Tech"],
 		"School of Pharmacy": ["B.Pharm"],
@@ -69,16 +68,12 @@ const SubjectsProvider = (props) => {
 			};
 		}
 	};
-	// Map the year options to a list of <option> elements
 	const yearOptionsList = yearOptions.map((year) => <option key={year}>{year}</option>);
 
-	// Map the school options to a list of <option> elements
 	const schoolOptionsList = Object.keys(schoolOptions).map((school) => <option key={school}>{school}</option>);
 
-	// Map the branch options for the selected school to a list of <option> elements
 	const branchOptionsList = school && schoolOptions[school] ? schoolOptions[school].map((branch) => <option key={branch}>{branch}</option>) : "";
 
-	// Map the course options for the selected branch to a list of <option> elements
 	const courseOptionsList = branch && branchOptions[branch] ? branchOptions[branch].map((course) => <option key={course}>{course}</option>) : "";
 
 	const handleSemesterChange = (event) => {
