@@ -81,4 +81,17 @@ router.post("/login", [body("email", "Enter valid email").isEmail(), body("passw
 		res.status(500).send("Internal Server Error");
 	}
 });
+
+router.get("/check/token", (req, res) => {
+	const token = req.header("auth-token");
+	if (!token) {
+		return res.status(401).json({ valid: false });
+	}
+	try {
+		jwt.verify(token, JWT_SECRET);
+		res.json({ valid: true });
+	} catch (error) {
+		res.status(401).json({ valid: false });
+	}
+});
 module.exports = router;

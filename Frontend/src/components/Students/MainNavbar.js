@@ -43,9 +43,9 @@ function MainNavbar(props) {
 				<Navbar variant="dark">
 					<button onClick={handleMenuclick} className="mx-2 menu-btn">
 						<div style={{ width: "24px", height: "18px", position: "relative", transform: "rotate(0deg)" }}>
-							<span style={{ display: "block", height: "2px", width: "100%", background: "white", transitionTimingFunction: "ease", transitionDuration: "0.5s", borderRadius: "0px", transformOrigin: "center center", position: "absolute", transform: !visible ? "translate3d(0px, 0px, 0px) rotate(0deg)" : "translate3d(0px, 9px, 0px) rotate(45deg)", marginTop: "-1px" }}></span>
-							<span style={{ display: "block", height: "2px", width: "100%", background: "white", transitionTimingFunction: "ease-out", transitionDuration: "0.125s", borderRadius: "0px", transformOrigin: "center center", position: "absolute", opacity: !visible ? 1 : 0, top: "9px", marginTop: "-1px" }}></span>
-							<span style={{ display: "block", height: "2px", width: "100%", background: "white", transitionTimingFunction: "ease", transitionDuration: "0.5s", borderRadius: "0px", transformOrigin: "center center", position: "absolute", transform: !visible ? "translate3d(0px, 18px, 0px) rotate(0deg)" : "translate3d(0px, 9px, 0px) rotate(-45deg)", marginTop: "-1px" }}></span>
+							<span style={{ display: "block", height: "2px", width: "100%", background: "white", transitionTimingFunction: "ease", transitionDuration: "0.3s", borderRadius: "1px", transformOrigin: "center center", position: "absolute", transform: !visible ? "translate3d(0px, 0px, 0px) rotate(0deg)" : "translate3d(0px, 9px, 0px) rotate(45deg)", marginTop: "-1px" }}></span>
+							<span style={{ display: "block", height: "2px", width: "100%", background: "white", transitionTimingFunction: "ease", transitionDuration: "0.2s", borderRadius: "1px", transformOrigin: "center center", position: "absolute", left: visible ? "-80px" : "0px", marginTop: "8px" }}></span>
+							<span style={{ display: "block", height: "2px", width: "100%", background: "white", transitionTimingFunction: "ease", transitionDuration: "0.3s", borderRadius: "1px", transformOrigin: "center center", position: "absolute", transform: !visible ? "translate3d(0px, 18px, 0px) rotate(0deg)" : "translate3d(0px, 9px, 0px) rotate(-45deg)", marginTop: "-1px" }}></span>
 						</div>
 					</button>
 					<Navbar.Brand>

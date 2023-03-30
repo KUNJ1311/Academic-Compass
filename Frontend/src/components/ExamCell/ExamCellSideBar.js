@@ -6,7 +6,7 @@ import marks from "./svg/marks.svg";
 import attendance from "./svg/attendance.svg";
 import book from "./svg/book.svg";
 import { useLocation } from "react-router-dom";
-
+import axios from "axios";
 const ExamCellSideBar = () => {
 	const location = useLocation();
 	const queryParams = new URLSearchParams(location.search);
@@ -33,12 +33,26 @@ const ExamCellSideBar = () => {
 		setHoveredIndex(null);
 	};
 	let navigate = useNavigate();
-
+	const host = process.env.REACT_APP_HOST;
 	useEffect(() => {
-		if (!localStorage.getItem("token")) {
-			navigate("/exam-cell-login");
-		}
-		//eslint-disable-next-line
+		const checkTokenValidity = async () => {
+			try {
+				const headers = {
+					"auth-token": localStorage.getItem("token"),
+				};
+				const response = await axios.get(`${host}/api/auth/examcell/check/token`, { headers });
+				if (response.data.valid) {
+					// User has a valid token, do nothing
+				} else {
+					// User does not have a valid token, navigate to login page
+					navigate("/exam-cell-login");
+				}
+			} catch (error) {
+				navigate("/exam-cell-login");
+			}
+		};
+
+		checkTokenValidity();
 	}, []);
 	return (
 		<div className="examcellsidebar">
