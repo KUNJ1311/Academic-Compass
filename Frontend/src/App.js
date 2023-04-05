@@ -1,8 +1,6 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Students/Home";
 import StudentLogin from "./components/Students/StudentLogin";
-import "./components/login.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
 import AdminHome from "./components/Admin/AdminHome";
 import SuperAdminHome from "./components/SuperAdmin/SuperAdminHome";
 import AdminLogin from "./components/Admin/AdminLogin";
@@ -13,6 +11,7 @@ import ManageSubjects from "./components/ExamCell/Subjects/ManageSubjects";
 import ManageAttendance from "./components/ExamCell/ManageAttendance";
 import ManageMarks from "./components/ExamCell/Marks/ManageMarks";
 import NotFound from "./components/NotFound/NotFound";
+import "./components/login.css";
 import "./components/ExamCell/ExamCell.css";
 import "./components/Students/Students.css";
 import { SubjectsProvider } from "./components/context/SubjectsContext";

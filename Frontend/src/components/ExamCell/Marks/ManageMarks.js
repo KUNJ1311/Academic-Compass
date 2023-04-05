@@ -11,11 +11,10 @@ import AddMarksModal from "./AddMarksModal";
 import add from "../svg/adds.svg";
 import excel from "../svg/excel.svg";
 import AddMarksExcel from "./AddMarksExcel";
-import setting from "../svg/settings.svg";
 import UpdateMarksModel from "./UpdateMarksModel";
 
 const ManageMarks = () => {
-	const { school, branch, course, year, semester, courseCodeRef, subjects, handleSchoolChange, handleBranchChange, handleCourseChange, handleYearChange, handleSubjectChange, schoolOptionsList, yearOptionsList, branchOptionsList, courseOptionsList, handleSemesterChange } = useContext(SubjectsContext);
+	const { school, branch, course, year, semester, courseCodeRef, subjects, selsubject, test, selcourse, handleSchoolChange, handleBranchChange, handleCourseChange, handleYearChange, handleSubjectChange, schoolOptionsList, yearOptionsList, branchOptionsList, courseOptionsList, handleSemesterChange, handleTestChange } = useContext(SubjectsContext);
 
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
@@ -137,21 +136,21 @@ const ManageMarks = () => {
 									<Form.Label>&nbsp;Semester</Form.Label>
 									<Form.Select id="semester" value={semester} onChange={handleSemesterChange} required>
 										<option value="">Select Semester</option>
-										<option value="sem1">1st Semester</option>
-										<option value="sem2">2nd Semester</option>
-										<option value="sem3">3rd Semester</option>
-										<option value="sem4">4th Semester</option>
-										<option value="sem5">5th Semester</option>
-										<option value="sem6">6th Semester</option>
-										<option value="sem7">7th Semester</option>
-										<option value="sem8">8th Semester</option>
+										<option value="Sem1">1st Semester</option>
+										<option value="Sem2">2nd Semester</option>
+										<option value="Sem3">3rd Semester</option>
+										<option value="Sem4">4th Semester</option>
+										<option value="Sem5">5th Semester</option>
+										<option value="Sem6">6th Semester</option>
+										<option value="Sem7">7th Semester</option>
+										<option value="Sem8">8th Semester</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
 							<Col sm={5}>
 								<Form.Group>
 									<Form.Label>&nbsp;Subject</Form.Label>
-									<Form.Select id="subject" defaultValue="" onChange={handleSubjectChange} required>
+									<Form.Select id="subject" value={selsubject} onChange={handleSubjectChange} required>
 										<option value="">Select Subject</option>
 										{Object.keys(subjects).map((subjectId) => (
 											<option key={subjectId} value={subjectId}>
@@ -164,16 +163,14 @@ const ManageMarks = () => {
 							<Col>
 								<Form.Group>
 									<Form.Label>&nbsp;Course Code</Form.Label>
-									<Form.Control className="form-nonselect" plaintext readOnly defaultValue={"Select Subject First"} id="course-code" ref={courseCodeRef} />
+									<Form.Control className="form-nonselect" plaintext readOnly id="course-code" value={selcourse ? selcourse : "Select Subject First"} ref={courseCodeRef} />
 								</Form.Group>
 							</Col>
 							<Col sm={2}>
 								<Form.Group>
 									<Form.Label>&nbsp;Test</Form.Label>
-									<Form.Select id="test" defaultValue="">
-										<option disabled value="">
-											Select Test
-										</option>
+									<Form.Select id="test" value={test} onChange={handleTestChange}>
+										<option value="">Select Test</option>
 										<option value="testfirst">First Test</option>
 										<option value="testsecond">Second Test</option>
 										<option value="testfinal">Final Test</option>

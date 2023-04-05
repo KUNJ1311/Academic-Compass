@@ -10,7 +10,9 @@ const SubjectsProvider = (props) => {
 	const [semester, setSemester] = useState("");
 	const [courseCodes, setCourseCodes] = useState({});
 	const [subjects, setSubjects] = useState({});
-
+	const [selsubject, setSelSubject] = useState("");
+	const [selcourse, setSelCourse] = useState("");
+	const [test, setTest] = useState("");
 	const currentYear = new Date().getFullYear();
 	const [year, setYear] = useState(currentYear);
 	const startYear = 2018;
@@ -88,8 +90,10 @@ const SubjectsProvider = (props) => {
 	const courseCodeRef = useRef(null);
 	const handleSubjectChange = (event) => {
 		const subjectId = event.target.value;
+		setSelSubject(subjectId);
 		const courseCode = courseCodes[subjectId];
 		courseCodeRef.current.value = courseCode;
+		setSelCourse(courseCode);
 	};
 	const getSubjects = async (semester) => {
 		const formData = new FormData();
@@ -118,6 +122,10 @@ const SubjectsProvider = (props) => {
 			};
 		}
 	};
+	const handleTestChange = (event) => {
+		const test = event.target.value;
+		setTest(test);
+	};
 	const subjectRef = useRef(null);
 	useEffect(() => {
 		const subjectSelect = subjectRef.current;
@@ -136,6 +144,9 @@ const SubjectsProvider = (props) => {
 		semester,
 		courseCodes,
 		subjects,
+		test,
+		selsubject,
+		selcourse,
 		courseCodeRef,
 		setCourse,
 		handleSchoolChange,
@@ -144,6 +155,7 @@ const SubjectsProvider = (props) => {
 		handleYearChange,
 		handleSemesterChange,
 		handleSubjectChange,
+		handleTestChange,
 		yearOptionsList,
 		schoolOptionsList,
 		branchOptionsList,

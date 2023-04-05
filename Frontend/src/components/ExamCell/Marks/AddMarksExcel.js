@@ -8,7 +8,7 @@ import axios from "axios";
 import { AlertContext } from "../../context/AlertContext";
 const AddMarksExcel = (props) => {
 	const { showAlert } = useContext(AlertContext);
-	const { school, branch, course, semester, courseCodeRef, subjects, handleSchoolChange, handleBranchChange, handleCourseChange, handleSubjectChange, schoolOptionsList, branchOptionsList, courseOptionsList, handleSemesterChange } = useContext(SubjectsContext);
+	const { school, branch, course, semester, courseCodeRef, subjects, test, selsubject, selcourse, handleTestChange, handleSchoolChange, handleBranchChange, handleCourseChange, handleSubjectChange, schoolOptionsList, branchOptionsList, courseOptionsList, handleSemesterChange } = useContext(SubjectsContext);
 	const [file, setFile] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [dots, setDots] = useState("");
@@ -114,7 +114,7 @@ const AddMarksExcel = (props) => {
 							<Col sm={5}>
 								<Form.Group>
 									<Form.Label>&nbsp;Subject</Form.Label>
-									<Form.Select id="subject" defaultValue="" onChange={handleSubjectChange} required>
+									<Form.Select id="subject" value={selsubject} onChange={handleSubjectChange} required>
 										<option value="">Select Subject</option>
 										{Object.keys(subjects).map((subjectId) => (
 											<option key={subjectId} value={subjectId}>
@@ -127,7 +127,7 @@ const AddMarksExcel = (props) => {
 							<Col>
 								<Form.Group>
 									<Form.Label>&nbsp;Course Code</Form.Label>
-									<Form.Control className="form-nonselect" plaintext readOnly defaultValue={"Select Subject First"} id="course-code" ref={courseCodeRef} />
+									<Form.Control className="form-nonselect" plaintext readOnly id="course-code" value={selcourse ? selcourse : "Select Subject First"} ref={courseCodeRef} />
 								</Form.Group>
 							</Col>
 						</Row>
@@ -135,10 +135,8 @@ const AddMarksExcel = (props) => {
 							<Col sm={3}>
 								<Form.Group>
 									<Form.Label>&nbsp;Test</Form.Label>
-									<Form.Select id="test" defaultValue="">
-										<option disabled value="">
-											Select Test
-										</option>
+									<Form.Select id="test" value={test} onChange={handleTestChange}>
+										<option value="">Select Test</option>
 										<option value="testfirst">First Test</option>
 										<option value="testsecond">Second Test</option>
 										<option value="testfinal">Final Test</option>
