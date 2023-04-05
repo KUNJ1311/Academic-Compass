@@ -37,7 +37,7 @@ fetchdatatable.post(`/students/data`, fetchuser, async (req, res) => {
 //stu marks ----------------------------------------------------------
 fetchdatatable.post(`/students/marks`, async (req, res) => {
 	try {
-		const { branch, course, year, school, sem, subject } = req.body;
+		const { branch, course, year, school, sem, subject, test } = req.body;
 		const userData = await Studentdata.find(
 			{
 				branch: branch,
@@ -49,20 +49,30 @@ fetchdatatable.post(`/students/marks`, async (req, res) => {
 		);
 		let students = [];
 		const SemModel = SemModels[sem];
-		const semData = await SemModel.find({ user: { $in: userData.map((data) => data._id) } }, { user: 1, testsecond: 1, _id: 1 });
-		students = students.concat(
-			semData.map((data) => {
-				const studentData = userData.find((d) => d._id.toString() === data.user.toString());
-				const testsecond = data.testsecond.find((test) => test.subject === subject);
-				return {
-					enrolment: studentData.enrolment,
-					name: studentData.name,
-					marks: testsecond ? testsecond.marks : "N/A",
-				};
-			})
+		const semData = await SemModel.find(
+			{ user: { $in: userData.map((data) => data._id) } },
+			{
+				user: 1,
+				[test]: { $elemMatch: { subject: subject } },
+				_id: 1,
+			}
 		);
-
-		res.send(students);
+		if (semData && semData.length > 0) {
+			students = semData
+				.filter((data) => data[test] && data[test].length > 0)
+				.map((data) => {
+					const studentData = userData.find((d) => d._id.toString() === data.user.toString());
+					const testmarks = data[test][0];
+					return {
+						enrolment: studentData.enrolment,
+						name: studentData.name,
+						marks: testmarks.marks,
+					};
+				});
+			res.send(students);
+		} else {
+			return res.send(students); // or return an error message
+		}
 	} catch (error) {
 		console.log(error);
 		res.status(500).send(error);
