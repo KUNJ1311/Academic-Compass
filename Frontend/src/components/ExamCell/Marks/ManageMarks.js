@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { SubjectsContext } from "../../context/SubjectsContext";
 import ExamCellSideBar from "../ExamCellSideBar";
 import Button from "react-bootstrap/Button";
@@ -12,6 +12,7 @@ import add from "../svg/adds.svg";
 import excel from "../svg/excel.svg";
 import AddMarksExcel from "./AddMarksExcel";
 import UpdateMarksModel from "./UpdateMarksModel";
+import axios from "axios";
 
 const ManageMarks = () => {
 	const { school, branch, course, year, semester, courseCodeRef, subjects, selsubject, test, selcourse, handleSchoolChange, handleBranchChange, handleCourseChange, handleYearChange, handleSubjectChange, schoolOptionsList, yearOptionsList, branchOptionsList, courseOptionsList, handleSemesterChange, handleTestChange } = useContext(SubjectsContext);
@@ -20,37 +21,40 @@ const ManageMarks = () => {
 	const [modalShow2, setModalShow2] = useState(false);
 	const [selectedStudent, setSelectedStudent] = useState(null);
 	const [showUpdateModal, setShowUpdateModal] = useState(false);
+	const [stu, setStu] = useState([]);
+	const [checkedRows, setCheckedRows] = useState({});
+	const [isHeaderCheckboxChecked, setIsHeaderCheckboxChecked] = useState(false);
 
-	const stu = [
-		{
-			"Enrolment No.": "210110101016",
-			Name: "Kunj Faladu Sureshbhai",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "22",
-		},
-		{
-			"Enrolment No.": "210110101019",
-			Name: "Rishi",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "20",
-		},
-		{
-			"Enrolment No.": "2101101010161",
-			Name: "Kunj Faladu Sureshbhai",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "22",
-		},
-		{
-			"Enrolment No.": "2101101010191",
-			Name: "Rishi",
-			"Course Code": "CSE101",
-			Subject: "Computer Network",
-			Marks: "20",
-		},
-	];
+	useEffect(() => {
+		const host = process.env.REACT_APP_HOST;
+		const headers = {
+			"auth-token": localStorage.getItem("token"),
+		};
+		setStu("");
+		// Make API call when all dropdowns have values
+		if (year && school && branch && course && subjects && selsubject && semester && test) {
+			axios
+				.post(
+					`${host}/fetch/students/marks`,
+					{
+						year: year,
+						school: school,
+						branch: branch,
+						course: course,
+						subject: subjects[selsubject],
+						sem: semester,
+						test: test,
+					},
+					{ headers }
+				)
+				.then((response) => {
+					setStu(response.data);
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		}
+	}, [year, school, branch, course, subjects, selsubject, semester, test]);
 
 	let navigate = useNavigate();
 	function handleLogout(e) {
@@ -58,9 +62,38 @@ const ManageMarks = () => {
 		window.localStorage.clear();
 		navigate("/exam-cell-login");
 	}
+
 	const handleRowClick = (data) => {
 		setSelectedStudent(data);
 		setShowUpdateModal(true);
+	};
+
+	const handleCheckboxChange = (e) => {
+		const checked = e.target.checked;
+		setIsHeaderCheckboxChecked(checked);
+		const updatedCheckedRows = {};
+		stu.forEach((student) => {
+			updatedCheckedRows[student.enrolment] = checked;
+		});
+		setCheckedRows(updatedCheckedRows);
+	};
+
+	const handleRowCheckboxChange = (e, enrolment) => {
+		const checked = e.target.checked;
+		setCheckedRows((prevCheckedRows) => {
+			const updatedCheckedRows = {
+				...prevCheckedRows,
+				[enrolment]: checked,
+			};
+
+			// Check if all rows are selected
+			const allRowsSelected = stu.every((student) => updatedCheckedRows[student.enrolment]);
+
+			// Update header checkbox state based on row checkbox state
+			setIsHeaderCheckboxChecked(allRowsSelected);
+
+			return updatedCheckedRows;
+		});
 	};
 
 	return (
@@ -136,14 +169,14 @@ const ManageMarks = () => {
 									<Form.Label>&nbsp;Semester</Form.Label>
 									<Form.Select id="semester" value={semester} onChange={handleSemesterChange} required>
 										<option value="">Select Semester</option>
-										<option value="Sem1">1st Semester</option>
-										<option value="Sem2">2nd Semester</option>
-										<option value="Sem3">3rd Semester</option>
-										<option value="Sem4">4th Semester</option>
-										<option value="Sem5">5th Semester</option>
-										<option value="Sem6">6th Semester</option>
-										<option value="Sem7">7th Semester</option>
-										<option value="Sem8">8th Semester</option>
+										<option value="sem1">1st Semester</option>
+										<option value="sem2">2nd Semester</option>
+										<option value="sem3">3rd Semester</option>
+										<option value="sem4">4th Semester</option>
+										<option value="sem5">5th Semester</option>
+										<option value="sem6">6th Semester</option>
+										<option value="sem7">7th Semester</option>
+										<option value="sem8">8th Semester</option>
 									</Form.Select>
 								</Form.Group>
 							</Col>
@@ -183,6 +216,9 @@ const ManageMarks = () => {
 						<Table bordered hover className="table-my mb-2">
 							<thead className="col-sticky" style={{ backgroundColor: "white" }}>
 								<tr className="col-sticky" style={{ backgroundColor: "white" }}>
+									<th className="col-sticky checkbox" style={{ backgroundColor: "white" }} width="30px">
+										<Form.Check type="checkbox" id="headerCheckbox" checked={isHeaderCheckboxChecked} onChange={handleCheckboxChange} />
+									</th>
 									<th className="col-sticky" style={{ backgroundColor: "white" }}>
 										Enrolment No.
 									</th>
@@ -190,26 +226,23 @@ const ManageMarks = () => {
 										Name
 									</th>
 									<th className="col-sticky" style={{ backgroundColor: "white" }}>
-										Course Code
-									</th>
-									<th className="col-sticky" style={{ backgroundColor: "white" }}>
-										Subject
-									</th>
-									<th className="col-sticky" style={{ backgroundColor: "white" }}>
 										Marks
 									</th>
 								</tr>
 							</thead>
 							<tbody>
-								{stu.map((data) => (
-									<tr key={data["Enrolment No."]} className="table-row-hover" onClick={() => handleRowClick(data)}>
-										<td>{data["Enrolment No."]}</td>
-										<td>{data.Name}</td>
-										<td>{data["Course Code"]}</td>
-										<td>{data.Subject}</td>
-										<td>{data.Marks}</td>
-									</tr>
-								))}
+								{stu
+									? stu.map((data) => (
+											<tr key={data.enrolment} className="table-row-hover">
+												<td className="checkbox">
+													<Form.Check id="headerCheckbox" type="checkbox" checked={checkedRows[data.enrolment] || false} onChange={(e) => handleRowCheckboxChange(e, data.enrolment)} />
+												</td>
+												<td onClick={() => handleRowClick(data)}>{data.enrolment}</td>
+												<td onClick={() => handleRowClick(data)}>{data.name}</td>
+												<td onClick={() => handleRowClick(data)}>{data.marks}</td>
+											</tr>
+									  ))
+									: null}
 							</tbody>
 						</Table>
 						{selectedStudent && <UpdateMarksModel show={showUpdateModal} onHide={() => setShowUpdateModal(false)} student={selectedStudent} />}

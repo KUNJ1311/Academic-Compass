@@ -2,23 +2,25 @@ import React, { useState, useContext, useEffect } from "react";
 import ExamCellSideBar from "../ExamCellSideBar";
 import Button from "react-bootstrap/Button";
 import MainNavbarExam from "../MainNavbarExam";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { Row, Col } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import add from "../svg/adds.svg";
 import excel from "../svg/excel.svg";
-import setting from "../svg/settings.svg";
 import { SubjectsContext } from "../../context/SubjectsContext";
 import AddStudentsExcel from "./AddStudentsExcel";
-import AddStudentsModal from "./AddStudentsModal";
 import axios from "axios";
 const ManageStudents = () => {
 	const { school, branch, course, year, handleYearChange, handleSchoolChange, handleBranchChange, handleCourseChange, yearOptionsList, schoolOptionsList, branchOptionsList, courseOptionsList } = useContext(SubjectsContext);
 	const [stu, setStu] = useState([]);
 	const [modalShow, setModalShow] = useState(false);
 	const [modalShow2, setModalShow2] = useState(false);
+	const [checkedRows, setCheckedRows] = useState({});
+	const [isHeaderCheckboxChecked, setIsHeaderCheckboxChecked] = useState(false);
+
 	useEffect(() => {
+		setStu("");
 		const host = process.env.REACT_APP_HOST;
 		const headers = {
 			"auth-token": localStorage.getItem("token"),
@@ -51,7 +53,33 @@ const ManageStudents = () => {
 		window.localStorage.clear();
 		navigate("/exam-cell-login");
 	}
+	const handleCheckboxChange = (e) => {
+		const checked = e.target.checked;
+		setIsHeaderCheckboxChecked(checked);
+		const updatedCheckedRows = {};
+		stu.forEach((student) => {
+			updatedCheckedRows[student.enrolment] = checked;
+		});
+		setCheckedRows(updatedCheckedRows);
+	};
 
+	const handleRowCheckboxChange = (e, enrolment) => {
+		const checked = e.target.checked;
+		setCheckedRows((prevCheckedRows) => {
+			const updatedCheckedRows = {
+				...prevCheckedRows,
+				[enrolment]: checked,
+			};
+
+			// Check if all rows are selected
+			const allRowsSelected = stu.every((student) => updatedCheckedRows[student.enrolment]);
+
+			// Update header checkbox state based on row checkbox state
+			setIsHeaderCheckboxChecked(allRowsSelected);
+
+			return updatedCheckedRows;
+		});
+	};
 	return (
 		<>
 			<MainNavbarExam handleLogout={handleLogout} />
@@ -124,6 +152,9 @@ const ManageStudents = () => {
 						<Table bordered hover className="table-my mb-2">
 							<thead className="col-sticky" style={{ backgroundColor: "white" }}>
 								<tr className="col-sticky" style={{ backgroundColor: "white" }}>
+									<th className="col-sticky checkbox" style={{ backgroundColor: "white" }} width="30px">
+										<Form.Check type="checkbox" id="headerCheckbox" checked={isHeaderCheckboxChecked} onChange={handleCheckboxChange} />
+									</th>
 									<th className="col-sticky" style={{ backgroundColor: "white" }}>
 										Enrolment No.
 									</th>
@@ -133,12 +164,17 @@ const ManageStudents = () => {
 								</tr>
 							</thead>
 							<tbody>
-								{stu.map((data) => (
-									<tr key={data.enrolment} className="table-row-hover">
-										<td>{data.enrolment}</td>
-										<td>{data.name}</td>
-									</tr>
-								))}
+								{stu
+									? stu.map((data) => (
+											<tr key={data.enrolment} className="table-row-hover">
+												<td className="checkbox">
+													<Form.Check type="checkbox" id="headerCheckbox" checked={checkedRows[data.enrolment] || false} onChange={(e) => handleRowCheckboxChange(e, data.enrolment)} />
+												</td>
+												<td>{data.enrolment}</td>
+												<td>{data.name}</td>
+											</tr>
+									  ))
+									: null}
 							</tbody>
 						</Table>
 					</div>

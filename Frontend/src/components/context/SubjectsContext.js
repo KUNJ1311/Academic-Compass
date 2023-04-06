@@ -83,6 +83,8 @@ const SubjectsProvider = (props) => {
 		if (newSemester) {
 			setSemester(newSemester);
 			setSubjects({});
+			setSelSubject("");
+			setSelCourse("");
 			courseCodeRef.current.value = "Select Subject First";
 			getSubjects(newSemester);
 		}
@@ -136,6 +138,7 @@ const SubjectsProvider = (props) => {
 			courseCodeInput.value = courseCode;
 		}
 	}, [courseCodes]);
+
 	const contextValue = {
 		school,
 		branch,
